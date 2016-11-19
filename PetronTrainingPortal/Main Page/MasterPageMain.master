@@ -1,0 +1,68 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageMain.master.cs" Inherits="MasterPageMain" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Petron Training</title>
+    <link rel="icon" type="image" href="../Image/favicon.ico" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="home_files/mbcsmbmcp.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+<%--<style>
+ul {
+   
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: gray;
+
+}
+
+li {
+    float: left;
+}
+
+li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: black;
+}
+
+
+
+</style>--%>
+</head>
+<body>
+    <%--<ul>
+        <li><a class="active" href="Login.aspx">Home</a></li>
+   </ul>--%>
+    <div id="mbmcpebul_wrapper" style="max-width: 90px;">
+        <ul id="mbmcpebul_table" class="mbmcpebul_menulist css_menu">
+        <li><div class="buttonbg"><a href="Login.aspx">Home</a></div></li>
+        </ul>
+    </div>
+    <form id="form1" runat="server">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+    <footer>
+        <img src="../Image/Footer%20Petron.png" width="100%" height="250" />
+        <%--<center>
+            <br />
+            ©EFSC 2016
+            <br />
+            Petron Corporation
+        </center>--%>
+    </footer>
+    <script src="home_files/mbjsmbmcp.js"></script>
+</body>
+</html>

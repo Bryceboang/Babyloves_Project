@@ -1,0 +1,100 @@
+﻿using PetronTrainingPortal.App_Code;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class TrainingTitle : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (Session["FirstName"] == null)
+        {
+            Response.Redirect("~/Users Page/Registration.aspx");
+        }
+        else if (Session["AccountType"] == "Admin")
+        {
+            Response.Redirect("~/Admin Page/ReportAdmin.aspx");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Users only" + "');", true);
+        }
+
+        if (!Page.IsPostBack)
+        {
+            using (var context = new DatabaseContext())
+            {
+                cmbBoxTraining.DataSource = null;
+                cmbBoxTraining.Items.Clear();
+                var trainingList = context.Trainings.ToList();
+
+                foreach (var item in trainingList) { cmbBoxTraining.Items.Add(item.TrainingTitle); }
+
+                //var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingTitle == cmbBoxTraining.Text);
+                //if (selectTraining != null) { lblDescription.Text = selectTraining.Description; }
+                //else { lblDescription.Text = "Text Here"; }
+            }
+        }
+    }
+    protected void cmbBoxTraining_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        using (var context = new DatabaseContext())
+        {
+            var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingTitle == cmbBoxTraining.Text);
+            if (selectTraining != null)
+            {
+                //int count = selectTraining.Description.Length;
+                //if (count < 69)
+                //{
+                //    lblDescription.Height = 60;
+                //}
+                //else if (count < 70)
+                //{
+                //    lblDescription.Height = 90;
+                //}
+                //else if (count < 140)
+                //{
+                //    lblDescription.Height = 120;
+                //}
+                //else if (count < 210)
+                //{
+                //    lblDescription.Height = 150;
+                //}
+                //else if (count < 240)
+                //{
+                //    lblDescription.Height = 180;
+                //}
+                //else
+                //{
+                //    lblDescription.Height = 210;
+                //}
+                //lblDescription.Text = selectTraining.Description;
+            }
+            else { lblDescription.Text = "Text Here"; }
+        }
+    }
+    protected void btnRegister_Click(object sender, EventArgs e)
+    {
+        using (var context = new DatabaseContext())
+        {
+            var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingTitle == cmbBoxTraining.Text);
+            if (selectTraining != null)
+            {
+                var empTraining = context.EmployeeTrainings.FirstOrDefault(c => c.EmployeeNumber == Variables.EmployeeNumber && c.TrainingId == selectTraining.TrainingId);
+                if (empTraining != null) { Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Cannot accept duplicate training" + "');", true); }
+                else
+                {
+                    EmployeeTraining empTrain = new EmployeeTraining()
+                    {
+                        EmployeeNumber = Variables.EmployeeNumber,
+                        TrainingId = selectTraining.TrainingId
+                    };
+                    context.EmployeeTrainings.Add(empTrain);
+                    context.SaveChanges();
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Registration Successful" + "');", true);
+                }
+            }
+            else { Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please select a training first" + "');", true); }
+        }
+    }
+}

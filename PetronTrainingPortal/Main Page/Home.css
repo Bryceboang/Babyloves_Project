@@ -1,0 +1,119 @@
+﻿    .main_container {
+        margin: 20px auto;
+        margin-bottom:4px;
+        width: 300px;
+        height: 230px;
+        padding: 40px;
+    }
+
+    .main_box {
+        clear: both;
+        margin: auto;
+        width: 300px auto;
+        height: 126px auto;
+        padding: 20px;
+        border: 2px solid white;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .content {
+        clear: both;
+        overflow: auto;
+        margin-bottom: 20px;
+    }
+
+    .main_container1 {
+        margin:auto;
+        width: 300px;
+        height: 75px;
+        padding: 40px;
+    }
+
+    .main_box1 {
+        clear: both;
+        width: 300px auto;
+        border: 2px solid white;
+        padding: 5px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+body {
+    background: #00072a;
+}
+
+.btn {
+    -webkit-border-radius: 7;
+    -moz-border-radius: 7;
+    border-radius: 7px;
+    font-family: Arial;
+    color: #fff;
+    font-size: 15px;
+    background: #01c605;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.btn-hover {
+    background: #e6f614;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.buttonbg {
+  height: 26px;
+  width: 86px;
+  line-height: 0;
+  background-color: #13AD0B;
+  border-style: solid;
+  border-color: #13AD0B;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 0;
+  box-shadow: 0 1px 2px -1px #FFFFFF inset;
+  text-align: center;
+}
+
+.buttonbg:hover {
+  color: #FFFFFF;
+  font-style: normal;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.buttonsu {
+    height: 26px;
+    width: 86px;
+    line-height: 0;
+    background-color: #BF0D00;
+    border-style: solid;
+    border-color: #BF0D00;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 0;
+    box-shadow: 0 1px 2px -1px #FFFFFF inset;
+    text-align: center;
+}
+
+    .buttonsu:hover {
+        color: #FFFFFF;
+        font-style: normal;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .text {
+            width: 70%;
+            padding: 4px 8px;
+            margin: 4px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }

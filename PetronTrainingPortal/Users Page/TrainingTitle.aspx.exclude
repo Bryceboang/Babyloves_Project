@@ -1,0 +1,84 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Users Page/MasterPage.master" AutoEventWireup="true" CodeFile="TrainingTitle.aspx.cs" Inherits="TrainingTitle" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style>
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.text  {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.submit {
+    width: 20%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit:hover  {
+    background-color: #45a049;
+}
+
+.button {
+    background-color: #0054a6;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+     width: 20%;
+}
+
+select.custom-dropdown {
+ -webkit-appearance: none;  /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
+ -moz-appearance: none;  /*REMOVES DEFAULT FIREFOX STYLE*/
+ border: 0 !important;  /*REMOVES BORDER*/
+
+ color: #fff;
+ -webkit-border-radius: 5px;
+ border-radius: 5px;
+ font-size: 14px;
+ padding: 10px;
+ width: 95%;
+ cursor: pointer;
+ text-align-last:center; 
+
+ background: #0060ff url(drop-down-arrow.png) no-repeat right center;
+ background-size: 40px 37px; /*TO ACCOUNT FOR @2X IMAGE FOR RETINA */
+}
+
+.container {
+    padding: 16px;
+}
+</style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+           <center>
+                  <asp:Label ID="Label1" runat="server" Text="LIST OF TRAININGS" Font-Bold="true" Font-Size="32pt"></asp:Label>
+                   <br />
+               <div class="container">
+                   <asp:DropDownList CssClass="custom-dropdown" ID="cmbBoxTraining" runat="server" OnSelectedIndexChanged="cmbBoxTraining_SelectedIndexChanged" AutoPostBack="True" Font-Size="18pt"></asp:DropDownList>
+                   <br />
+                   <br />
+                   <asp:TextBox CssClass="text" ID="lblDescription" runat="server" TextMode="MultiLine" Font-Size="16pt">a</asp:TextBox>
+                   <br />
+                   <asp:Button CssClass="button" ID="btnRegister" runat="server" Text="Register" OnClick="btnRegister_Click" Font-Size="15pt"></asp:Button>
+                   <br />
+               </div>
+           </center>
+  
+</asp:Content>
+
