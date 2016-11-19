@@ -25,7 +25,7 @@
                 </div>
                 <div class="right1_content_user_home ">
                     <center>
-                    <asp:GridView ID="gridEmployee" OnRowCommand="gridTraining_RowCommand" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
+                    <asp:GridView ID="gridEmployee" OnRowCommand="gridEmployee_RowCommand" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                         <Columns>
                             <asp:BoundField DataField="FullName" HeaderText="Full Name" />
                             <asp:BoundField DataField="Email" HeaderText="Email" />
