@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style>
- div {
+ /*div {
             border-radius: 5px;
             background-color: #f2f2f2;
             padding: 20px;
@@ -50,7 +50,7 @@
     border: none;
     cursor: pointer;
      width: 20%;
-}
+}*/
 
 select.custom-dropdown {
  -webkit-appearance: none;  /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
