@@ -13,11 +13,11 @@
                     <asp:Label ID="Label7" runat="server" Text="Training Code" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
                     <br />
-                    <asp:TextBox ID="txtTrainingCode" runat="server" ValidationGroup="deltrain"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtTrainingCode" ForeColor="Red" ValidationGroup="deltrain"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtTrainingCode" runat="server" ValidationGroup="training"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtTrainingCode" ForeColor="Red" ValidationGroup="training"></asp:RequiredFieldValidator>
                     <br />
                     <br />
-                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Enter" OnClick="btnSearch_Click" ValidationGroup="deltrain"></asp:Button>
+                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Enter" OnClick="btnSearch_Click" ValidationGroup="training"></asp:Button>
                     </center>
                 </div>
                 <div class="right1_content_train_home ">
@@ -40,7 +40,6 @@
             </div>
         </div>
     </div>
-    <br />
     <br />
     <div class="main_container_train_home ">
         <div class="main_box_train">

@@ -208,6 +208,66 @@
     height: 310px;
 }
 
+.main_container_user_home {
+    margin: 0 auto;
+    width: 960px;
+    border:none;
+}
+
+.main_box_user {
+    clear: both;
+    border: none;
+}
+
+.content_user {
+    clear: both;
+    overflow: auto;
+    margin-bottom: 20px;
+    border:none;
+}
+
+.left1_content_user_home {
+    width: 280px;
+    float: left;
+    border: 2px solid white;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 180px;
+}
+
+.right1_content_user_home {
+    width: 670px;
+    float: left;
+    margin-left: 2px auto;
+    border: 2px solid white;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 180px;
+}
+
+.left2_content_user_home {
+    width: 600px;
+    float: left;
+    border: 2px solid white;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 250px;
+}
+
+.right2_content_user_home {
+    width: 350px;
+    float: left;
+    margin-left: 2px auto;
+    border: 2px solid white;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 250px;
+}
+
 .button_enter {
   height: 26px;
   width: 86px;
