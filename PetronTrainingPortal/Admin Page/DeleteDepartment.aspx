@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
        <style>
- div {
+ /*div {
             border-radius: 5px;
             background-color: #f2f2f2;
             padding: 20px;
@@ -25,7 +25,7 @@
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
-}
+}*/
 
 .submit {
   width: 20%;
