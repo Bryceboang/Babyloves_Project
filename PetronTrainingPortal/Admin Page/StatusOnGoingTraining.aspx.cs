@@ -622,4 +622,24 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
     {
         ReloadEmailManager();
     }
+    protected void btnEmailManager_Click(object sender, EventArgs e)
+    {
+        string email = cmbManager.Text;
+
+        //string email = "escruz@petron.com";
+        string subject = "Subject Here";
+        //string body = "body";
+        string body = "There are still pending request.";
+        ClientScript.RegisterStartupScript(this.GetType(), "mailto", "parent.location='mailto:" + email + "?subject=" + subject + "&body=" + body + "'", true);
+    }
+    protected void btnEmailSupervisor_Click(object sender, EventArgs e)
+    {
+        string email = cmbSupervisor.Text;
+
+        //string email = "escruz@petron.com";
+        string subject = "Subject Here";
+        //string body = "body";
+        string body = "There are still pending request.";
+        ClientScript.RegisterStartupScript(this.GetType(), "mailto", "parent.location='mailto:" + email + "?subject=" + subject + "&body=" + body + "'", true);
+    }
 }

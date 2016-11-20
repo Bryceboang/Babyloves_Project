@@ -75,12 +75,12 @@
               <asp:Button CssClass="button" ID="bTnExport1" runat="server" Text="Export to Excel" Font-Size="10pt" Width="150"></asp:Button>
                     <br />
                     <br />
-              <asp:Button ID="btnEmailManager" CssClass="button" runat="server" Text="Email Manager" Font-Size="8pt" Width="112px" Height="40px"></asp:Button>
+              <asp:Button ID="btnEmailManager" CssClass="button" runat="server" Text="Email Manager" Font-Size="8pt" Width="112px" Height="40px" OnClick="btnEmailManager_Click"></asp:Button>
                     <br />  
               <asp:DropDownList ID="cmbManager" runat="server" AutoPostBack="true" OnSelectedIndexChanged="cmbManager_SelectedIndexChanged"></asp:DropDownList>
                     <br />
                     <br />
-              <asp:Button ID="btnEmailSupervisor" CssClass="button" runat="server" Text="Email Supervisor" Font-Size="8pt" Width="122px" Height="40px"></asp:Button>
+              <asp:Button ID="btnEmailSupervisor" CssClass="button" runat="server" Text="Email Supervisor" Font-Size="8pt" Width="122px" Height="40px" OnClick="btnEmailSupervisor_Click"></asp:Button>
                     <br />
               <asp:DropDownList ID="cmbSupervisor" runat="server" AutoPostBack="true" OnSelectedIndexChanged="cmbSupervisor_SelectedIndexChanged"></asp:DropDownList>
                     <br />
