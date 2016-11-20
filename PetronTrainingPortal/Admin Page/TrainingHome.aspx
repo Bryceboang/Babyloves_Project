@@ -83,12 +83,11 @@
                     <asp:Label ID="Label17" runat="server" Text="•Target Participants:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
                     <asp:TextBox CssClass="text" ID="txtParticipants" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine"></asp:TextBox>
                     <br />
-                    <asp:Button CssClass="button_enter" ID="btnClear" runat="server" Text="Search" OnClick="btnClear_Click" ValidationGroup="AddTraining"></asp:Button>
-                    <asp:Button CssClass="button_enter" ID="btnSave" runat="server" Text="Search" OnClick="btnSave_Click" ValidationGroup="AddTraining"></asp:Button>
-                    <br />
                 </div>
             </div>
         </div>
     </div>
+    <center><asp:Button CssClass="buttonGrid" ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" ValidationGroup="AddTraining" Width="116px"></asp:Button>
+    &nbsp;<asp:Button CssClass="buttonGrid" ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="AddTraining" Width="116"></asp:Button></center>
 </asp:Content>
 
