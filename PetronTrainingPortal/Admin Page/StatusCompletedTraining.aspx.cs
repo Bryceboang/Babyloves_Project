@@ -2,7 +2,10 @@
 using PetronTrainingPortal.App_Code;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -693,4 +696,35 @@ public partial class Admin_Page_StatusCompletedTraining : System.Web.UI.Page
         }
     }
 
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        return;
+        //required to avoid the run time error "  
+        //Control 'GridView1' of type 'Grid View' must be placed inside a form tag with runat=server."  
+    }
+
+    private void ExportGridToExcel2()
+    {
+        Response.Clear();
+        Response.Buffer = true;
+        Response.ClearContent();
+        Response.ClearHeaders();
+        Response.Charset = "";
+        string FileName = "CompletedTraining" + DateTime.Now + ".xls";
+        StringWriter strwritter = new StringWriter();
+        HtmlTextWriter htmltextwrtter = new HtmlTextWriter(strwritter);
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Response.ContentType = "application/vnd.ms-excel";
+        Response.AddHeader("Content-Disposition", "attachment;filename=" + FileName);
+        gridView.GridLines = GridLines.Both;
+        gridView.HeaderStyle.Font.Bold = true;
+        gridView.RenderControl(htmltextwrtter);
+        Response.Write(strwritter.ToString());
+        Response.End();
+    }
+
+    protected void bTnExport1_Click(object sender, EventArgs e)
+    {
+        ExportGridToExcel2();
+    }
 }

@@ -70,7 +70,7 @@
                 <center>
                     <br />
                     <br />
-              <asp:Button CssClass="button" ID="bTnExport1" runat="server" Text="Export to Excel" Font-Size="10pt" Width="150"></asp:Button>
+              <asp:Button CssClass="button" ID="bTnExport1" runat="server" Text="Export to Excel" Font-Size="10pt" Width="150" OnClick="bTnExport1_Click"></asp:Button>
                 </center>
             </div>
             </div>

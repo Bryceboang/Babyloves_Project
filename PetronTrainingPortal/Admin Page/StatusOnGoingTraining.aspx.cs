@@ -598,7 +598,7 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
         Response.ClearContent();
         Response.ClearHeaders();
         Response.Charset = "";
-        string FileName = "Training" + DateTime.Now + ".xls";
+        string FileName = "OnGoingTraining" + DateTime.Now + ".xls";
         StringWriter strwritter = new StringWriter();
         HtmlTextWriter htmltextwrtter = new HtmlTextWriter(strwritter);
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
