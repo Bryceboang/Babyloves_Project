@@ -52,7 +52,7 @@
                 </center>
                 </div>
             <div class="left_content_train2">
-            <div style =" height:300px;  overflow:auto; width: 785px;">
+            <div style =" height:300px;  overflow:auto; width: 791px;">
                 <center>
                     <asp:GridView ID="gridView" CssClass="mydatagrid"  ShowHeader = "true" HeaderStyle-CssClass="header" RowStyle-CssClass="rows"  runat="server" AutoGenerateColumns="false" EmptyDataText="No data uploaded" Font-Size="8pt">
                     <Columns>
@@ -72,7 +72,7 @@
               </div>
             <div class="right_content_train2">
                 <center>
-              <asp:Button CssClass="button" ID="bTnExport1" runat="server" Text="Export to Excel" Font-Size="10pt" Width="150"></asp:Button>
+              <asp:Button CssClass="button" ID="bTnExport1" runat="server" Text="Export to Excel" Font-Size="10pt" Width="150" OnClick="bTnExport1_Click1"></asp:Button>
                     <br />
                     <br />
               <asp:Button ID="btnEmailManager" CssClass="button" runat="server" Text="Email Manager" Font-Size="8pt" Width="112px" Height="40px" OnClick="btnEmailManager_Click"></asp:Button>

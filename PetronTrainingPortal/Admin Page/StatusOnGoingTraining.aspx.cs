@@ -430,7 +430,6 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
                 var managerList = context.Users.Where(c => c.DepartmentId == selectEmailDept.DepartmentId && c.AccessType.ToLower() == "manager").OrderBy(c => c.Email).ToList();
                 if (managerList.Count > 0)
                 {
-                    cmbManager.Items.Add("None");
                     foreach (var item in managerList) { cmbManager.Items.Add(item.Email); }
                 }
             }
@@ -451,7 +450,6 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
                 var supervisorList = context.Users.Where(c => c.DepartmentId == selectEmailDept.DepartmentId && c.AccessType.ToLower() == "supervisor").OrderBy(c => c.Email).ToList();
                 if (supervisorList.Count > 0)
                 {
-                    cmbSupervisor.Items.Add("None");
                     foreach (var item in supervisorList) { cmbSupervisor.Items.Add(item.Email); }
                 }
             }
@@ -641,5 +639,9 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
         //string body = "body";
         string body = "There are still pending request.";
         ClientScript.RegisterStartupScript(this.GetType(), "mailto", "parent.location='mailto:" + email + "?subject=" + subject + "&body=" + body + "'", true);
+    }
+    protected void bTnExport1_Click1(object sender, EventArgs e)
+    {
+        ExportGridToExcel2();
     }
 }
