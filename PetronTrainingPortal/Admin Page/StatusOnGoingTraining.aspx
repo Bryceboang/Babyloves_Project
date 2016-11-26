@@ -19,7 +19,7 @@
                     <asp:Label ID="Label2" runat="server" Text="Status:" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
                     <asp:DropDownList CssClass="custom-dropdown" ID="cmbStatus" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbStatus_SelectedIndexChanged">
-                                               <asp:ListItem>ALL</asp:ListItem>
+                         <asp:ListItem>ALL</asp:ListItem>
                          <asp:ListItem>APPROVED</asp:ListItem>
                         <asp:ListItem>PENDING</asp:ListItem>
                         <asp:ListItem>DECLINED</asp:ListItem>
