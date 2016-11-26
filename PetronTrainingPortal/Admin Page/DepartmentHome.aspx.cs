@@ -20,7 +20,7 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
             List<DepartmentViews> departmentView = new List<DepartmentViews>();
             departmentView.Clear();
             var department = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
-            lblHidden.Text = department.DepartmentId.ToString();
+
             departmentView.Add(new DepartmentViews()
             {
                 DepartmentId = department.DepartmentId,
@@ -57,7 +57,12 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
     {
         using (var context = new DatabaseContext())
         {
-            int id = int.Parse(lblHidden.Text);
+            int index = Convert.ToInt32(e.CommandArgument);
+
+            GridViewRow selectedRow = gridDept.Rows[index];
+            TableCell deptId = selectedRow.Cells[0];
+            int id = int.Parse(deptId.Text);
+
             var select = context.Departments.FirstOrDefault(c => c.DepartmentId == id);
             if (e.CommandName == "RemoveDepartment")
             {
@@ -89,7 +94,7 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
             }
             else
             {
-                if (select != null) { txtBoxDepartment.Text = select.DepartmentName; }
+                if (select != null) { lblHidden.Text = id.ToString(); txtBoxDepartment.Text = select.DepartmentName; }
             }
         }
     }

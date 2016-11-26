@@ -12,7 +12,7 @@
                     <center>
                     <asp:Label ID="Label6" runat="server" Text="Department Name:" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
-                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true" OnSelectedIndexChanged="cmbDepartment_SelectedIndexChanged" runat="server"></asp:DropDownList>
                     <br />
                     <br />
                     <asp:Label ID="Label1" runat="server" Text="Section Name:" ForeColor="White" Font-Bold="True"></asp:Label>
@@ -26,7 +26,8 @@
                 <div class="right1_content_dept_home">
                     <center>
                     <asp:GridView ID="gridSec" OnRowCommand="gridSec_RowCommand" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
-                        <Columns>
+                        <Columns> 
+                            <asp:BoundField DataField="SectionId" Visible="false" HeaderText="Section Id" />
                             <asp:BoundField DataField="SectionName" HeaderText="Section Name" />
                             <asp:ButtonField  CommandName="EditSection"   ImageUrl="~/Image/edit.png" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
                             <asp:ButtonField  CommandName="RemoveSection"   ImageUrl="~/Image/remove.jpg" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />

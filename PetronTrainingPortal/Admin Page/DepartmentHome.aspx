@@ -24,7 +24,8 @@
                     <center>
                     <asp:GridView ID="gridDept" OnRowCommand="gridDept_RowCommand" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                         <Columns>
-                            <asp:BoundField DataField="Department" HeaderText="Department Name" />
+                            <asp:BoundField DataField="DepartmentId" Visible="false" HeaderText="DepartmentId" />
+                            <asp:BoundField DataField="DepartmentName" HeaderText="Department Name" />
                             <asp:ButtonField  CommandName="EditDepartment"   ImageUrl="~/Image/edit.png" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
                             <asp:ButtonField  CommandName="RemoveDepartment"   ImageUrl="~/Image/remove.jpg" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
                         </Columns>

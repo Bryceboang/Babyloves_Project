@@ -69,7 +69,13 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
         using (var context = new DatabaseContext())
         {
             cmbSelectDepartment.Enabled = true;
-            int id = int.Parse(lblHidden.Text);
+
+            int index = Convert.ToInt32(e.CommandArgument);
+
+            GridViewRow selectedRow = gridSec.Rows[index];
+            TableCell secId = selectedRow.Cells[0];
+            int id = int.Parse(secId.Text);
+      
             var select = context.Sections.FirstOrDefault(c => c.SectionId == id);
             if (e.CommandName == "RemoveSection")
             {
@@ -102,6 +108,7 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
                 {
                     cmbSelectDepartment.Enabled = false;
                     var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == select.DepartmentId);
+                    lblHidden.Text = id.ToString();
                     cmbSelectDepartment.Text = selectDept.DepartmentName;
                     txtBoxSection.Text = select.SectionName;
                 }
@@ -189,5 +196,10 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
             Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a section first.');</script>");
         }
         else { Reload(); }
+    }
+    
+    protected void cmbDepartment_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ReloadSection();
     }
 }

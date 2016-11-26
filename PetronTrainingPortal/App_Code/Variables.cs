@@ -24,6 +24,8 @@ namespace PetronTrainingPortal.App_Code
         public string DepartmentName { get; set; }
         public string SectionName { get; set; }
         public string Status { get; set; }
+        public string Email { get; set; }
+        public string AccessType { get; set; }
     }
 
     public class CompleteTrainingViews
