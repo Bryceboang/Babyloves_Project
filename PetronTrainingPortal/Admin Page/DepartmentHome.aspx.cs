@@ -106,7 +106,7 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
                 int id = int.Parse(lblHidden.Text);
                 var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == id);
                 var list = context.Departments.Where(c => c.DepartmentId != id).ToList();
-                var checkDup = list.FirstOrDefault(c => c.DepartmentName == txtBoxDepartment.Text);
+                var checkDup = list.FirstOrDefault(c => c.DepartmentName.ToLower() == txtBoxDepartment.Text.ToLower());
                 if (checkDup != null)
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('The department name already exist.');</script>");
@@ -125,7 +125,7 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
             }
             else
             {
-                var checkDup = context.Departments.FirstOrDefault(c => c.DepartmentName == txtBoxDepartment.Text);
+                var checkDup = context.Departments.FirstOrDefault(c => c.DepartmentName.ToLower() == txtBoxDepartment.Text.ToLower());
                 if (checkDup != null)
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('The department name already exist.');</script>");
