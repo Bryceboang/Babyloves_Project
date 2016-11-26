@@ -41,6 +41,7 @@
                     <center>
                         <br />   
                          <asp:Label ID="lblHidden" runat="server" Visible="false" ForeColor="White" Font-Bold="True" Font-Size="15pt"></asp:Label>
+                        <br />   
                         <asp:Label ID="Label1" runat="server" Text="Department Name:" ForeColor="White" Font-Bold="True"></asp:Label>
                         <br />
                         <asp:TextBox ID="txtBoxDepartment" CssClass="text" runat="server" ValidationGroup="dept" Width="350px"></asp:TextBox>

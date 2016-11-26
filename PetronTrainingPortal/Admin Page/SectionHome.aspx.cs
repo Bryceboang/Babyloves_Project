@@ -19,6 +19,7 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
         using (var context = new DatabaseContext())
         {
             List<SectionViews> sectionView = new List<SectionViews>();
+            sectionView.Clear();
             var department = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
             var section = context.Sections.FirstOrDefault(c => c.SectionName == cmbSection.Text && c.DepartmentId == department.DepartmentId);
             lblHidden.Text = department.DepartmentId.ToString();

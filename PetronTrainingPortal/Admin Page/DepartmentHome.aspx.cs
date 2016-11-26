@@ -18,6 +18,7 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
         using (var context = new DatabaseContext())
         {
             List<DepartmentViews> departmentView = new List<DepartmentViews>();
+            departmentView.Clear();
             var department = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
             lblHidden.Text = department.DepartmentId.ToString();
             departmentView.Add(new DepartmentViews()
