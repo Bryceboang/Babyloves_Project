@@ -79,7 +79,7 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
         {
             string trainingTitle = lblTrainingTitle.Text;
             var selectTrain = context.Trainings.FirstOrDefault(c => c.TrainingTitle == trainingTitle);
-            if (e.CommandName == "Remove")
+            if (e.CommandName == "DeleteTraining")
             {
                 if (selectTrain != null)
                 {
@@ -97,11 +97,13 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
 
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('The selected training is removed.');</script>");
                         Clear();
-
+                        txtTrainingCode.Text = string.Empty;
+                        gridTraining.DataSource = null;
+                        gridTraining.DataBind();
                     }
                 }
             }
-            else
+            else 
             {
                 if (selectTrain != null)
                 {

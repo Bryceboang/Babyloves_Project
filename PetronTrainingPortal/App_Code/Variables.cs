@@ -45,6 +45,12 @@ namespace PetronTrainingPortal.App_Code
         public string TargetParticipants { get; set; }
     }
 
+    public class DepartmentViews
+    {
+        public int DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
+    }
+
     public class EmployeeTrainingViews
     {
         public string EmployeeNumber { get; set; }

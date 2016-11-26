@@ -31,8 +31,8 @@
                             <asp:BoundField DataField="TimeDuration" HeaderText="Time Duration" />
                             <asp:BoundField DataField="TrainingProvider" HeaderText="Training Provider" />
                             <asp:BoundField DataField="TargetParticipants" HeaderText="Target Participants" />
-                            <asp:ButtonField  CommandName="Edit"   ImageUrl="~/Image/edit.png" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
-                            <asp:ButtonField  CommandName="Remove"   ImageUrl="~/Image/remove.jpg" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
+                            <asp:ButtonField CommandName="EditTraining" ImageUrl="~/Image/edit.png" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
+                            <asp:ButtonField CommandName="DeleteTraining" ImageUrl="~/Image/remove.jpg" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
                         </Columns>
                     </asp:GridView>
                     </center>
