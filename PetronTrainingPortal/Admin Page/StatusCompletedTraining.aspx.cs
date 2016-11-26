@@ -275,13 +275,11 @@ public partial class Admin_Page_StatusCompletedTraining : System.Web.UI.Page
         using (var context = new DatabaseContext())
         {
             var training = context.Trainings.FirstOrDefault(c => c.TrainingTitle == cmbTraining.Text);
-            if (training == null)
-            {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please select a training first." + "');", true);
-            }
+         
+            if (training == null) { }
             else
             {
-                var list = context.CompleteEmployeeTrainings.Where(c => c.TrainingId == training.TrainingId).ToList();
+                var list = context.EmployeeTrainings.Where(c => c.TrainingId == training.TrainingId).ToList();
                 if (list.Count() > 0)
                 {
                     foreach (var item in list)

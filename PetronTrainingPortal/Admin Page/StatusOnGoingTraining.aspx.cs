@@ -17,8 +17,10 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
     {
         List<TrainingViews> trainViewList = new List<TrainingViews>();
         List<EmployeeTrainingViews> empListView = new List<EmployeeTrainingViews>();
+        List<CompleteTrainingViews> completeListView = new List<CompleteTrainingViews>();
         trainViewList.Clear();
         empListView.Clear();
+        completeListView.Clear();
 
         using (var context = new DatabaseContext())
         {
@@ -112,6 +114,39 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
                         }
                     }
 
+                    var grouped = trainViewList.GroupBy(c => c.SectionName).Select(g => new
+                    {
+                        SectionName = g.Key,
+                        Count = g.Count(),
+                        TApproved = g.Where(a => a.Status == "APPROVED").ToList().Count(),
+                        TPending = g.Where(a => a.Status == "PENDING").ToList().Count(),
+                        TDeclined = g.Where(a => a.Status == "DECLINED").ToList().Count(),
+                    });
+
+
+                    foreach (var item in grouped)
+                    {
+                        int countEmp = 0;
+                        int countSuper = 0;
+                        foreach (var selectItem in trainViewList.Where(c => c.SectionName == item.SectionName))
+                        {
+                            var selectEmp = context.Employees.FirstOrDefault(c => c.EmployeeNumber == selectItem.EmployeeNumber);
+                            if (selectEmp != null) { countEmp++; }
+                            else { countSuper++; }
+                        }
+
+                        completeListView.Add(new CompleteTrainingViews()
+                        {
+                            NoOfEmployees = countEmp.ToString("n0"),
+                            NoOfSupervisor = countSuper.ToString("n0"),
+                            SectionName = item.SectionName,
+                            TotalApproved = item.TApproved.ToString("n0"),
+                            TotalDeclined = item.TDeclined.ToString("n0"),
+                            TotalPending = item.TPending.ToString("n0")
+                        });
+                    }
+
+
 
                 }
                 else if (section == null) { Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please select a section first." + "');", true); }
@@ -184,15 +219,130 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
                             });
                         }
                     }
+
+                    var grouped = trainViewList.GroupBy(c => c.SectionName).Select(g => new
+                    {
+                        SectionName = g.Key,
+                        Count = g.Count(),
+                        TApproved = g.Where(a => a.Status == "APPROVED").ToList().Count(),
+                        TPending = g.Where(a => a.Status == "PENDING").ToList().Count(),
+                        TDeclined = g.Where(a => a.Status == "DECLINED").ToList().Count(),
+                    });
+
+                    foreach (var item in grouped)
+                    {
+                        int countEmp = 0;
+                        int countSuper = 0;
+                        foreach (var selectItem in trainViewList.Where(c => c.SectionName == item.SectionName))
+                        {
+                            var selectEmp = context.Employees.FirstOrDefault(c => c.EmployeeNumber == selectItem.EmployeeNumber);
+                            if (selectEmp != null) { countEmp++; }
+                            else { countSuper++; }
+                        }
+
+                        completeListView.Add(new CompleteTrainingViews()
+                        {
+                            NoOfEmployees = countEmp.ToString("n0"),
+                            NoOfSupervisor = countSuper.ToString("n0"),
+                            SectionName = item.SectionName,
+                            TotalApproved = item.TApproved.ToString("n0"),
+                            TotalDeclined = item.TDeclined.ToString("n0"),
+                            TotalPending = item.TPending.ToString("n0")
+                        });
+                    }
                 }
             }
 
             gridView.DataSource = null;
-            gridView.DataSource = trainViewList.OrderBy(c => c.DepartmentName).ThenBy(c => c.SectionName).ThenBy(c => c.FullName).ToList();
+            gridView.DataSource = completeListView.OrderBy(c => c.SectionName).ToList();
             gridView.DataBind();
 
             //if (cmbStatus.Text == "APPROVED") { this.gridView.Columns[5].Visible = true; }
             //else { this.gridView.Columns[5].Visible = false; }
+        }
+    }
+
+    // eto yung lalagay mo pang completed na training
+    public void RefreshEmployee()
+    {
+        List<TrainingViews> empViewList = new List<TrainingViews>();
+        empViewList.Clear();
+
+        using (var context = new DatabaseContext())
+        {
+            var training = context.Trainings.FirstOrDefault(c => c.TrainingTitle == cmbTraining.Text);
+            var dept = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
+
+            if (training == null) { }
+            else if (dept == null) { }
+            else
+            {
+                var sec = context.Sections.FirstOrDefault(c => c.SectionName == cmbSection.Text && c.DepartmentId == dept.DepartmentId);
+                if (sec == null) { }
+                else
+                {
+                    var listEmp = context.Employees.Where(c => c.DepartmentId == dept.DepartmentId && c.SectionId == sec.SectionId).Select(c => c.EmployeeNumber).ToList();
+                    var listEmpTrain = context.EmployeeTrainings.Where(c => c.TrainingId == training.TrainingId).Select(c => c.EmployeeNumber).ToList();
+
+                    var newList = listEmpTrain.Except(listEmp).ToList();
+
+                    if (cmbStatus.Text == "ALL")
+                    {
+                        foreach (var item in newList)
+                        {
+                            var emptTrainingSelect = context.EmployeeTrainings.FirstOrDefault(c => c.TrainingId == training.TrainingId && c.EmployeeNumber == item);
+
+                            string fullName = string.Empty;
+                            string status = string.Empty;
+                            var emp = context.Employees.FirstOrDefault(c => c.EmployeeNumber == item);
+                            if (emp == null)
+                            {
+                                var user = context.Users.FirstOrDefault(c => c.EmployeeNumber == item);
+                                fullName = user.FullName;
+                            }
+                            else { fullName = emp.FullName; }
+
+                            if (emptTrainingSelect != null) { status = emptTrainingSelect.Status; }
+
+                            empViewList.Add(new TrainingViews()
+                            {
+                                EmployeeNumber = item,
+                                FullName = fullName,
+                                Status = status
+                            });
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in newList)
+                        {
+                            var emptTrainingSelect = context.EmployeeTrainings.FirstOrDefault(c => c.TrainingId == training.TrainingId && c.Status == cmbStatus.Text && c.EmployeeNumber == item);
+
+                            string fullName = string.Empty;
+                            string status = string.Empty;
+                            var emp = context.Employees.FirstOrDefault(c => c.EmployeeNumber == item);
+                            if (emp == null)
+                            {
+                                var user = context.Users.FirstOrDefault(c => c.EmployeeNumber == item);
+                                fullName = user.FullName;
+                            }
+                            else { fullName = emp.FullName; }
+                            if (emptTrainingSelect != null) { status = emptTrainingSelect.Status; }
+
+                            empViewList.Add(new TrainingViews()
+                            {
+                                EmployeeNumber = item,
+                                FullName = fullName,
+                                Status = status
+                            });
+                        }
+                    }
+                }
+            }
+
+            gridViewEmployee.DataSource = null;
+            gridViewEmployee.DataSource = empViewList.OrderBy(c => c.EmployeeNumber).ToList();
+            gridViewEmployee.DataBind();
         }
     }
 
@@ -399,6 +549,7 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
                 Refresh();
                 ReloadEmailManager();
                 ReloadEmailSupervisor();
+                RefreshEmployee();
             }
         }
     }
@@ -406,6 +557,7 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
     protected void cmbBoxTraining_TextChanged(object sender, EventArgs e)
     {
         Refresh();
+        RefreshEmployee();
     }
 
     public void ReloadDepartment()

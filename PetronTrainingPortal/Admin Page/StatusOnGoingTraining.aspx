@@ -19,7 +19,8 @@
                     <asp:Label ID="Label2" runat="server" Text="Status:" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
                     <asp:DropDownList CssClass="custom-dropdown" ID="cmbStatus" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbStatus_SelectedIndexChanged">
-                        <asp:ListItem>APPROVED</asp:ListItem>
+                                               <asp:ListItem>ALL</asp:ListItem>
+                         <asp:ListItem>APPROVED</asp:ListItem>
                         <asp:ListItem>PENDING</asp:ListItem>
                         <asp:ListItem>DECLINED</asp:ListItem>
                     </asp:DropDownList>
@@ -37,7 +38,7 @@
                 </div>
                 <div class="upperright_content_train">
                     <div style =" height:200px;  overflow:auto;">
-                    <asp:GridView ID="gridView1" CssClass="mydatagrid"  ShowHeader = "true" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" runat="server" AutoGenerateColumns="false" EmptyDataText="No data uploaded" Font-Size="12pt">
+                    <asp:GridView ID="gridView" CssClass="mydatagrid"  ShowHeader = "true" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" runat="server" AutoGenerateColumns="false" EmptyDataText="No data uploaded" Font-Size="12pt">
                     <Columns>
                     <asp:BoundField  ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px"  DataField="SectionName" HeaderText="SECTION NAME"  />
                     <asp:BoundField  ItemStyle-HorizontalAlign="Center" ItemStyle-Width="250px"  DataField="NoOfEmployees" HeaderText="NUMBER OF EMPLOYEES"  />
@@ -54,7 +55,7 @@
             <div class="left_content_train2">
             <div style =" height:300px;  overflow:auto; width: 791px;">
                 <center>
-                    <asp:GridView ID="gridView" CssClass="mydatagrid"  ShowHeader = "true" HeaderStyle-CssClass="header" RowStyle-CssClass="rows"  runat="server" AutoGenerateColumns="false" EmptyDataText="No data uploaded" Font-Size="8pt">
+                    <asp:GridView ID="gridViewEmployee" CssClass="mydatagrid"  ShowHeader = "true" HeaderStyle-CssClass="header" RowStyle-CssClass="rows"  runat="server" AutoGenerateColumns="false" EmptyDataText="No data uploaded" Font-Size="8pt">
                     <Columns>
                     <asp:BoundField  ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px"  DataField="EmployeeNumber" HeaderText="EMPLOYEE NUMBER"  />
                     <asp:BoundField  ItemStyle-HorizontalAlign="Center" ItemStyle-Width="250px"  DataField="FullName" HeaderText="FULLNAME"  />
