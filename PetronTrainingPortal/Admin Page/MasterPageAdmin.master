@@ -72,48 +72,21 @@
 <body>
     <ul>
         <li><a href="AdminReport.aspx">Registration</a></li>
-        <li><a href="TrainingCompleted.aspx">Complete Training</a></li>
-        <li><a href="StatusOnGoingTraining.aspx">On Going Training</a></li>
-        <li><a href="StatusCompletedTraining.aspx">Completed Trainings</a></li>
-
-  <li class="dropdown">
-      <a href="TrainingHome.aspx" class="dropbtn">Trainings</a>
-      <div class="dropdown-content">
-          <a href="AddTraining.aspx">Add Training</a>
-          <a href="EditTraining.aspx">Edit Training</a>
-          <a href="DeleteTraining.aspx">Delete Training</a>
-      </div>
-  </li>
-        <li class="dropdown">
-            <a href="UserHome.aspx" class="dropbtn">Users</a>
+        <li class="dropdown"><a href="#" class="dropbtn">Status</a>
             <div class="dropdown-content">
-                <a href="AddUser.aspx">Add User</a>
-                <a href="EditUser.aspx">Edit User</a>
-                <a href="DeleteUser.aspx">Delete User</a>
+                <a href="StatusOnGoingTraining.aspx">On Going Training</a>
+                <a href="StatusCompletedTraining.aspx">Completed Trainings</a>
             </div>
-            <li class="dropdown">
-                <a href="EmployeeHome.aspx" class="dropbtn">Employees</a>
-                <div class="dropdown-content">
-                    <a href="AddEmployee.aspx">Add Employee</a>
-                    <a href="EditEmployee.aspx">Edit Employee</a>
-                    <a href="DeleteEmployee.aspx">Delete Employee</a>
-                </div>
-                <li class="dropdown">
-                    <a href="DepartmentHome.aspx" class="dropbtn">Departments</a>
-                    <div class="dropdown-content">
-                        <a href="AddDepartment.aspx">Add Department</a>
-                        <a href="EditDepartment.aspx">Edit Department</a>
-                        <a href="DeleteDepartment.aspx">Delete Department</a>
-                    </div>
-                    <li class="dropdown">
-                        <a href="SectionHome.aspx" class="dropbtn">Sections</a>
-                        <div class="dropdown-content">
-                            <a href="AddSection.aspx">Add Section</a>
-                            <a href="EditSection.aspx">Edit Section</a>
-                            <a href="DeleteSection.aspx">Delete Section</a>
-                        </div>
-                    </li>
-                    <li class="navright"><a href="ChangePassword.aspx">Change Password</a></li>
+  </li>
+
+        <li><a href="TrainingCompleted.aspx">Complete Training</a></li>
+
+        <li><a href="TrainingHome.aspx" class="dropbtn">Trainings</a></li>
+        <li><a href="UserHome.aspx" class="dropbtn">Users</a></li>
+        <li><a href="EmployeeHome.aspx" class="dropbtn">Employees</a></li>
+        <li><a href="DepartmentHome.aspx" class="dropbtn">Departments</a></li>
+        <li><a href="SectionHome.aspx" class="dropbtn">Sections</a></li>
+        <li class="navright"><a href="ChangePassword.aspx">Change Password</a></li>
     </ul>
     <form id="form1" runat="server">
 

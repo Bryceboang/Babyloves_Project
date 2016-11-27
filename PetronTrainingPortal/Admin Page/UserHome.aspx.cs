@@ -72,7 +72,6 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
 
                 if (secList.Count() > 0)
                 {
-                    cmbSection.Items.Add("ALL");
                     foreach (var item in secList) { cmbSection.Items.Add(item.SectionName); }
                 }
 
@@ -400,7 +399,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
             else
             {
                 var selectUser = context.Users.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumberSearch.Text.ToLower());
-                if (selectUser != null) { Reload(); }
+                if (selectUser != null) { Reload(); btnClear.Enabled = true; btnReset.Enabled = true; }
                 else
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This employee number doesn't exist.');</script>");
@@ -526,7 +525,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
                 var selectUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == lblhidden.Text);
                 selectUser.Password = "petron10";
                 context.SaveChanges();
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Employee  password successfully changed.');</script>");
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Employee password successfully reset to petron10.');</script>");
                 Clear();
             }
         }

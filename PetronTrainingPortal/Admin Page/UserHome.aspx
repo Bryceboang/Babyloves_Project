@@ -15,12 +15,12 @@
                     <br />
                     <br />
                     <asp:TextBox ID="txtBoxEmployeeNumberSearch" runat="server" ValidationGroup="user"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumber" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumberSearch" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Label ID="ErrorEmpNo" runat="server" ForeColor="Red" Text=""></asp:Label>
                     <br />
                     <br />
-                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Enter" ValidationGroup="user"></asp:Button>
+                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Enter" ValidationGroup="user" OnClick="btnSearch_Click"></asp:Button>
                     </center>
                 </div>
                 <div class="right1_content_user_home ">
@@ -51,23 +51,23 @@
                     <asp:Label ID="lblhidden" runat="server" Visible="false" ForeColor="White" Font-Bold="True"></asp:Label>
              <br />
                     <asp:Label ID="Label2" runat="server" Text="Employee Number:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtBoxEmployeeNumber" CssClass="text" runat="server" ValidationGroup="user"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumber1" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtBoxEmployeeNumber" CssClass="text" runat="server" ValidationGroup="useradd"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumber" ForeColor="Red" ValidationGroup="useradd"></asp:RequiredFieldValidator>
                     <br />
                     <br />
                     <asp:Label ID="Label1" runat="server" Text="Full Name:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtFullName" CssClass="text" runat="server" ValidationGroup="user"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtFullName" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtFullName" CssClass="text" runat="server" ValidationGroup="useradd"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtFullName" ForeColor="Red" ValidationGroup="useradd"></asp:RequiredFieldValidator>
                     <center><asp:Label ID="lblFullNameMsg" runat="server" ForeColor="Red" ></asp:Label></center>
                     <br />
                     <asp:Label ID="Label3" runat="server" Text="Email:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtEmail" CssClass="text" runat="server" ValidationGroup="user"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtEmail" CssClass="text" runat="server" ValidationGroup="useradd"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" ForeColor="Red" ValidationGroup="useradd"></asp:RequiredFieldValidator>
                     <br />
                     <br />
                     <asp:Label ID="Label4" runat="server" Text="Password:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtPassword" CssClass="text" runat="server" ValidationGroup="user"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ControlToValidate="txtPassword" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtPassword" CssClass="text" runat="server" ValidationGroup="useradd"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ControlToValidate="txtPassword" ForeColor="Red" ValidationGroup="useradd"></asp:RequiredFieldValidator>
                     <center><asp:Label ID="lblPasswordMsg" runat="server" ForeColor="Red" ></asp:Label></center>
                 </div>
                 <div class="right2_content_user_home">
@@ -98,11 +98,11 @@
         </div>
     </div>
     <center>
-        <asp:Button ID="btnClear" OnClick="btnClear_Click"  CssClass="buttonGrid" runat="server" Text="Clear" ValidationGroup="EditUser" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
+        <asp:Button ID="btnClear" OnClick="btnClear_Click"  CssClass="buttonGrid" runat="server" Text="Clear" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
         &nbsp;
-        <asp:Button ID="btnSave" OnClick="btnSave_Click" CssClass="buttonGrid" runat="server" Text="Save" ValidationGroup="EditUser" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
+        <asp:Button ID="btnSave" OnClick="btnSave_Click" CssClass="buttonGrid" runat="server" Text="Save" ValidationGroup="useradd" Font-Size="10pt" Width="116px"></asp:Button>
         &nbsp;
-        <asp:Button ID="btnReset" OnClick="btnReset_Click" CssClass="buttonGrid" runat="server" Text="Reset Password" Enabled="False" ValidationGroup="EditUser" Font-Size="10pt" Width="195px" />
+        <asp:Button ID="btnReset" OnClick="btnReset_Click" CssClass="buttonGrid" runat="server" Text="Reset Password" Enabled="False" Font-Size="10pt" Width="195px" />
     </center>
 </asp:Content>
 

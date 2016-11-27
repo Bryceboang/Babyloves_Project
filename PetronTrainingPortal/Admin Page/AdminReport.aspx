@@ -48,7 +48,6 @@
             <div class="content_train">
                 <div class="left_content_train2_admin">
                     <center>
-                    <asp:Label ID="Label13" runat="server" Text="APPROVAL" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
                     <br />
                     <asp:Label ID="Label9" runat="server" Text="Department:" ForeColor="White" Font-Bold="True"></asp:Label>
