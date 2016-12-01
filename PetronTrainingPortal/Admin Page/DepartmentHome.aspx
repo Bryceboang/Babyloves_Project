@@ -17,7 +17,7 @@
                     <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true" runat="server"></asp:DropDownList>
                     <br />
                     <br />
-                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" ValidationGroup="training"></asp:Button>
+                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click"></asp:Button>
                     </center>
                 </div>
                 <div class="right1_content_dept_home">
@@ -41,7 +41,7 @@
                 <div class="left2_content_dept_home ">
                     <center>
                         <br />   
-                         <asp:Label ID="lblHidden" runat="server" Visible="false" ForeColor="White" Font-Bold="True" Font-Size="15pt"></asp:Label>
+                         <asp:Label ID="lblHidden" runat="server" Visible="false" ForeColor="White" Font-Bold="True"></asp:Label>
                         <br />   
                         <asp:Label ID="Label1" runat="server" Text="Department Name:" ForeColor="White" Font-Bold="True"></asp:Label>
                         <br />
@@ -55,7 +55,7 @@
     <center>
         <asp:Button ID="btnClear" OnClick="btnClear_Click"  CssClass="buttonGrid" runat="server" Text="Clear" ValidationGroup="dept" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
         &nbsp;
-        <asp:Button ID="btnSave" OnClick="btnSave_Click"  CssClass="buttonGrid" runat="server" Text="Save" ValidationGroup="dept" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
+        <asp:Button ID="btnSave" OnClick="btnSave_Click"  CssClass="buttonGrid" runat="server" Text="Save" ValidationGroup="dept" Font-Size="10pt" Width="116px"></asp:Button>
     </center>
 </asp:Content>
 

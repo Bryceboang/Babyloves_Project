@@ -37,7 +37,7 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
     {
         lblHidden.Text = string.Empty;
         if (string.IsNullOrEmpty(cmbDepartment.Text) != true) { Reload(); }
-        else { Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a department.');</script>"); }
+        else { Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a department.');</script>"); btnClear.Enabled = true; }
 
     }
 
