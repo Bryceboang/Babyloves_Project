@@ -10,8 +10,11 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        ReloadDepartment();
-        ReloadSection();
+        if (!Page.IsPostBack)
+        {
+            ReloadDepartment();
+            ReloadSection();
+        }
     }
 
     public void Reload()
@@ -64,7 +67,6 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
 
                 if (secList.Count() > 0)
                 {
-                    cmbSection.Items.Add("ALL");
                     foreach (var item in secList) { cmbSection.Items.Add(item.SectionName); }
                 }
 
@@ -123,6 +125,7 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                     var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == select.SectionId);
 
                     lblhidden.Text = select.EmployeeNumber;
+                    txtBoxEmployeeNumber.Text = select.EmployeeNumber;
                     cmbDepartment.Text = selectDept.DepartmentName;
                     cmbSection.Text = selectSec.SectionName;
                     txtFullName.Text = select.FullName;
@@ -147,7 +150,7 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
             else
             {
                 var selectEmp = context.Employees.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumberSearch.Text.ToLower());
-                if (selectEmp != null) { Reload(); }
+                if (selectEmp != null) { Reload(); btnClear.Enabled = true; }
                 else
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This employee number doesn't exist.');</script>");

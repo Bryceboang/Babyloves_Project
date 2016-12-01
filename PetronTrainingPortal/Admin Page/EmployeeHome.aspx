@@ -14,7 +14,7 @@
                     <br />
                     <br />
                     <asp:TextBox ID="txtBoxEmployeeNumberSearch" runat="server" ValidationGroup="employee"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumber" ForeColor="Red" ValidationGroup="employee"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumberSearch" ForeColor="Red" ValidationGroup="employee"></asp:RequiredFieldValidator>
                     <br />
             <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red" ></asp:Label>
                         <br />
@@ -24,6 +24,7 @@
                     </center>
                 </div>
                 <div class="right1_content_emp_home ">
+                    <center>
                     <asp:GridView ID="gridEmployee" OnRowCommand="gridEmployee_RowCommand" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                         <Columns>
                             <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
@@ -34,6 +35,7 @@
                             <asp:ButtonField  CommandName="RemoveEmployee"   ImageUrl="~/Image/remove.jpg" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
                         </Columns>
                     </asp:GridView>
+                    </center>
                 </div>
             </div>
         </div>
@@ -42,42 +44,40 @@
         <div class="main_box_emp">
             <div class="content_emp">
                 <div class="left2_content_emp_home ">
-                    <br />
                     <center>
                     <br />
                     <asp:Label ID="lblhidden" runat="server" Visible="false" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
                     <asp:Label ID="Label2" runat="server" Text="Employee Number:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtBoxEmployeeNumber" CssClass="text" runat="server" ValidationGroup="user"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumber1" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtBoxEmployeeNumber" CssClass="text" runat="server" ValidationGroup="addemp"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumber" ForeColor="Red" ValidationGroup="addemp"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Label ID="Label1" runat="server" Text="Full Name:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtFullName" CssClass="text" runat="server" ValidationGroup="user"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtFullName" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtFullName" CssClass="text" runat="server" ValidationGroup="addemp"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtFullName" ForeColor="Red" ValidationGroup="addemp"></asp:RequiredFieldValidator>
                     </center>
                 </div>
                 <div class="right2_content_emp_home">
-                    <br />
                     <center>
+                    <br />
+                    <br />
                     <asp:Label ID="Label6" runat="server" Text="Department:" ForeColor="White" Font-Bold="True" Width="100"></asp:Label>
                     <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true" OnSelectedIndexChanged="cmbDepartment_SelectedIndexChanged" runat="server"></asp:DropDownList>
-                    <br />
-                    <asp:Label ID="lblDepartmentMsg" runat="server" ForeColor="Red" ></asp:Label>
+                    &nbsp;<asp:Label ID="lblDepartmentMsg" runat="server" ForeColor="Red" ></asp:Label>
                     <br />
                     <br />
                     <asp:Label ID="Label7" runat="server" Text="Section:" ForeColor="White" Font-Bold="True" Width="100"></asp:Label>
                     <asp:DropDownList ID="cmbSection" CssClass="custom-dropdown" AutoPostBack="true" runat="server"></asp:DropDownList>
-                    <br />
-                    <asp:Label ID="lblSectionMsg" runat="server" ForeColor="Red" ></asp:Label>
+                    &nbsp;<asp:Label ID="lblSectionMsg" runat="server" ForeColor="Red" ></asp:Label>
                     </center>
                 </div>
             </div>
         </div>
     </div>
         <center>
-        <asp:Button ID="btnClear" OnClick="btnClear_Click"  CssClass="buttonGrid" runat="server" Text="Clear" ValidationGroup="EditUser" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
+        <asp:Button ID="btnClear" OnClick="btnClear_Click"  CssClass="buttonGrid" runat="server" Text="Clear" ValidationGroup="addemp" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
         &nbsp;
-        <asp:Button ID="btnSave" OnClick="btnSave_Click"  CssClass="buttonGrid" runat="server" Text="Save" ValidationGroup="EditUser" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
+        <asp:Button ID="btnSave" OnClick="btnSave_Click"  CssClass="buttonGrid" runat="server" Text="Save" ValidationGroup="addemp" Font-Size="10pt" Width="116px"></asp:Button>
         </center>
 </asp:Content>
 
