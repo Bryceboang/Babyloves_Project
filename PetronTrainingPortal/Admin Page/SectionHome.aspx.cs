@@ -110,6 +110,8 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
                     var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == select.DepartmentId);
                     lblHidden.Text = id.ToString();
                     cmbSelectDepartment.Text = selectDept.DepartmentName;
+                    txtBoxDept.Enabled = true;
+                    txtBoxDept.Text = selectDept.DepartmentName;
                     txtBoxSection.Text = select.SectionName;
                 }
             }
@@ -120,6 +122,8 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
     {
         lblHidden.Text = string.Empty;
         cmbSelectDepartment.Enabled = true;
+        txtBoxDept.Enabled = false;
+        txtBoxSection.Text = string.Empty;
         txtBoxSection.Text = string.Empty;
     }
 

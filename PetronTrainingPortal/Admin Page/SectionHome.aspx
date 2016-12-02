@@ -43,13 +43,16 @@
             <div class="content_dept">
                 <div class="left2_content_sec_home ">
                     <center>
-                    <br />
                     <asp:Label ID="lblHidden" runat="server" Visible="false" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />   
                     <asp:Label ID="Label3" runat="server" Text="Department Name:" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
-                    <asp:DropDownList ID="cmbSelectDepartment" CssClass="custom-dropdown" AutoPostBack="true" Width="350px" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="cmbSelectDepartment" CssClass="custom-dropdown" AutoPostBack="true" Width="365px" runat="server"></asp:DropDownList>
                     <br />
+                    <asp:Label ID="Label4" runat="server" Text="Department Name:" ForeColor="White" Font-Bold="True"></asp:Label>
+                    <br />
+                    <asp:TextBox ID="txtBoxDept" CssClass="text" runat="server" ValidationGroup="sec" Width="350px" Enabled="False"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtBoxDept" ForeColor="Red" ValidationGroup="sec"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Label ID="Label2" runat="server" Text="Section Name:" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
