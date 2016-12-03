@@ -10,8 +10,11 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        ReloadDepartment();
-        ReloadSection();
+        if (!Page.IsPostBack)
+        {
+            ReloadDepartment();
+            ReloadSection();
+        }
     }
 
     public void Reload()
@@ -64,7 +67,6 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
 
                 if (secList.Count() > 0)
                 {
-                    cmbSection.Items.Add("ALL");
                     foreach (var item in secList) { cmbSection.Items.Add(item.SectionName); }
                 }
 
@@ -121,9 +123,10 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                     txtBoxEmployeeNumber.Enabled = false;
                     var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == select.DepartmentId);
                     var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == select.SectionId);
-
+                    txtBoxEmployeeNumber.Text = id;
                     lblhidden.Text = select.EmployeeNumber;
                     cmbDepartment.Text = selectDept.DepartmentName;
+                    ReloadSection();
                     cmbSection.Text = selectSec.SectionName;
                     txtFullName.Text = select.FullName;
                 }
@@ -138,6 +141,7 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
+        lblEmpNoMsg.Text = string.Empty;
         using (var context = new DatabaseContext())
         {
             if (string.IsNullOrEmpty(txtBoxEmployeeNumberSearch.Text) == true)
@@ -150,7 +154,7 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                 if (selectEmp != null) { Reload(); }
                 else
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This employee number doesn't exist.');</script>");
+                    lblEmpNoMsg.Text = "This employee number doesn't exist.";
                 }
             }
         }
@@ -158,9 +162,11 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
 
     protected void btnClear_Click(object sender, EventArgs e)
     {
+        txtBoxEmployeeNumber.Enabled = true;
+        txtBoxEmployeeNumber.Text = string.Empty;
+        lblEmpNoMsg.Text = string.Empty;
         lblhidden.Text = string.Empty;
         txtFullName.Text = string.Empty;
-        txtBoxEmployeeNumberSearch.Text = string.Empty;
     }
 
     protected void btnSave_Click(object sender, EventArgs e)

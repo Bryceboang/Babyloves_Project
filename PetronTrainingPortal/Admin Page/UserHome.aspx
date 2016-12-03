@@ -47,7 +47,6 @@
         <div class="main_box_user">
             <div class="content_user">
                 <div class="left2_content_user_home ">
-                    <br />
                     <asp:Label ID="lblhidden" runat="server" Visible="false" ForeColor="White" Font-Bold="True"></asp:Label>
              <br />
                     <asp:Label ID="Label2" runat="server" Text="Employee Number:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
