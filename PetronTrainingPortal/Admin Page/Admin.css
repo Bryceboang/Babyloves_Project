@@ -48,7 +48,7 @@
 }
 
 .left_content_train {
-    width: 200px;
+    width: 220px;
     float: left;
     border: 2px solid white;
     -webkit-box-sizing: border-box;
@@ -58,7 +58,7 @@
 }
 
 .right_content_train {
-    width: 200px;
+    width: 220px;
     float: left;
     margin-left: 2px auto;
     border: 2px solid white;
@@ -96,7 +96,7 @@
 }
 
 .upperright_content_train {
-    width: 585px;
+    width: 546px;
     float: left;
     margin-left: 2px auto;
     border: 2px solid white;
@@ -430,7 +430,6 @@
 }
 
 .mydatagrid {
-  width: 80%;
   border: solid 2px black;
   min-width: 80%;
 }

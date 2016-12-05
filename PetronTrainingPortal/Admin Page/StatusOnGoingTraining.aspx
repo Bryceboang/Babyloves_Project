@@ -8,8 +8,8 @@
     <div class="main_container_train">
         <div class="main_box_train">
             <div class="content_train">
-                <center>
                 <div class="left_content_train">
+                    <center>
                     <br />
                     <asp:Label ID="Label1" runat="server" Text="Training Title:" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
@@ -24,8 +24,10 @@
                         <asp:ListItem>PENDING</asp:ListItem>
                         <asp:ListItem>DECLINED</asp:ListItem>
                     </asp:DropDownList>
+                    </center>
                  </div>
                 <div class="right_content_train">
+                    <center>
                     <br />
                     <asp:Label ID="Label3" runat="server" Text="Department:" Font-Bold="True" ForeColor="White"></asp:Label>
                     <br />
@@ -35,9 +37,10 @@
                     <asp:Label ID="Label4" runat="server" Text="Section:" Font-Bold="True" ForeColor="White"></asp:Label>
                     <br />
                     <asp:DropDownList CssClass="custom-dropdown" ID="cmbSection" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cmbSection_SelectedIndexChanged"></asp:DropDownList>
+                    </center>
                 </div>
                 <div class="upperright_content_train">
-                    <div style =" height:200px;  overflow:auto;">
+                    <center>
                     <asp:GridView ID="gridView" CssClass="mydatagrid"  ShowHeader = "true" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" runat="server" AutoGenerateColumns="false" EmptyDataText="No data uploaded" Font-Size="12pt">
                     <Columns>
                     <asp:BoundField  ItemStyle-HorizontalAlign="Center" ItemStyle-Width="100px"  DataField="SectionName" HeaderText="SECTION NAME"  />
@@ -47,13 +50,12 @@
                     <asp:BoundField  ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200px"  DataField="TotalPending" HeaderText="TOTAL PENDING"  />
                     <asp:BoundField  ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200px"  DataField="TotalDeclined" HeaderText="TOTAL DECLINED"  />
                     </Columns>
-             <RowStyle CssClass="rows"></RowStyle>
+                    <RowStyle CssClass="rows"></RowStyle>
                     </asp:GridView>
-                </div>
-                </center>
+                    </center>
                 </div>
             <div class="left_content_train2">
-            <div style =" height:300px;  overflow:auto; width: 791px;">
+            <div style="height: 285px; width: 790px; overflow:auto;">
                 <center>
                     <asp:GridView ID="gridViewEmployee" CssClass="mydatagrid"  ShowHeader = "true" HeaderStyle-CssClass="header" RowStyle-CssClass="rows"  runat="server" AutoGenerateColumns="false" EmptyDataText="No data uploaded" Font-Size="8pt">
                     <Columns>
