@@ -16,9 +16,7 @@
                     <asp:TextBox ID="txtBoxEmployeeNumberSearch" runat="server" ValidationGroup="employee"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumberSearch" ForeColor="Red" ValidationGroup="employee"></asp:RequiredFieldValidator>
                     <br />
-            <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red" ></asp:Label>
-                        <br />
-                    <asp:Label ID="ErrorEmpNo" runat="server" ForeColor="Red" Text=""></asp:Label>
+                    <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red" ></asp:Label>
                     <br />
                     <asp:Button OnClick="btnSearch_Click" CssClass="button_enter" ID="btnSearch" runat="server" Text="Search" ValidationGroup="employee"></asp:Button>
                     </center>
@@ -45,7 +43,6 @@
             <div class="content_emp">
                 <div class="left2_content_emp_home ">
                     <center>
-                    <br />
                     <asp:Label ID="lblhidden" runat="server" Visible="false" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
                     <asp:Label ID="Label2" runat="server" Text="Employee Number:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
