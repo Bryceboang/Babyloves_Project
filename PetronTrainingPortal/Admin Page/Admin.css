@@ -308,7 +308,7 @@
 }
 
 .left2_content_emp_home {
-    width: 475px;
+    width: 575px;
     float: left;
     border: 2px solid white;
     -webkit-box-sizing: border-box;
@@ -318,7 +318,7 @@
 }
 
 .right2_content_emp_home {
-    width: 475px;
+    width: 375px;
     float: left;
     margin-left: 2px auto;
     border: 2px solid white;

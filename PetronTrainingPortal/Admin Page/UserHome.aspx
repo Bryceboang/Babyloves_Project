@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="main_container_user_home ">
         <div class="main_box_user">
+            <center><asp:Label ID="lblTitle" runat="server" Text="USER" ForeColor="White" Font-Size="16" Font-Bold="True"></asp:Label></center>
             <div class="content_user">
                 <div class="left1_content_user_home ">
                     <br />
@@ -14,7 +15,7 @@
                     <asp:Label ID="lblEmpNum" runat="server" Text="Employee Number" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
                     <br />
-                    <asp:TextBox ID="txtBoxEmployeeNumberSearch" runat="server" ValidationGroup="user"></asp:TextBox>
+                    <asp:TextBox ID="txtBoxEmployeeNumberSearch" runat="server" ValidationGroup="user" Width="150px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumberSearch" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Label ID="ErrorEmpNo" runat="server" ForeColor="Red" Text=""></asp:Label>
@@ -47,33 +48,34 @@
         <div class="main_box_user">
             <div class="content_user">
                 <div class="left2_content_user_home ">
+                    <center>
                     <asp:Label ID="lblhidden" runat="server" Visible="false" ForeColor="White" Font-Bold="True"></asp:Label>
              <br />
                     <asp:Label ID="Label2" runat="server" Text="Employee Number:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtBoxEmployeeNumber" CssClass="text" runat="server" ValidationGroup="useradd"></asp:TextBox>
+                    <asp:TextBox ID="txtBoxEmployeeNumber" CssClass="text" runat="server" ValidationGroup="useradd" Width="250px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumber" ForeColor="Red" ValidationGroup="useradd"></asp:RequiredFieldValidator>
                     <br />
                     <br />
                     <asp:Label ID="Label1" runat="server" Text="Full Name:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtFullName" CssClass="text" runat="server" ValidationGroup="useradd"></asp:TextBox>
+                    <asp:TextBox ID="txtFullName" CssClass="text" runat="server" ValidationGroup="useradd" Width="250px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtFullName" ForeColor="Red" ValidationGroup="useradd"></asp:RequiredFieldValidator>
                     <center><asp:Label ID="lblFullNameMsg" runat="server" ForeColor="Red" ></asp:Label></center>
                     <br />
                     <asp:Label ID="Label3" runat="server" Text="Email:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtEmail" CssClass="text" runat="server" ValidationGroup="useradd"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" CssClass="text" runat="server" ValidationGroup="useradd" Width="250px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" ForeColor="Red" ValidationGroup="useradd"></asp:RequiredFieldValidator>
                     <br />
                     <br />
                     <asp:Label ID="Label4" runat="server" Text="Password:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
-                    <asp:TextBox ID="txtPassword" CssClass="text" runat="server" ValidationGroup="useradd"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" CssClass="text" runat="server" ValidationGroup="useradd" Width="250px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*" ControlToValidate="txtPassword" ForeColor="Red" ValidationGroup="useradd"></asp:RequiredFieldValidator>
-                    <center><asp:Label ID="lblPasswordMsg" runat="server" ForeColor="Red" ></asp:Label></center>
+                    <center><asp:Label ID="lblPasswordMsg" runat="server" ForeColor="Red" ></asp:Label></center></center>
                 </div>
                 <div class="right2_content_user_home">
                     <center>
                     <br />
                     <br />
-                    <asp:Label ID="Label5" runat="server" Text="Access Type:" ForeColor="White" Font-Bold="True" Width="120"></asp:Label>
+                    <asp:Label ID="Label5" runat="server" Text="Access Type:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
                     <asp:DropDownList ID="cmbAccessType" CssClass="custom-dropdown" OnSelectedIndexChanged="cmbBoxAccessType_SelectedIndexChanged" AutoPostBack="true" runat="server">
                     <asp:ListItem>SUPERVISOR</asp:ListItem>
                     <asp:ListItem>MANAGER</asp:ListItem>

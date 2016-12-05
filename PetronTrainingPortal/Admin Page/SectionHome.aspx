@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="main_container_dept_home ">
         <div class="main_box_dept">
+            <center><asp:Label ID="lblTitle" runat="server" Text="SECTION" ForeColor="White" Font-Size="16" Font-Bold="True"></asp:Label></center>
             <div class="content_dept">
                 <div class="left1_content_sec_home ">
                     <br />
