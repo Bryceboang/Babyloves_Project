@@ -42,7 +42,7 @@
         </div>
     </div>
     <br />
-    <br />d
+    <br />
     <center><asp:Button CssClass="button" ID="btnSave" runat="server" Text="Training Completed" OnClick="btnSave_Click" ValidationGroup="EditTraining" Font-Size="15pt" Width="220px"></asp:Button></center>
     <%--<center>
             <h2>Training Completed</h2>

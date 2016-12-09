@@ -150,7 +150,7 @@ public partial class Supervisor_TrainingRegister : System.Web.UI.Page
                     context.EmployeeTrainings.Add(empTrain);
                     context.SaveChanges();
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('The selected employee's status is now PENDING.');</script>");
-
+                    EMAIL();
                 }
                 EmployeeReload();
             }
@@ -169,6 +169,15 @@ public partial class Supervisor_TrainingRegister : System.Web.UI.Page
             gridEmployee.DataSource = null;
             gridEmployee.DataBind();
         }
+    }
+
+    public void EMAIL()
+    {
+        //dapat po lalabas sa string email yung email ng manager nung dept nila.
+        string email = "escruz@petron.com";
+        string subject = "Employee Approval in Training";
+        string body = "For your approval on request.";
+        ClientScript.RegisterStartupScript(this.GetType(), "mailto", "parent.location='mailto:" + email + "?subject=" + subject + "&body=" + body + "'", true);
     }
 
 }
