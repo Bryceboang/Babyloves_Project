@@ -749,11 +749,14 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
     {
         using (var context = new DatabaseContext())
         {
+            cmbDepartment.Items.Clear();
             var deptList = context.Departments.OrderBy(c => c.DepartmentName).ToList();
             if (deptList.Count > 0)
             {
                 foreach (var item in deptList) { cmbDepartment.Items.Add(item.DepartmentName); }
             }
+            ReloadEmailManager();
+            ReloadEmailSupervisor();
         }
     }
 
@@ -761,6 +764,7 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
     {
         using (var context = new DatabaseContext())
         {
+            cmbManager.Items.Clear();
             var selectEmailDept = context.Departments.First(c => c.DepartmentName == cmbDepartment.Text);
             if (selectEmailDept != null)
             {
@@ -781,6 +785,7 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
     {
         using (var context = new DatabaseContext())
         {
+            cmbSupervisor.Items.Clear();
             var selectEmailDept = context.Departments.First(c => c.DepartmentName == cmbDepartment.Text);
             if (selectEmailDept != null)
             {
@@ -823,6 +828,8 @@ public partial class Admin_Page_StatusOnGoingTraining : System.Web.UI.Page
 
     protected void cmbDepartment_SelectedIndexChanged(object sender, EventArgs e)
     {
+        ReloadEmailManager();
+        ReloadEmailSupervisor();
         ReloadSection();
         RefreshEmployee();
         Refresh();
