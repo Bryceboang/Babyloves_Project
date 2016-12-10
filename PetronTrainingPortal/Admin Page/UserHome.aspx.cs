@@ -10,9 +10,12 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        ReloadDepartment();
-        ReloadSection();
-        Variables.empNo = string.Empty;
+        if (!Page.IsPostBack)
+        {
+            ReloadDepartment();
+            ReloadSection();
+            Variables.empNo = string.Empty;
+        }
     }
 
     public void Reload()
@@ -22,22 +25,29 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
             List<TrainingViews> trainViewList = new List<TrainingViews>();
             trainViewList.Clear();
             lblhidden.Text = string.Empty;
+            string deptName = string.Empty;
+            string secName = string.Empty;
 
             var selectUser = context.Users.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumberSearch.Text.ToLower());
             var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == selectUser.DepartmentId);
+            if (selectDept != null)
+            {
+                deptName = selectDept.DepartmentName;
+            }
+           
             var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == selectUser.SectionId);
-
-            string sec = string.Empty;
+            if (selectSec != null)
+            {
+                secName = selectSec.SectionName;
+            }
             Variables.empNo = selectUser.EmployeeNumber;
-            if (selectSec != null) { sec = selectSec.SectionName; }
-
 
             trainViewList.Add(new TrainingViews()
             {
-                DepartmentName = selectDept.DepartmentName,
+                DepartmentName = deptName,
                 EmployeeNumber = selectUser.EmployeeNumber,
                 FullName = selectUser.FullName,
-                SectionName = sec,
+                SectionName = secName,
                 AccessType = selectUser.AccessType,
                 Email = selectUser.Email
             });
@@ -278,7 +288,8 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
                 if (lblhidden.Text == string.Empty)
                 {
                     var check = context.Users.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumber.Text.ToLower());
-                    if (check != null)
+                    var checkEmp = context.Employees.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumber.Text.ToLower());
+                    if (check != null || checkEmp != null)
                     {
                         string x = "Cannot add duplicate employee number.";
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + x + "');", true);
@@ -290,7 +301,8 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
                 {
                     var list = context.Users.Where(c => c.EmployeeNumber != lblhidden.Text).ToList();
                     var check = list.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumber.Text.ToLower());
-                    if (check != null)
+                    var checkEmp = context.Employees.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumber.Text.ToLower());
+                    if (check != null || checkEmp != null)
                     {
                         string x = "Cannot add duplicate employee number.";
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + x + "');", true);
@@ -302,90 +314,6 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
 
         }
     }
-
-
-    //    using (var context = new DatabaseContext())
-    //    {
-    //        var selectUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == txtBoxEmployeeNumber.Text);
-    //        if (string.IsNullOrEmpty(Variables.empNo) == true)
-    //        {
-    //            ErrorEmpNo.Text = "Please search an employee number first.";
-    //        }
-    //        else if (string.IsNullOrWhiteSpace(txtFullName.Text) == true)
-    //        {
-    //            lblFullNameMsg.Text = "please enter a full name.";
-    //        }
-    //        else if (string.IsNullOrWhiteSpace(txtPassword.Text) == true)
-    //        {
-    //            lblPasswordMsg.Text = "please enter a password.";
-    //        }
-    //        else if (string.IsNullOrEmpty(cmbDepartment.Text) == true && cmbBoxAccessType.Text != "Admin")
-    //        {
-    //            lblDepartmentMsg.Text = "Please select a department name first.";
-    //        }
-    //        else if (string.IsNullOrEmpty(cmbSection.Text) == true && cmbBoxAccessType.Text == "Supervisor")
-    //        {
-    //            lblSectionMsg.Text = "Please select a section name first.";
-    //        }
-    //        else
-    //        {
-    //            if (cmbBoxAccessType.Text == "Admin")
-    //            {
-    //                selectUser.Password = txtPassword.Text;
-    //                selectUser.AccessType = cmbBoxAccessType.Text;
-    //                selectUser.FullName = txtFullName.Text;
-    //                selectUser.Email = txtEmail.Text;
-    //                selectUser.DepartmentId = 0;
-    //                selectUser.SectionId = 0;
-    //                context.SaveChanges();
-    //                x = x + "                   Edit user successful.";
-    //                Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + x + "');", true);
-    //            }
-    //            else if (cmbBoxAccessType.Text == "Manager")
-    //            {
-    //                var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
-    //                selectUser.Password = txtPassword.Text;
-    //                selectUser.AccessType = cmbBoxAccessType.Text;
-    //                selectUser.FullName = txtFullName.Text;
-    //                selectUser.DepartmentId = selectDept.DepartmentId;
-    //                selectUser.Email = txtEmail.Text;
-    //                selectUser.SectionId = 0;
-    //                context.SaveChanges();
-    //                x = x + "                   Edit user successful.";
-    //                Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + x + "');", true);
-    //            }
-    //            else
-    //            {
-    //                var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
-    //                var selectSec = context.Sections.FirstOrDefault(c => c.SectionName == cmbSection.Text);
-
-    //                selectUser.Password = txtPassword.Text;
-    //                selectUser.AccessType = cmbBoxAccessType.Text;
-    //                selectUser.FullName = txtFullName.Text;
-    //                selectUser.DepartmentId = selectDept.DepartmentId;
-    //                selectUser.Email = txtEmail.Text;
-    //                selectUser.SectionId = selectSec.SectionId;
-    //                context.SaveChanges();
-    //                x = x + "                   Edit user successful.";
-    //                Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + x + "');", true);
-    //            }
-    //            Clear();
-
-    //            var accountType = Session["AccountType"].ToString();
-    //            var empNo = Session["EmpNo"].ToString();
-    //            if (selectUser.AccessType != accountType && selectUser.EmployeeNumber == empNo)
-    //            {
-    //                Session["EmpNo"] = null;
-    //                Session["FirstName"] = null;
-    //                Session["AccountType"] = null;
-    //                Session.Abandon();
-    //                Page.ClientScript.RegisterStartupScript(this.GetType(), "clearHistory", "ClearHistory();", true);
-
-    //                Response.Redirect("~/Main Page/Login.aspx");
-    //            }
-    //        }
-    //    }
-    //}
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
@@ -431,7 +359,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
             string id = empNo.Text;
 
             var selectUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == id);
-            if (e.CommandName == "Remove")
+            if (e.CommandName == "RemoveUser")
             {
                 if (selectUser != null)
                 {
@@ -454,6 +382,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
 
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('The selected user is removed.');</script>");
                         Clear();
+                        AccessType();
                     }
                 }
             }
@@ -462,29 +391,52 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
                 if (selectUser != null)
                 {
                     txtBoxEmployeeNumber.Enabled = false;
+                    string deptName = string.Empty;
+                    string secName = string.Empty;
                     var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == selectUser.DepartmentId);
                     var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == selectUser.SectionId);
 
-                    string sec = string.Empty;
+                    if (selectDept != null)
+                    {
+                        deptName = selectDept.DepartmentName;
+                        cmbDepartment.Text = deptName;
+                        ReloadSection();
+                    }
 
-                    if (selectSec != null) { sec = selectSec.SectionName; }
+        
+
+                    if (selectSec != null)
+                    {
+                        secName = selectSec.SectionName;
+                        cmbSection.Text = secName;
+                    }
+
                     lblhidden.Text = selectUser.EmployeeNumber;
                     txtBoxEmployeeNumber.Text = selectUser.EmployeeNumber;
                     txtFullName.Text = selectUser.FullName;
                     txtEmail.Text = selectUser.Email;
-                    cmbSection.Text = sec;
-                    cmbDepartment.Text = selectDept.DepartmentName;
+                    txtPassword.Text = selectUser.Password;
+   
                     cmbAccessType.Text = selectUser.AccessType;
+                    AccessType();
                 }
             }
         }
     }
 
-    protected void cmbBoxAccessType_SelectedIndexChanged(object sender, EventArgs e)
+    public void AccessType()
     {
         using (var context = new DatabaseContext())
         {
-            if (cmbAccessType.Text == "Admin")
+            labelDept.Visible = true;
+            cmbDepartment.Visible = true;
+            lblDepartmentMsg.Visible = true;
+
+            labelSection.Visible = true;
+            cmbSection.Visible = true;
+            lblSectionMsg.Visible = true;
+
+            if (cmbAccessType.Text.ToLower() == "admin")
             {
                 labelDept.Visible = false;
                 cmbDepartment.Visible = false;
@@ -494,7 +446,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
                 cmbSection.Visible = false;
                 lblSectionMsg.Visible = false;
             }
-            else if (cmbAccessType.Text == "Manager")
+            else if (cmbAccessType.Text.ToLower() == "manager")
             {
                 labelSection.Visible = false;
                 cmbSection.Visible = false;
@@ -513,7 +465,10 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
         }
     }
 
-
+    protected void cmbBoxAccessType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        AccessType();
+    }
 
     protected void btnReset_Click(object sender, EventArgs e)
     {
@@ -529,5 +484,9 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
                 Clear();
             }
         }
+    }
+    protected void cmbDepartment_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        ReloadSection();
     }
 }

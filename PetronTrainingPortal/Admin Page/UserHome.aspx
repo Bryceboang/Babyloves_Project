@@ -35,7 +35,7 @@
                             <asp:BoundField DataField="DepartmentName" HeaderText="Department" />
                             <asp:BoundField DataField="SectionName" HeaderText="Section" />
                             <asp:ButtonField  CommandName="EditEmployee"   ImageUrl="~/Image/edit.png" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
-                            <asp:ButtonField  CommandName="RemoveEmployee"   ImageUrl="~/Image/remove.jpg" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
+                            <asp:ButtonField  CommandName="RemoveUser"   ImageUrl="~/Image/remove.jpg" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
                         </Columns>
                     </asp:GridView>
                     </center>
@@ -84,7 +84,7 @@
                     <br />
                     <br />
                     <asp:Label ID="labelDept" runat="server" Text="Department:" ForeColor="White" Font-Bold="True" Width="120"></asp:Label>
-                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true" OnSelectedIndexChanged="cmbDepartment_SelectedIndexChanged" runat="server"></asp:DropDownList>
                     <br />
                     <asp:Label ID="lblDepartmentMsg" runat="server" ForeColor="Red" ></asp:Label>
                     <br />
@@ -99,7 +99,7 @@
         </div>
     </div>
     <center>
-        <asp:Button ID="btnClear" OnClick="btnClear_Click"  CssClass="buttonGrid" runat="server" Text="Clear" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
+        <asp:Button ID="btnClear" OnClick="btnClear_Click"  CssClass="buttonGrid" runat="server" Text="Clear" Font-Size="10pt" Width="116px"></asp:Button>
         &nbsp;
         <asp:Button ID="btnSave" OnClick="btnSave_Click" CssClass="buttonGrid" runat="server" Text="Save" ValidationGroup="useradd" Font-Size="10pt" Width="116px"></asp:Button>
         &nbsp;
