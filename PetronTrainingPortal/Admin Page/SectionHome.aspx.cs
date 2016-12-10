@@ -10,8 +10,11 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        ReloadDepartment();
-        ReloadSection();
+        if (!Page.IsPostBack)
+        {
+            ReloadDepartment();
+            ReloadSection(); 
+        }
     }
 
     public void Reload()
@@ -22,7 +25,6 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
             sectionView.Clear();
             var department = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
             var section = context.Sections.FirstOrDefault(c => c.SectionName == cmbSection.Text && c.DepartmentId == department.DepartmentId);
-            lblHidden.Text = department.DepartmentId.ToString();
             sectionView.Add(new SectionViews()
             {
                 DepartmentId = section.DepartmentId,
@@ -73,10 +75,12 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
             int index = Convert.ToInt32(e.CommandArgument);
 
             GridViewRow selectedRow = gridSec.Rows[index];
-            TableCell secId = selectedRow.Cells[0];
-            int id = int.Parse(secId.Text);
-      
-            var select = context.Sections.FirstOrDefault(c => c.SectionId == id);
+            TableCell secId = selectedRow.Cells[1];
+            string id = secId.Text;
+            var department = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
+
+
+            var select = context.Sections.FirstOrDefault(c => c.SectionName == id && c.DepartmentId == department.DepartmentId);
             if (e.CommandName == "RemoveSection")
             {
                 if (select != null)
@@ -133,16 +137,16 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
         {
             if (lblHidden.Text != string.Empty)
             {
-                var dept = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
+                var dept = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbSelectDepartment.Text);
                 if (dept == null)
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a department first.');</script>");
                 }
                 else
                 {
-                    int id = int.Parse(lblHidden.Text);
-                    var list = context.Sections.Where(c => c.SectionId != id).ToList();
-                    var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == id);
+                    string id = lblHidden.Text;
+                    var list = context.Sections.Where(c => c.SectionName != id && dept.DepartmentId == dept.DepartmentId).ToList();
+                    var selectSec = context.Sections.FirstOrDefault(c => c.SectionName == id && dept.DepartmentId == dept.DepartmentId);
                     var check = list.FirstOrDefault(c => c.SectionName.ToLower() == txtBoxSection.Text.ToLower() && c.DepartmentId == dept.DepartmentId);
                     if (check != null)
                     {
@@ -156,12 +160,15 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
                         lblHidden.Text = string.Empty;
                         cmbSelectDepartment.Enabled = true;
                         txtBoxSection.Text = string.Empty;
+                        gridSec.DataSource = null;
+                        gridSec.DataBind();
+                        ReloadSection();
                     }
                 }
             }
             else
             {
-                var dept = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbDepartment.Text);
+                var dept = context.Departments.FirstOrDefault(c => c.DepartmentName == cmbSelectDepartment.Text);
                 if (dept == null)
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a department first.');</script>");
@@ -187,6 +194,9 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
                         lblHidden.Text = string.Empty;
                         cmbSelectDepartment.Enabled = true;
                         txtBoxSection.Text = string.Empty;
+                        gridSec.DataSource = null;
+                        gridSec.DataBind();
+                        ReloadSection();
                     }
                 }
             }
@@ -195,6 +205,7 @@ public partial class Admin_Page_SectionHome : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
+        lblHidden.Text = string.Empty;
         if (string.IsNullOrEmpty(cmbSection.Text) == true)
         {
             Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a section first.');</script>");

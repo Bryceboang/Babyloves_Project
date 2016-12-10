@@ -65,7 +65,7 @@
         </div>
     </div>
     <center>
-        <asp:Button ID="btnClear" OnClick="btnClear_Click" CssClass="buttonGrid" runat="server" Text="Clear" ValidationGroup="sec" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
+        <asp:Button ID="btnClear" OnClick="btnClear_Click" CssClass="buttonGrid" runat="server" Text="Clear" ValidationGroup="sec" Font-Size="10pt" Width="116px"></asp:Button>
         &nbsp;
         <asp:Button ID="btnSave" OnClick="btnSave_Click" CssClass="buttonGrid" runat="server" Text="Save" ValidationGroup="sec" Font-Size="10pt" Width="116px"></asp:Button>
     </center>
