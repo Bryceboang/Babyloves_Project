@@ -15,7 +15,7 @@
                     <asp:Label ID="Label6" runat="server" Text="Department Name:" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
                     <br />
-                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" runat="server"></asp:DropDownList>
                     <br />
                     <br />
                     <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click"></asp:Button>
@@ -54,7 +54,7 @@
         </div>
     </div>
     <center>
-        <asp:Button ID="btnClear" OnClick="btnClear_Click"  CssClass="buttonGrid" runat="server" Text="Clear" ValidationGroup="dept" Enabled="False" Font-Size="10pt" Width="116px"></asp:Button>
+        <asp:Button ID="btnClear" OnClick="btnClear_Click"  CssClass="buttonGrid" runat="server" Text="Clear" ValidationGroup="dept" Font-Size="10pt" Width="116px"></asp:Button>
         &nbsp;
         <asp:Button ID="btnSave" OnClick="btnSave_Click"  CssClass="buttonGrid" runat="server" Text="Save" ValidationGroup="dept" Font-Size="10pt" Width="116px"></asp:Button>
     </center>

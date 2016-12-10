@@ -10,7 +10,10 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        ReloadDepartment();
+        if (!Page.IsPostBack)
+        {
+            ReloadDepartment(); 
+        }
     }
 
     public void Reload()
@@ -45,6 +48,7 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
     {
         using (var context = new DatabaseContext())
         {
+            cmbDepartment.Items.Clear();
             var deptList = context.Departments.OrderBy(c => c.DepartmentName).ToList();
             if (deptList.Count > 0)
             {
@@ -60,10 +64,10 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
             int index = Convert.ToInt32(e.CommandArgument);
 
             GridViewRow selectedRow = gridDept.Rows[index];
-            TableCell deptId = selectedRow.Cells[0];
-            int id = int.Parse(deptId.Text);
+            TableCell deptId = selectedRow.Cells[1];
+            string id = deptId.Text;
 
-            var select = context.Departments.FirstOrDefault(c => c.DepartmentId == id);
+            var select = context.Departments.FirstOrDefault(c => c.DepartmentName == id);
             if (e.CommandName == "RemoveDepartment")
             {
                 if (select != null)
@@ -98,20 +102,22 @@ public partial class Admin_Page_DepartmentHome : System.Web.UI.Page
             }
         }
     }
+
     protected void btnClear_Click(object sender, EventArgs e)
     {
         lblHidden.Text = string.Empty;
         txtBoxDepartment.Text = string.Empty;
     }
+
     protected void btnSave_Click(object sender, EventArgs e)
     {
         using (var context = new DatabaseContext())
         {
             if (lblHidden.Text != string.Empty)
             {
-                int id = int.Parse(lblHidden.Text);
-                var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == id);
-                var list = context.Departments.Where(c => c.DepartmentId != id).ToList();
+                string id = lblHidden.Text;
+                var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentName == id);
+                var list = context.Departments.Where(c => c.DepartmentName != id).ToList();
                 var checkDup = list.FirstOrDefault(c => c.DepartmentName.ToLower() == txtBoxDepartment.Text.ToLower());
                 if (checkDup != null)
                 {
