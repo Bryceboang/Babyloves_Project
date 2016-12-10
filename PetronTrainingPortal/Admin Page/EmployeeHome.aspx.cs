@@ -182,10 +182,11 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                 var selectSec = context.Sections.FirstOrDefault(c => c.SectionName == cmbSection.Text && c.DepartmentId == selectDept.DepartmentId);
                 if (string.IsNullOrEmpty(lblhidden.Text) != true)
                 {
-                    var list = context.Employees.Where(c => c.EmployeeNumber != lblhidden.Text).ToList();
-                    var selectEmp = context.Employees.FirstOrDefault(c => c.EmployeeNumber == lblhidden.Text);
+                    var list = context.Employees.Where(c => c.EmployeeNumber.ToLower() != lblhidden.Text.ToLower()).ToList();
+                    var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber.ToLower() == lblhidden.Text.ToLower());
+                    var selectEmp = context.Employees.FirstOrDefault(c => c.EmployeeNumber.ToLower() == lblhidden.Text.ToLower());
                     var check = list.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumber.Text.ToLower());
-                    if (check != null) { Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This employee number already exist.');</script>"); }
+                    if (check != null || checkUser != null) { Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This employee number already exist.');</script>"); }
                     else
                     {
 
@@ -202,7 +203,8 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                 else
                 {
                     var check = context.Employees.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumber.Text.ToLower());
-                    if (check != null) { Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This employee number already exist.');</script>"); }
+                    var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber.ToLower() == txtBoxEmployeeNumber.Text.ToLower());
+                    if (check != null || checkUser != null) { Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This employee number already exist.');</script>"); }
                     else
                     {
                         Employee newEmp = new Employee()
