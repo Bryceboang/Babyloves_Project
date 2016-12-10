@@ -20,7 +20,7 @@
                     <asp:Label ID="lblcmbCodeMsg" runat="server" ForeColor="Red" ></asp:Label>
                     <br />
                     <br />
-                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Enter" ValidationGroup="trngadmin"></asp:Button>
+                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Enter" OnClick="btnSearch_Click" ValidationGroup="trngadmin"></asp:Button>
                     </center>
                 </div>
                 <div class="right_content_train_admin">

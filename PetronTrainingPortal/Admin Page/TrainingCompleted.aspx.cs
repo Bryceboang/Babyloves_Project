@@ -8,55 +8,62 @@ using System.Web.UI.WebControls;
 
 public partial class Admin_Page_TrainingCompleted : System.Web.UI.Page
 {
-    public void Refresh()
+
+    public void ReloadTraining(string keyword)
     {
         using (var context = new DatabaseContext())
         {
-            cmbTrainingCode.Items.Clear();
-            List<int> intList = new List<int>();
-            intList.Clear();
+            List<TrainingReportViews> trainView = new List<TrainingReportViews>();
+            trainView.Clear();
+            lblTrainingTitle.Text = string.Empty;
 
-            var empTrainList = context.EmployeeTrainings.ToList();
-            foreach (var item in empTrainList)
+            if (string.IsNullOrWhiteSpace(cmbTrainingCode.Text) == true)
             {
-                var check = intList.FirstOrDefault(c => c == item.TrainingId);
-                if (check == 0)
-                {
-                    intList.Add(item.TrainingId);
-                }
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please enter a training code.');</script>");
             }
-
-            foreach (var item in intList)
+            else
             {
-                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingId == item);
-                cmbTrainingCode.Items.Add(selectTraining.TrainingCode);
-            }
-
-
-
-            if (intList.Count > 0)
-            {
-                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == cmbTrainingCode.Text);
-                if (selectTraining != null)
+                if (keyword != string.Empty)
                 {
-                    //txtTitle.Text = selectTraining.TrainingTitle;
-                    //txtCode.Text = selectTraining.TrainingCode;
-                    //txtVenue.Text = selectTraining.Venue;
-                    //txtDateDuration.Text = selectTraining.DateDuration;
-                    //txtTimeDuration.Text = selectTraining.TimeDuration;
-                    //txtProvider.Text = selectTraining.TrainingProvider;
-                    //txtParticipants.Text = selectTraining.TargetParticipants;
+                    var training = context.Trainings.FirstOrDefault(c => c.TrainingCode == keyword);
+                    if (training == null)
+                    {
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This training code doesn't exist.');</script>");
+                    }
+                    else
+                    {
+                        lblTrainingTitle.Text = training.TrainingTitle;
+
+                        trainView.Add(new TrainingReportViews()
+                        {
+                            DateDuration = training.DateDuration,
+                            TargetParticipants = training.TargetParticipants,
+                            TimeDuration = training.TimeDuration,
+                            TrainingProvider = training.TrainingProvider,
+                            TrainingVenue = training.Venue
+                        });
+                    }
                 }
                 else
                 {
-                    //txtTitle.Text = string.Empty;
-                    //txtCode.Text = string.Empty;
-                    //txtVenue.Text = string.Empty;
-                    //txtDateDuration.Text = string.Empty;
-                    //txtTimeDuration.Text = string.Empty;
-                    //txtProvider.Text = string.Empty;
-                    //txtParticipants.Text = string.Empty;
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This training code doesn't exist.');</script>");
                 }
+            }
+
+            gridTraining.DataSource = null;
+            gridTraining.DataSource = trainView.ToList();
+            gridTraining.DataBind();
+        }
+    }
+
+    public void ReloadTrainingCode()
+    {
+        using (var context = new DatabaseContext())
+        {
+            var trainList = context.Trainings.OrderBy(c => c.TrainingCode).ToList();
+            if (trainList.Count > 0)
+            {
+                foreach (var item in trainList) { cmbTrainingCode.Items.Add(item.TrainingCode);}
             }
         }
     }
@@ -78,7 +85,7 @@ public partial class Admin_Page_TrainingCompleted : System.Web.UI.Page
             Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Administrator only" + "');", true);
         }
 
-        if (!Page.IsPostBack) { Refresh(); }
+        if (!Page.IsPostBack) { ReloadTrainingCode(); }
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -90,7 +97,6 @@ public partial class Admin_Page_TrainingCompleted : System.Web.UI.Page
             if (string.IsNullOrEmpty(cmbTrainingCode.Text) == true) { lblcmbCodeMsg.Text = "Please select a training code first."; }
             else
             {
-
                 var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == cmbTrainingCode.Text);
                 var empTrainList = context.EmployeeTrainings.Where(c => c.TrainingId == selectTraining.TrainingId).ToList();
                 if (empTrainList.Count > 0)
@@ -113,7 +119,7 @@ public partial class Admin_Page_TrainingCompleted : System.Web.UI.Page
                     foreach (var item in empTrainList) { context.EmployeeTrainings.Remove(item); }
                     context.SaveChanges();
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Training successfully completed.');</script>");
-                    Refresh();
+                    ReloadTraining(string.Empty);
                 }
                 else
                 {
@@ -160,5 +166,10 @@ public partial class Admin_Page_TrainingCompleted : System.Web.UI.Page
                 }
             }
         }
+    }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        ReloadTraining(cmbTrainingCode.Text);
     }
 }
