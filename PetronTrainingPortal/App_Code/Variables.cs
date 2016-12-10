@@ -40,6 +40,7 @@ namespace PetronTrainingPortal.App_Code
 
     public class TrainingReportViews
     {
+        public string TrainingTitle { get; set; }
         public string TrainingVenue { get; set; }
         public string DateDuration { get; set; }
         public string TimeDuration { get; set; }
