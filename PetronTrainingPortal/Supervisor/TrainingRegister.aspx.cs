@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 
 public partial class Supervisor_TrainingRegister : System.Web.UI.Page
 {
+
     public void ReloadTraining()
     {
         using (var context = new DatabaseContext())
@@ -130,7 +131,7 @@ public partial class Supervisor_TrainingRegister : System.Web.UI.Page
     {
         using (var context = new DatabaseContext())
         {
-            if (e.CommandName == "Nominate")
+            if (e.CommandName == "NominateEmployee")
             {
                 int index = Convert.ToInt32(e.CommandArgument);
 
@@ -150,7 +151,26 @@ public partial class Supervisor_TrainingRegister : System.Web.UI.Page
                     context.EmployeeTrainings.Add(empTrain);
                     context.SaveChanges();
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('The selected employee's status is now PENDING.');</script>");
-                    EMAIL();
+
+                    int id = 0;
+                    var selectEmp = context.Employees.FirstOrDefault(c => c.EmployeeNumber == empNo);
+                    if (selectEmp != null)
+                    {
+                        id = selectEmp.DepartmentId;
+                    }
+
+                    if (id != 0)
+                    {
+                        var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == id);
+                        if (selectDept != null)
+                        {
+                            var selectUser = context.Users.FirstOrDefault(c => c.DepartmentId == selectDept.DepartmentId && c.AccessType.ToLower() == "manager");
+                            if (selectUser != null)
+                            {
+                                EMAIL(selectUser.Email);
+                            }
+                        }
+                    }
                 }
                 EmployeeReload();
             }
@@ -171,10 +191,10 @@ public partial class Supervisor_TrainingRegister : System.Web.UI.Page
         }
     }
 
-    public void EMAIL()
+    public void EMAIL(string emailAddress)
     {
-        //dapat po lalabas sa string email yung email ng manager nung dept nila.
-        string email = "escruz@petron.com";
+        //dapat lalabas sa string email yung email ng manager nung dept nila.
+        string email = emailAddress;
         string subject = "Employee Approval in Training";
         string body = "For your approval on request.";
         ClientScript.RegisterStartupScript(this.GetType(), "mailto", "parent.location='mailto:" + email + "?subject=" + subject + "&body=" + body + "'", true);

@@ -69,7 +69,7 @@
                         <Columns>
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="EmployeeNumber" HeaderText="EMPLOYEE NUMBER" />
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="FullName" HeaderText="FULLNAME" />
-                            <asp:ButtonField  ItemStyle-HorizontalAlign="Center"  HeaderText="REGISTER" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/Button-Add-icon.png" Text="NOMINATE" CommandName="Nominate"/>
+                            <asp:ButtonField  ItemStyle-HorizontalAlign="Center"  HeaderText="REGISTER" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/Button-Add-icon.png" Text="NOMINATE" CommandName="NominateEmployee"/>
                         </Columns>
                     </asp:GridView>
                     </div>
