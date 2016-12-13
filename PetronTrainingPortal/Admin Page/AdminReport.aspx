@@ -26,7 +26,7 @@
                     <asp:Label ID="Label8" runat="server" Text="Training Details" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
                     <center><asp:Label ID="lblTrainingTitle" runat="server" ForeColor="White" Font-Bold="True" Font-Size="15"></asp:Label>
-                    <asp:GridView ID="gridTraining" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
+                    <asp:GridView ID="gridTraining" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows" Height="91px">
                         <Columns>
                             <asp:BoundField DataField="TrainingVenue" HeaderText="Training Venue" />
                             <asp:BoundField DataField="DateDuration" HeaderText="Date Duration" />
@@ -40,8 +40,6 @@
             </div>
         </div>
     </div>
-    <br />
-    <br />
     <br />
     <div class="main_container_train_admin">
         <div class="main_box_train">

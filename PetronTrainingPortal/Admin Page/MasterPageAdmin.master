@@ -78,6 +78,7 @@
                 <a href="StatusCompletedTraining.aspx">Completed Trainings</a>
             </div>
             </li>--%>
+        <li><a href="TrainingSchedule.aspx">Schedule</a></li>
         <li><a href="StatusOnGoingTraining.aspx">On Going</a></li>
         <li><a href="StatusCompletedTraining.aspx">Accomplished</a></li>
         <li><a href="TrainingCompleted.aspx">Complete</a></li>

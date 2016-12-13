@@ -55,7 +55,7 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    height: 180px;
+    height: 300px;
 }
 
 .left_content_train {
@@ -443,6 +443,7 @@
 .mydatagrid {
   border: solid 2px black;
   min-width: 80%;
+    margin-bottom: 0px;
 }
 .header {
   background-color: #000;

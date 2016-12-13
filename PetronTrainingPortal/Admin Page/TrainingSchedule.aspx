@@ -12,7 +12,7 @@
                 <div class="center_content_train_admin">
                     <br />
                     <center><asp:Label ID="lblList" Text="LIST OF ACTIVE TRAININGS" runat="server" ForeColor="White" Font-Bold="True" Font-Size="15"></asp:Label>
-                    <asp:GridView ID="gridTraining" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows" Width="850px">
+                    <asp:GridView ID="gridTraining" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows" Width="850px" Height="200px">
                         <Columns>
                             <asp:BoundField DataField="TrainingTitle" HeaderText="Training Title" />
                             <asp:BoundField DataField="TrainingVenue" HeaderText="Training Venue" />
