@@ -39,8 +39,6 @@
         </div>
     </div>
     <br />
-    <br />
-    <br />
     <div class="main_container_train">
         <div class="main_box_train">
             <div class="content_train">

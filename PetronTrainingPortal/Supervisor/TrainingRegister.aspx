@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="main_container_train">
         <div class="main_box_train">
+            <center><asp:Label ID="lblTitle" runat="server" Text="EMPLOYEE REGISTRATION" ForeColor="White" Font-Size="16" Font-Bold="True"></asp:Label></center>
             <div class="content_train">
                 <div class="left_content_train">
                     <center>
@@ -38,7 +39,6 @@
             </div>
         </div>
     </div>
-    <br />
     <br />
     <div class="main_container_train">
         <div class="main_box_train">
