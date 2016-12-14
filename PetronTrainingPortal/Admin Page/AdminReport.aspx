@@ -18,6 +18,7 @@
                     <asp:TextBox ID="txtTrainingCode" runat="server" ValidationGroup="trngadmin"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtTrainingCode" ForeColor="Red" ValidationGroup="trngadmin"></asp:RequiredFieldValidator>
                     <br />
+                    <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red"></asp:Label>
                     <br />
                     <asp:Button CssClass="button_enter" ID="btnSearch" OnClick="btnSearch_Click" runat="server" Text="Enter" ValidationGroup="trngadmin"></asp:Button>
                     </center>

@@ -466,6 +466,7 @@ public partial class Admin_Page_AdminReport : System.Web.UI.Page
 
     public void ReloadTraining()
     {
+        lblEmpNoMsg.Text = string.Empty;
         using (var context = new DatabaseContext())
         {
             List<TrainingReportViews> trainView = new List<TrainingReportViews>();
@@ -482,6 +483,7 @@ public partial class Admin_Page_AdminReport : System.Web.UI.Page
                 if (training == null)
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This training code doesn't exist.');</script>");
+                    lblEmpNoMsg.Text = "This employee number doesn't exist.";
                 }
                 else
                 {
