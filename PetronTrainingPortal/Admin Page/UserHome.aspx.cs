@@ -97,7 +97,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
         txtFullName.Text = string.Empty;
         txtEmail.Text = string.Empty;
         txtPassword.Text = string.Empty;
-        cmbAccessType.Text = "SUPERVISOR";
+        cmbAccessType.Text = "Supervisor";
         gridEmployee.DataSource = null;
         gridEmployee.DataBind();
         txtBoxEmployeeNumber.Enabled = true;
@@ -109,13 +109,13 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
         {
             var selectUser = context.Users.FirstOrDefault(c => c.EmployeeNumber.ToLower() == keyword.ToLower());
 
-            if (acess == "SUPERVISOR")
+            if (acess == "Supervisor")
             {
-                if (string.IsNullOrEmpty(cmbDepartment.Text) == true && cmbAccessType.Text != "ADMIN")
+                if (string.IsNullOrEmpty(cmbDepartment.Text) == true && cmbAccessType.Text != "Admin")
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a department name first.');</script>");
                 }
-                else if (string.IsNullOrEmpty(cmbSection.Text) == true && cmbAccessType.Text == "SUPERVISOR")
+                else if (string.IsNullOrEmpty(cmbSection.Text) == true && cmbAccessType.Text == "Supervisor")
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a section name first.');</script>");
                 }
@@ -140,7 +140,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
             }
             else if (acess == "MANAGER")
             {
-                if (string.IsNullOrEmpty(cmbDepartment.Text) == true && cmbAccessType.Text != "ADMIN")
+                if (string.IsNullOrEmpty(cmbDepartment.Text) == true && cmbAccessType.Text != "Admin")
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please select a department name first." + "');", true);
                 }
@@ -184,13 +184,13 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
         using (var context = new DatabaseContext())
         {
 
-            if (acess == "SUPERVISOR")
+            if (acess == "Supervisor")
             {
-                if (string.IsNullOrEmpty(cmbDepartment.Text) == true && cmbAccessType.Text != "ADMIN")
+                if (string.IsNullOrEmpty(cmbDepartment.Text) == true && cmbAccessType.Text != "Admin")
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a department name first.');</script>");
                 }
-                else if (string.IsNullOrEmpty(cmbSection.Text) == true && cmbAccessType.Text == "SUPERVISOR")
+                else if (string.IsNullOrEmpty(cmbSection.Text) == true && cmbAccessType.Text == "Supervisor")
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Please select a section name first.');</script>");
                 }
@@ -216,9 +216,9 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "User successfully added." + "');", true);
                 }
             }
-            else if (acess == "MANAGER")
+            else if (acess == "Manager")
             {
-                if (string.IsNullOrEmpty(cmbDepartment.Text) == true && cmbAccessType.Text != "ADMIN")
+                if (string.IsNullOrEmpty(cmbDepartment.Text) == true && cmbAccessType.Text != "Admin")
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please select a department name first." + "');", true);
                 }
@@ -343,7 +343,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
         txtFullName.Text = string.Empty;
         txtEmail.Text = string.Empty;
         txtPassword.Text = string.Empty;
-        cmbAccessType.Text = "SUPERVISOR";
+        cmbAccessType.Text = "Supervisor";
         txtBoxEmployeeNumber.Enabled = true;
     }
 
@@ -436,7 +436,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
             cmbSection.Visible = true;
             lblSectionMsg.Visible = true;
 
-            if (cmbAccessType.Text.ToLower() == "admin")
+            if (cmbAccessType.Text.ToLower() == "Admin")
             {
                 labelDept.Visible = false;
                 cmbDepartment.Visible = false;
@@ -446,7 +446,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
                 cmbSection.Visible = false;
                 lblSectionMsg.Visible = false;
             }
-            else if (cmbAccessType.Text.ToLower() == "manager")
+            else if (cmbAccessType.Text.ToLower() == "Manager")
             {
                 labelSection.Visible = false;
                 cmbSection.Visible = false;

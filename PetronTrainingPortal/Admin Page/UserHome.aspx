@@ -77,9 +77,9 @@
                     <br />
                     <asp:Label ID="Label5" runat="server" Text="Access Type:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
                     <asp:DropDownList ID="cmbAccessType" CssClass="custom-dropdown" OnSelectedIndexChanged="cmbBoxAccessType_SelectedIndexChanged" AutoPostBack="true" runat="server">
-                    <asp:ListItem>SUPERVISOR</asp:ListItem>
-                    <asp:ListItem>MANAGER</asp:ListItem>
-                    <asp:ListItem>ADMIN</asp:ListItem>
+                    <asp:ListItem>Supervisor</asp:ListItem>
+                    <asp:ListItem>Manager</asp:ListItem>
+                    <asp:ListItem>Admin</asp:ListItem>
                     </asp:DropDownList>
                     <br />
                     <br />
