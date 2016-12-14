@@ -317,6 +317,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
 
     protected void btnSearch_Click(object sender, EventArgs e)
     {
+        lblEmpNoMsg.Text = string.Empty;
         using (var context = new DatabaseContext())
         {
             Variables.empNo = string.Empty;
@@ -331,6 +332,7 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
                 else
                 {
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This employee number doesn't exist.');</script>");
+                    lblEmpNoMsg.Text = "This employee number doesn't exist.";
                 }
             }
         }

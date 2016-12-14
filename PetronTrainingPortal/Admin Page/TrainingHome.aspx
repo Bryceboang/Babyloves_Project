@@ -17,6 +17,7 @@
                     <asp:TextBox ID="txtTrainingCode" runat="server" ValidationGroup="training" Width="150px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtTrainingCode" ForeColor="Red" ValidationGroup="training"></asp:RequiredFieldValidator>
                     <br />
+                    <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red" Text=""></asp:Label>
                     <br />
                     <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" ValidationGroup="training"></asp:Button>
                     </center>

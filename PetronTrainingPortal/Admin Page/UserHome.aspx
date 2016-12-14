@@ -18,8 +18,7 @@
                     <asp:TextBox ID="txtBoxEmployeeNumberSearch" runat="server" ValidationGroup="user" Width="150px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumberSearch" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
                     <br />
-                    <asp:Label ID="ErrorEmpNo" runat="server" ForeColor="Red" Text=""></asp:Label>
-                    <br />
+                    <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red" Text=""></asp:Label>
                     <br />
                     <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Enter" ValidationGroup="user" OnClick="btnSearch_Click"></asp:Button>
                     </center>

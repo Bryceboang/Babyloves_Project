@@ -11,6 +11,7 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
 
     public void ReloadTraining(string keyword)
     {
+        lblEmpNoMsg.Text = string.Empty;
         using (var context = new DatabaseContext())
         {
             List<TrainingReportViews> trainView = new List<TrainingReportViews>();
@@ -29,6 +30,7 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
                     if (training == null)
                     {
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This training code doesn't exist.');</script>");
+                        lblEmpNoMsg.Text = "This training code doesn't exist.";
                     }
                     else
                     {
@@ -50,6 +52,7 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
                     if (training == null)
                     {
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('This training code doesn't exist.');</script>");
+                        lblEmpNoMsg.Text = "This training code doesn't exist.";
                     }
                     else
                     {

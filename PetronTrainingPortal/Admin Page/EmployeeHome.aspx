@@ -10,6 +10,7 @@
             <div class="content_emp">
                 <div class="left1_content_emp_home ">
                     <br />
+                    <br />
                     <center>
                     <asp:Label ID="lblEmpNum" runat="server" Text="Employee Number" ForeColor="White" Font-Bold="True"></asp:Label>
                     <br />
