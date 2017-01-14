@@ -199,13 +199,13 @@
 }
 
 .left2_content_train_home {
-    width: 350px;
+    width: 290px;
     float: left;
     border: 2px solid white;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    height: 310px;
+    height: 300px;
 }
 
 .right2_content_train_home {
@@ -216,7 +216,17 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    height: 310px;
+    height: 300px;
+}
+
+.right3_content_train_home {
+    width: 955px;
+    float: left;
+    border: 2px solid white;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 300px;
 }
 
 .main_container_user_home {

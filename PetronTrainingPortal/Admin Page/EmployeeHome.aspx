@@ -21,6 +21,8 @@
                     <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red" ></asp:Label>
                     <br />
                     <asp:Button OnClick="btnSearch_Click" CssClass="button_enter" ID="btnSearch" runat="server" Text="Search" ValidationGroup="employee"></asp:Button>
+                    &nbsp;
+                    <asp:Button CssClass="button_enter" ID="btnClear1" runat="server" Text="Clear" ValidationGroup="employee" OnClick="btnClear1_Click"></asp:Button>
                     </center>
                 </div>
                 <div class="right1_content_emp_home ">

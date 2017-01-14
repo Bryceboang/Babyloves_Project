@@ -1,6 +1,7 @@
 ﻿using PetronTrainingPortal.App_Code;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -140,7 +141,7 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        ReloadDepartment();
     }
 
     protected void btnSearch_Click(object sender, EventArgs e)
@@ -149,17 +150,26 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
         ReloadTraining(string.Empty);
     }
 
+    public void Clear2()
+    {
+        lblTrainingTitle.Text = string.Empty;
+        txtTrainingCode.Text = string.Empty;
+        gridTraining.DataSource = null;
+        gridTraining.DataBind();
+    }
+
     protected void btnClear_Click(object sender, EventArgs e)
     {
-        txtCode.Text = string.Empty;
-        txtTitle.Text = string.Empty;
-        txtVenue.Text = string.Empty;
-        txtDateDuration.Text = string.Empty;
-        txtTimeDuration.Text = string.Empty;
-        txtProvider.Text = string.Empty;
-        txtParticipants.Text = string.Empty;
-        lblCodeMsg.Text = string.Empty;
-        lblTitleMsg.Text = string.Empty;
+        //txtCode.Text = string.Empty;
+        //txtTitle.Text = string.Empty;
+        //txtVenue.Text = string.Empty;
+        //txtDateDuration.Text = string.Empty;
+        //txtTimeDuration.Text = string.Empty;
+        //txtProvider.Text = string.Empty;
+        //txtParticipants.Text = string.Empty;
+        //lblCodeMsg.Text = string.Empty;
+        //lblTitleMsg.Text = string.Empty;
+        SetPreviousData();
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -235,4 +245,105 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
             }
         }
     }
+
+    protected void btnClear1_Click(object sender, EventArgs e)
+    {
+        //Clear2();
+        SetPreviousData();
+    }
+
+    public void ReloadTrainingCapacity(int id)
+    {
+        using (var context = new DatabaseContext())
+        {
+            var trainingCapacityList = context.TrainingCapacities.ToList();
+
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[2] { new DataColumn("DepartmentName", typeof(string)),
+                            new DataColumn("Capacity", typeof(int)) });
+
+            foreach (var item in trainingCapacityList)
+            {
+                var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == item.DepartmentId);
+
+                dt.Rows.Add(selectDept.DepartmentName, item.Capacity);
+            }
+
+            gridTrainingCapacity.DataSource = null;
+            gridTrainingCapacity.DataSource = dt;
+            gridTrainingCapacity.DataBind();
+        }
+    }
+
+    public void ReloadDepartment()
+    {
+        using (var context = new DatabaseContext())
+        {
+            var derpatmentList = context.Departments.ToList();
+
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[2] { new DataColumn("DepartmentName", typeof(string)),
+                            new DataColumn("Capacity", typeof(int)) });
+
+            foreach (var item in derpatmentList)
+            {
+                var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == item.DepartmentId);
+
+                dt.Rows.Add(selectDept.DepartmentName, 0);
+            }
+
+            gridTrainingCapacity.DataSource = null;
+            gridTrainingCapacity.DataSource = dt;
+            gridTrainingCapacity.DataBind();
+            ViewState["CurrentTable"] = dt;
+        }
+    }
+
+    private void SetPreviousData()
+    {
+        int rowIndex = 0;
+        if (ViewState["CurrentTable"] != null)
+        {
+            DataTable dt = (DataTable)ViewState["CurrentTable"];
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    TextBox box1 = (TextBox)gridTrainingCapacity.Rows[rowIndex].Cells[0].FindControl("txtCapacity");
+                    TextBox box2 = (TextBox)gridTrainingCapacity.Rows[rowIndex].Cells[1].FindControl("txtCapacity");
+
+                    box1.Text = dt.Rows[i]["Capacity"].ToString();
+                    box2.Text = dt.Rows[i]["Capacity"].ToString();
+
+                    rowIndex++;
+                }
+            }
+        }
+    }
+
+    private void getGridInfo()
+    {
+
+        DataTable dt = new DataTable();
+        DataRow dr;
+        dt.Columns.Add(new System.Data.DataColumn("DepartmentName", typeof(string)));
+        dt.Columns.Add(new System.Data.DataColumn("Capacity", typeof(int)));
+        int i = 0;
+        foreach (GridViewRow row in gridTrainingCapacity.Rows)
+        {
+
+            TextBox cap = row.FindControl("Capacity") as TextBox;
+
+            TextBox txt = (TextBox)gridTrainingCapacity.Rows[i].Cells[0].FindControl("Capacity");
+            string Ques = txt.Text;//This will be desired one
+
+            string deptName = row.Cells[0].Text;
+            string capacity = row.Cells[1].Text;
+              i++;
+       
+        }
+        Session["QtyTable"] = dt;
+        Response.Redirect("Admin/Default.aspx");
+    } 
+
 }

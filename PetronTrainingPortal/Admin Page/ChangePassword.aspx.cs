@@ -60,4 +60,33 @@ public partial class Admin_Page_ChangePassword : System.Web.UI.Page
             }
         }
     }
+
+    public void OnConfirm(object sender, EventArgs e)
+    {
+        string confirmValue = Request.Form["confirm_value"];
+        if (confirmValue == "Yes")
+        {
+            Label2.Text = "<script type='text/javascript'>Confirm2()</script>";
+            //Button1.PerformClick();
+            //this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked YES!')", true);
+            
+        }
+        else
+        {
+            this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked NO1!')", true);
+        }
+    }
+
+    public void OnConfirm2(object sender, EventArgs e)
+    {
+        string confirmValue = Request.Form["confirm_value"];
+        if (confirmValue == "Yes")
+        {
+            this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked YES2!')", true);
+        }
+        else
+        {
+            this.Page.ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('You clicked NO2!')", true);
+        }
+    }
 }

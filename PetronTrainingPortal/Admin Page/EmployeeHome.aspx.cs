@@ -85,6 +85,14 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
         txtBoxEmployeeNumber.Enabled = true;
     }
 
+    public void Clear2()
+    {
+        lblhidden.Text = string.Empty;
+        txtBoxEmployeeNumberSearch.Text = string.Empty;
+        gridEmployee.DataSource = null;
+        gridEmployee.DataBind();
+    }
+
     public void gridEmployee_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
         using (var context = new DatabaseContext())
@@ -223,5 +231,9 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                 }
             }
         }
+    }
+    protected void btnClear1_Click(object sender, EventArgs e)
+    {
+        Clear2();
     }
 }

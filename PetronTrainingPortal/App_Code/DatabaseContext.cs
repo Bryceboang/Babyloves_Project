@@ -15,6 +15,7 @@ namespace PetronTrainingPortal.App_Code
         public DbSet<Department> Departments { get; set; }
         public DbSet<Section> Sections { get; set; }
         public DbSet<CompleteEmployeeTraining> CompleteEmployeeTrainings { get; set; }
+        public DbSet<TrainingCapacity> TrainingCapacities { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

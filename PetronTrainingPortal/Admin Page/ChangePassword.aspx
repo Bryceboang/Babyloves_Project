@@ -47,6 +47,34 @@
             padding-top: 16px;
         }
     </style>
+    <script type = "text/javascript">
+        function Confirm() {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm("Do you want to save data?")) {
+                confirm_value.value = "Yes";
+            } else {
+                confirm_value.value = "No";
+            }
+            document.forms[0].appendChild(confirm_value);
+        }
+            function Confirm2() {
+                var confirm_value = document.createElement("INPUT");
+                confirm_value.type = "hidden";
+                confirm_value.name = "confirm_value";
+                if (confirm("Second question?")) {
+                    confirm_value.value = "Yes";
+                } else {
+                    confirm_value.value = "No";
+                }
+                document.forms[0].appendChild(confirm_value);
+                
+            }
+            function LAST() {
+                onclick = "Confirm2";
+            }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <center>
@@ -64,6 +92,9 @@
                       &nbsp; <asp:Label ID="ErrorEmpNo2" runat="server" ForeColor="Red" Text=""></asp:Label>
            </br>
                <asp:Button CssClass="button" ID="btnChangePass" runat="server" Text="Submit" type="submit" ValidationGroup="changepass" OnClick="btnChangePass_Click" Font-Size="10pt" Height="45px" Width="163px"></asp:Button>
+            <asp:Button ID="btnConfirm" runat="server" Text="Button" OnClick="OnConfirm" OnClientClick="Confirm()"></asp:Button>
+            <asp:Button ID="Button1" runat="server" Text="Button" Visible="false" OnClick="OnConfirm2" OnClientClick="Confirm2()"></asp:Button>
+            <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
         </div>
     </center>
 </asp:Content>

@@ -20,6 +20,8 @@
                     <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red" Text=""></asp:Label>
                     <br />
                     <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" ValidationGroup="training"></asp:Button>
+                    &nbsp;
+                    <asp:Button CssClass="button_enter" ID="btnClear1" runat="server" Text="Clear" ValidationGroup="employee" OnClick="btnClear1_Click"></asp:Button>
                     </center>
                 </div>
                 <div class="right1_content_train_home ">
@@ -69,24 +71,61 @@
                 </div>
                 <div class="right2_content_train_home">
                     <br />
-                    <asp:Label ID="Label13" runat="server" Text="•Training Venue:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
-                    <asp:TextBox CssClass="text" ID="txtVenue" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="400px"></asp:TextBox>
+                    <asp:Label ID="Label13" runat="server" Text="Training Venue:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
+                    <asp:TextBox CssClass="text" ID="txtVenue" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="350px"></asp:TextBox>
                     <br />
                     <br />
-                    <asp:Label ID="Label14" runat="server" Text="•Date Duration:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
-                    <asp:TextBox CssClass="text" ID="txtDateDuration" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="400px"></asp:TextBox>
+                    <asp:Label ID="Label14" runat="server" Text="Date Duration:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
+                    <asp:TextBox CssClass="text" ID="txtDateDuration" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="350px"></asp:TextBox>
                     <br />
                     <br />
-                    <asp:Label ID="Label15" runat="server" Text="•Time Duration:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
-                    <asp:TextBox CssClass="text" ID="txtTimeDuration" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="400px"></asp:TextBox>
+                    <asp:Label ID="Label15" runat="server" Text="Time Duration:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
+                    <asp:TextBox CssClass="text" ID="txtTimeDuration" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="350px"></asp:TextBox>
                     <br />
                     <br />
-                    <asp:Label ID="Label16" runat="server" Text="•Training Provider:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
-                    <asp:TextBox CssClass="text" ID="txtProvider" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="400px"></asp:TextBox>
+                    <asp:Label ID="Label16" runat="server" Text="Training Provider:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
+                    <asp:TextBox CssClass="text" ID="txtProvider" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="350px"></asp:TextBox>
                     <br />
                     <br />
-                    <asp:Label ID="Label17" runat="server" Text="•Target Participants:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
-                    <asp:TextBox CssClass="text" ID="txtParticipants" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="400px"></asp:TextBox>
+                    <asp:Label ID="Label17" runat="server" Text="Target Participants:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
+                    <asp:TextBox CssClass="text" ID="txtParticipants" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="350px"></asp:TextBox>
+                    <br />
+                    <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+     <div class="main_container_train_home ">
+        <div class="main_box_train">
+            <div class="content_train">
+                    <div class="right3_content_train_home">
+
+          <asp:GridView ID="gridTrainingCapacity"  runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows" Width="954px">
+                        <Columns>
+        <asp:BoundField DataField="DepartmentName" HeaderText="DepartmentName" ItemStyle-Width="30" />
+   <asp:TemplateField HeaderText="Capacity" ItemStyle-Width="30">
+            <ItemTemplate>
+                <asp:TextBox ID="txtCapacity" runat="server" Text='<%# Eval("Capacity") %>' />
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
+
+                   <%-- <asp:GridView ID="gridTrainingCapacity"  runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows" Width="954px">
+                        <Columns>
+                            <asp:BoundField DataField="DepartmentName" HeaderText="Department Name" />
+                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Is Selected">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="CheckRow" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                         <asp:TemplateField  HeaderText="Capacity">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtCapacity" Width="30" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                          </Columns>
+                    </asp:GridView>--%>
                     <br />
                 </div>
             </div>

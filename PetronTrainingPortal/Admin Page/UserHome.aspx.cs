@@ -491,4 +491,16 @@ public partial class Admin_Page_UserHome : System.Web.UI.Page
     {
         ReloadSection();
     }
+    protected void btnClear1_Click(object sender, EventArgs e)
+    {
+        Clear2();
+    }
+
+    public void Clear2()
+    {
+        lblhidden.Text = string.Empty;
+        txtBoxEmployeeNumberSearch.Text = string.Empty;
+        gridEmployee.DataSource = null;
+        gridEmployee.DataBind();
+    }
 }

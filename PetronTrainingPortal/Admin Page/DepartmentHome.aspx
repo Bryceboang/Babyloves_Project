@@ -19,6 +19,8 @@
                     <br />
                     <br />
                     <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click"></asp:Button>
+                    &nbsp;
+                    <%--<asp:Button CssClass="button_enter" ID="btnClear1" runat="server" Text="Clear" ValidationGroup="employee" OnClick="btnClear1_Click"></asp:Button>--%>
                     </center>
                 </div>
                 <div class="right1_content_dept_home">
