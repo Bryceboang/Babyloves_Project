@@ -107,7 +107,7 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
                     }
                 }
             }
-            else 
+            else
             {
                 if (selectTrain != null)
                 {
@@ -160,96 +160,114 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
 
     protected void btnClear_Click(object sender, EventArgs e)
     {
-        //txtCode.Text = string.Empty;
-        //txtTitle.Text = string.Empty;
-        //txtVenue.Text = string.Empty;
-        //txtDateDuration.Text = string.Empty;
-        //txtTimeDuration.Text = string.Empty;
-        //txtProvider.Text = string.Empty;
-        //txtParticipants.Text = string.Empty;
-        //lblCodeMsg.Text = string.Empty;
-        //lblTitleMsg.Text = string.Empty;
-        SetPreviousData();
+        txtCode.Text = string.Empty;
+        txtTitle.Text = string.Empty;
+        txtVenue.Text = string.Empty;
+        txtDateDuration.Text = string.Empty;
+        txtTimeDuration.Text = string.Empty;
+        txtProvider.Text = string.Empty;
+        txtParticipants.Text = string.Empty;
+        lblCodeMsg.Text = string.Empty;
+        lblTitleMsg.Text = string.Empty;
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
         using (var context = new DatabaseContext())
         {
-            lblCodeMsg.Text = string.Empty;
-            lblTitleMsg.Text = string.Empty;
+            TextBox txt = gridTrainingCapacity.FindControl("txtCapacity") as TextBox;
 
-            if (lblHiddenTrainingCode.Text != string.Empty)
+            foreach (GridViewRow row in gridTrainingCapacity.Rows)
             {
-                var list = context.Trainings.Where(c => c.TrainingCode != lblHiddenTrainingCode.Text).ToList();
-                var selectTrainTitle = list.FirstOrDefault(c => c.TrainingTitle.ToLower() == txtTitle.Text.ToLower());
-                var selectTrainCode = list.FirstOrDefault(c => c.TrainingCode.ToLower() == txtCode.Text.ToLower());
+                HiddenField hiddenField = (HiddenField)row.FindControl("HiddenField");
+                Guid submissionIdGuid = new Guid();
+                Guid.TryParse(hiddenField.Value, out submissionIdGuid);
 
-                if (selectTrainCode != null) { lblCodeMsg.Text = "Cannot accept duplicate training code."; }
-                else if (selectTrainTitle != null) { lblTitleMsg.Text = "Cannot accept duplicate training title."; }
-                else
-                {
-                    var selectTrain = context.Trainings.FirstOrDefault(c => c.TrainingCode == lblHiddenTrainingCode.Text);
-                    selectTrain.TrainingCode = txtCode.Text;
-                    selectTrain.TrainingTitle = txtTitle.Text;
-                    selectTrain.Venue = txtVenue.Text;
-                    selectTrain.DateDuration = txtDateDuration.Text;
-                    selectTrain.TimeDuration = txtTimeDuration.Text;
-                    selectTrain.TrainingProvider = txtProvider.Text;
-                    selectTrain.TargetParticipants = txtParticipants.Text;
-                    context.SaveChanges();
-                    txtCode.Text = string.Empty;
-                    txtTitle.Text = string.Empty;
-                    txtVenue.Text = string.Empty;
-                    txtDateDuration.Text = string.Empty;
-                    txtTimeDuration.Text = string.Empty;
-                    txtProvider.Text = string.Empty;
-                    txtParticipants.Text = string.Empty;
-                    lblHiddenTrainingCode.Text = string.Empty;
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Training successfully edited.');</script>");
-                    ReloadTraining(selectTrain.TrainingCode);
-                }
-            }
-            else
-            {
-                var selectTrainTitle = context.Trainings.FirstOrDefault(c => c.TrainingTitle.ToLower() == txtTitle.Text.ToLower());
-                var selectTrainCode = context.Trainings.FirstOrDefault(c => c.TrainingCode.ToLower() == txtCode.Text.ToLower());
+                hiddenField.Value = submissionIdGuid.ToString();
+                //if using TemplateField columns then you may need to use FindControl method
+                TextBox tb = (TextBox)row.FindControl("txtCapacity");
+                string someVariableName = tb.Text; // get the value from TextBox
 
-                if (string.IsNullOrWhiteSpace(txtCode.Text) == true) { lblCodeMsg.Text = "Please enter a training code."; }
-                else if (string.IsNullOrWhiteSpace(txtTitle.Text) == true) { lblTitleMsg.Text = "Please enter a training title."; }
-                else if (selectTrainCode != null) { lblCodeMsg.Text = "Cannot accept duplicate training code."; }
-                else if (selectTrainTitle != null) { lblTitleMsg.Text = "Cannot accept duplicate training title."; }
-                else
-                {
-                    Training newTrain = new Training()
-                    {
-                        TrainingCode = txtCode.Text,
-                        TrainingTitle = txtTitle.Text,
-                        Venue = txtVenue.Text,
-                        DateDuration = txtDateDuration.Text,
-                        TimeDuration = txtTimeDuration.Text,
-                        TrainingProvider = txtProvider.Text,
-                        TargetParticipants = txtParticipants.Text
-                    };
-                    context.Trainings.Add(newTrain);
-                    context.SaveChanges();
-                    txtCode.Text = string.Empty;
-                    txtTitle.Text = string.Empty;
-                    txtVenue.Text = string.Empty;
-                    txtDateDuration.Text = string.Empty;
-                    txtTimeDuration.Text = string.Empty;
-                    txtProvider.Text = string.Empty;
-                    txtParticipants.Text = string.Empty;
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Training successfully added.');</script>");
-                }
+                //Otherwise if you are just using BoundField columns then you get the data directly like this
+                string someVariableName1 = row.Cells[0].Text; //Where Cells is the column. Just changed the index of cells
+                string someVariableName2 = row.Cells[1].Text; //Where Cells is the column. Just changed the index of cells
             }
+
+            #region Save Code
+            //lblCodeMsg.Text = string.Empty;
+            //lblTitleMsg.Text = string.Empty;
+
+            //if (lblHiddenTrainingCode.Text != string.Empty)
+            //{
+            //    var list = context.Trainings.Where(c => c.TrainingCode != lblHiddenTrainingCode.Text).ToList();
+            //    var selectTrainTitle = list.FirstOrDefault(c => c.TrainingTitle.ToLower() == txtTitle.Text.ToLower());
+            //    var selectTrainCode = list.FirstOrDefault(c => c.TrainingCode.ToLower() == txtCode.Text.ToLower());
+
+            //    if (selectTrainCode != null) { lblCodeMsg.Text = "Cannot accept duplicate training code."; }
+            //    else if (selectTrainTitle != null) { lblTitleMsg.Text = "Cannot accept duplicate training title."; }
+            //    else
+            //    {
+            //        var selectTrain = context.Trainings.FirstOrDefault(c => c.TrainingCode == lblHiddenTrainingCode.Text);
+            //        selectTrain.TrainingCode = txtCode.Text;
+            //        selectTrain.TrainingTitle = txtTitle.Text;
+            //        selectTrain.Venue = txtVenue.Text;
+            //        selectTrain.DateDuration = txtDateDuration.Text;
+            //        selectTrain.TimeDuration = txtTimeDuration.Text;
+            //        selectTrain.TrainingProvider = txtProvider.Text;
+            //        selectTrain.TargetParticipants = txtParticipants.Text;
+            //        context.SaveChanges();
+            //        txtCode.Text = string.Empty;
+            //        txtTitle.Text = string.Empty;
+            //        txtVenue.Text = string.Empty;
+            //        txtDateDuration.Text = string.Empty;
+            //        txtTimeDuration.Text = string.Empty;
+            //        txtProvider.Text = string.Empty;
+            //        txtParticipants.Text = string.Empty;
+            //        lblHiddenTrainingCode.Text = string.Empty;
+            //        Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Training successfully edited.');</script>");
+            //        ReloadTraining(selectTrain.TrainingCode);
+            //    }
+            //}
+            //else
+            //{
+            //    var selectTrainTitle = context.Trainings.FirstOrDefault(c => c.TrainingTitle.ToLower() == txtTitle.Text.ToLower());
+            //    var selectTrainCode = context.Trainings.FirstOrDefault(c => c.TrainingCode.ToLower() == txtCode.Text.ToLower());
+
+            //    if (string.IsNullOrWhiteSpace(txtCode.Text) == true) { lblCodeMsg.Text = "Please enter a training code."; }
+            //    else if (string.IsNullOrWhiteSpace(txtTitle.Text) == true) { lblTitleMsg.Text = "Please enter a training title."; }
+            //    else if (selectTrainCode != null) { lblCodeMsg.Text = "Cannot accept duplicate training code."; }
+            //    else if (selectTrainTitle != null) { lblTitleMsg.Text = "Cannot accept duplicate training title."; }
+            //    else
+            //    {
+            //        Training newTrain = new Training()
+            //        {
+            //            TrainingCode = txtCode.Text,
+            //            TrainingTitle = txtTitle.Text,
+            //            Venue = txtVenue.Text,
+            //            DateDuration = txtDateDuration.Text,
+            //            TimeDuration = txtTimeDuration.Text,
+            //            TrainingProvider = txtProvider.Text,
+            //            TargetParticipants = txtParticipants.Text
+            //        };
+            //        context.Trainings.Add(newTrain);
+            //        context.SaveChanges();
+            //        txtCode.Text = string.Empty;
+            //        txtTitle.Text = string.Empty;
+            //        txtVenue.Text = string.Empty;
+            //        txtDateDuration.Text = string.Empty;
+            //        txtTimeDuration.Text = string.Empty;
+            //        txtProvider.Text = string.Empty;
+            //        txtParticipants.Text = string.Empty;
+            //        Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Training successfully added.');</script>");
+            //    }
+            //}
+            #endregion
         }
     }
 
     protected void btnClear1_Click(object sender, EventArgs e)
     {
-        //Clear2();
-        SetPreviousData();
+        Clear2();
     }
 
     public void ReloadTrainingCapacity(int id)
@@ -281,43 +299,53 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
         {
             var derpatmentList = context.Departments.ToList();
 
-            DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[2] { new DataColumn("DepartmentName", typeof(string)),
-                            new DataColumn("Capacity", typeof(int)) });
+            List<TrainingCapacityViews> trainViews = new List<TrainingCapacityViews>();
+            trainViews.Clear();
 
             foreach (var item in derpatmentList)
             {
-                var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == item.DepartmentId);
-
-                dt.Rows.Add(selectDept.DepartmentName, 0);
+                trainViews.Add(new TrainingCapacityViews()
+                    {
+                        DepartmentName = item.DepartmentName
+                    });
             }
 
             gridTrainingCapacity.DataSource = null;
-            gridTrainingCapacity.DataSource = dt;
+            gridTrainingCapacity.DataSource = trainViews;
             gridTrainingCapacity.DataBind();
-            ViewState["CurrentTable"] = dt;
+
+
+            //DataTable dt = new DataTable();
+            //dt.Columns.AddRange(new DataColumn[2] { new DataColumn("DepartmentName", typeof(string)),
+            //                new DataColumn("Capacity", typeof(int)) });
+
+            //foreach (var item in derpatmentList)
+            //{
+            //    var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == item.DepartmentId);
+
+            //    dt.Rows.Add(selectDept.DepartmentName, 0);
+            //}
+
+            //gridTrainingCapacity.DataSource = null;
+            //gridTrainingCapacity.DataSource = dt;
+            //gridTrainingCapacity.DataBind();
+            //ViewState["CurrentTable"] = dt;
         }
     }
 
     private void SetPreviousData()
     {
-        int rowIndex = 0;
-        if (ViewState["CurrentTable"] != null)
+        TextBox txt = gridTrainingCapacity.FindControl("txtCapacity") as TextBox;
+
+        foreach (GridViewRow row in gridTrainingCapacity.Rows)
         {
-            DataTable dt = (DataTable)ViewState["CurrentTable"];
-            if (dt.Rows.Count > 0)
-            {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    TextBox box1 = (TextBox)gridTrainingCapacity.Rows[rowIndex].Cells[0].FindControl("txtCapacity");
-                    TextBox box2 = (TextBox)gridTrainingCapacity.Rows[rowIndex].Cells[1].FindControl("txtCapacity");
+            //if using TemplateField columns then you may need to use FindControl method
+            TextBox tb = (TextBox)row.FindControl("txtCapacity");
+            string someVariableName = tb.Text; // get the value from TextBox
 
-                    box1.Text = dt.Rows[i]["Capacity"].ToString();
-                    box2.Text = dt.Rows[i]["Capacity"].ToString();
-
-                    rowIndex++;
-                }
-            }
+            //Otherwise if you are just using BoundField columns then you get the data directly like this
+            string someVariableName1 = row.Cells[0].Text; //Where Cells is the column. Just changed the index of cells
+            string someVariableName2 = row.Cells[1].Text; //Where Cells is the column. Just changed the index of cells
         }
     }
 
@@ -339,11 +367,11 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
 
             string deptName = row.Cells[0].Text;
             string capacity = row.Cells[1].Text;
-              i++;
-       
+            i++;
+
         }
         Session["QtyTable"] = dt;
         Response.Redirect("Admin/Default.aspx");
-    } 
+    }
 
 }

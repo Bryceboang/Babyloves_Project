@@ -91,41 +91,39 @@
                     <asp:TextBox CssClass="text" ID="txtParticipants" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="350px"></asp:TextBox>
                     <br />
                     <br />
-                    </div>
                 </div>
             </div>
         </div>
-     <div class="main_container_train_home ">
+    </div>
+    <div class="main_container_train_home ">
         <div class="main_box_train">
             <div class="content_train">
-                    <div class="right3_content_train_home">
-
-          <asp:GridView ID="gridTrainingCapacity"  runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows" Width="954px">
+                <div class="right3_content_train_home">
+                    <%-- <asp:GridView ID="gridTrainingCapacity" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows" Width="954px">
                         <Columns>
-        <asp:BoundField DataField="DepartmentName" HeaderText="DepartmentName" ItemStyle-Width="30" />
-   <asp:TemplateField HeaderText="Capacity" ItemStyle-Width="30">
-            <ItemTemplate>
-                <asp:TextBox ID="txtCapacity" runat="server" Text='<%# Eval("Capacity") %>' />
-            </ItemTemplate>
-        </asp:TemplateField>
-    </Columns>
-</asp:GridView>
+                            <asp:BoundField DataField="DepartmentName" HeaderText="DepartmentName" ItemStyle-Width="30" />
+                            <asp:TemplateField HeaderText="TID" SortExpression="Timeline">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtCapacity" runat="server" Text='<%#Eval("Capacity") %>'>
+                                    </asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>--%>
 
-                   <%-- <asp:GridView ID="gridTrainingCapacity"  runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows" Width="954px">
+                    <asp:GridView ID="gridTrainingCapacity" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows" Width="954px">
                         <Columns>
                             <asp:BoundField DataField="DepartmentName" HeaderText="Department Name" />
-                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" HeaderText="Is Selected">
+                            <asp:TemplateField HeaderText="Capacity">
                                 <ItemTemplate>
-                                    <asp:CheckBox ID="CheckRow" runat="server" />
+                                    <asp:Label ID="lbl1" runat="server"
+                                        Value='<%# Eval("Name") %>' />
+                                    <asp:HiddenField ID="HiddenField1" runat="server"
+                                        Value='<%# Eval("BirthDate") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                         <asp:TemplateField  HeaderText="Capacity">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="txtCapacity" Width="30" runat="server"></asp:TextBox>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                          </Columns>
-                    </asp:GridView>--%>
+                        </Columns>
+                    </asp:GridView>
                     <br />
                 </div>
             </div>
@@ -133,5 +131,6 @@
     </div>
     <center><asp:Button CssClass="buttonGrid" ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" ValidationGroup="AddTraining" Width="116px"></asp:Button>
     &nbsp;<asp:Button CssClass="buttonGrid" ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" ValidationGroup="AddTraining" Width="116"></asp:Button></center>
+    &nbsp;<asp:Button CssClass="buttonGrid" ID="Button1" runat="server" Text="Save" OnClick="btnSave_Click" Width="116"></asp:Button></center>
 </asp:Content>
 
