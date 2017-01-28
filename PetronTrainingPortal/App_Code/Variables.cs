@@ -25,7 +25,9 @@ namespace PetronTrainingPortal.App_Code
         public string SectionName { get; set; }
         public string Status { get; set; }
         public string Email { get; set; }
-        public string AccessType { get; set; }
+        public string AccessType { get; set; }   
+        public string DateHired { get; set; }
+        public string ServiceYears { get; set; }
     }
 
     public class CompleteTrainingViews
@@ -52,6 +54,12 @@ namespace PetronTrainingPortal.App_Code
     {
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
+    }
+
+    public class CapacityRemainingViews
+    {
+        public string MaxNumber { get; set; }
+        public string Remaining { get; set; }
     }
 
     public class TrainingCapacityViews

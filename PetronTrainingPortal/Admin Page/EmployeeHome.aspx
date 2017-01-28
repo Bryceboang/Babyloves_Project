@@ -33,6 +33,7 @@
                             <asp:BoundField DataField="FullName" HeaderText="Full Name" />
                             <asp:BoundField DataField="DepartmentName" HeaderText="Department" />
                             <asp:BoundField DataField="SectionName" HeaderText="Section" />
+                            <asp:BoundField DataField="DateHired" HeaderText="Date Hired" />
                             <asp:ButtonField  CommandName="EditEmployee"   ImageUrl="~/Image/edit.png" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
                             <asp:ButtonField  CommandName="RemoveEmployee"   ImageUrl="~/Image/remove.jpg" Text="" ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
                         </Columns>
@@ -58,7 +59,11 @@
                     <asp:Label ID="Label1" runat="server" Text="Full Name:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
                     <asp:TextBox ID="txtFullName" CssClass="text" runat="server" ValidationGroup="addemp" Width="250px"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ControlToValidate="txtFullName" ForeColor="Red" ValidationGroup="addemp"></asp:RequiredFieldValidator>
-                    </center>
+                   <br />
+                    <br />
+                    <asp:Label ID="Label3" runat="server" Text="Full Name:" ForeColor="White" Font-Bold="True" Width="150"></asp:Label>
+                        <asp:TextBox ID="dpDateHired" runat="server" TextMode="DateTime"></asp:TextBox>
+                           </center>
                 </div>
                 <div class="right2_content_emp_home">
                     <center>

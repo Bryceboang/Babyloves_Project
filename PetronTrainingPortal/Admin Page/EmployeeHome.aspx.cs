@@ -34,7 +34,8 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                 DepartmentName = selectDept.DepartmentName,
                 EmployeeNumber = selectEmp.EmployeeNumber,
                 FullName = selectEmp.FullName,
-                SectionName = selectSec.SectionName
+                SectionName = selectSec.SectionName,
+                DateHired = selectEmp.DateHired.ToShortDateString()
             });
 
             gridEmployee.DataSource = null;
@@ -80,6 +81,7 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
         txtBoxEmployeeNumberSearch.Text = string.Empty;
         txtBoxEmployeeNumber.Text = string.Empty;
         txtFullName.Text = string.Empty;
+        dpDateHired.Text = string.Empty;
         gridEmployee.DataSource = null;
         gridEmployee.DataBind();
         txtBoxEmployeeNumber.Enabled = true;
@@ -138,6 +140,7 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                     ReloadSection();
                     cmbSection.Text = selectSec.SectionName;
                     txtFullName.Text = select.FullName;
+                    dpDateHired.Text = select.DateHired.ToString();
                 }
             }
         }
@@ -176,6 +179,7 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
         lblEmpNoMsg.Text = string.Empty;
         lblhidden.Text = string.Empty;
         txtFullName.Text = string.Empty;
+        dpDateHired.Text = string.Empty;
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -202,7 +206,7 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                         selectEmp.SectionId = selectSec.SectionId;
                         selectEmp.EmployeeNumber = txtBoxEmployeeNumber.Text;
                         selectEmp.FullName = txtFullName.Text;
-
+                        selectEmp.DateHired = Convert.ToDateTime(dpDateHired.Text);
                         context.SaveChanges();
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Employee successfully edited.');</script>");
                         Clear();
@@ -220,7 +224,8 @@ public partial class Admin_Page_EmployeeHome : System.Web.UI.Page
                             DepartmentId = selectDept.DepartmentId,
                             SectionId = selectSec.SectionId,
                             EmployeeNumber = txtBoxEmployeeNumber.Text,
-                            FullName = txtFullName.Text
+                            FullName = txtFullName.Text,
+                            DateHired = Convert.ToDateTime(dpDateHired.Text)
                         };
 
                         context.Employees.Add(newEmp);

@@ -16,5 +16,6 @@ namespace PetronTrainingPortal.App_Code
         public string FullName { get; set; }
         public int DepartmentId { get; set; }
         public int SectionId { get; set; }
+        public DateTime DateHired { get; set; }
     }
 }

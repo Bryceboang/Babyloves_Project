@@ -20,6 +20,8 @@ namespace PetronTrainingPortal.App_Code
         public string TimeDuration { get; set; }
         public string TrainingProvider { get; set; }
         public string TargetParticipants { get; set; }
-
+        public string TrainingObjectives { get; set; }
+        public string CourseOutline { get; set; }
+        public int IsCompleted { get; set; }
     }
 }

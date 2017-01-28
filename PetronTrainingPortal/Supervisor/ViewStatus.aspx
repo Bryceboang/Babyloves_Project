@@ -70,8 +70,9 @@
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="250px" DataField="FullName" HeaderText="FULLNAME" />
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200px" DataField="DepartmentName" HeaderText="DEPARTMENT" />
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200px" DataField="SectionName" HeaderText="SECTION" />
+                            <asp:BoundField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200px" DataField="ServiceYears" HeaderText="SERVICE YEARS" />
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="200px" DataField="Status" HeaderText="STATUS" />
-                        </Columns>
+                             </Columns>
                     </asp:GridView>
                     </div>
                     </center>

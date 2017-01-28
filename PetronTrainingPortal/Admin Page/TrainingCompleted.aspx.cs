@@ -1,6 +1,7 @@
 ﻿using PetronTrainingPortal.App_Code;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -42,6 +43,8 @@ public partial class Admin_Page_TrainingCompleted : System.Web.UI.Page
                             TrainingProvider = training.TrainingProvider,
                             TrainingVenue = training.Venue
                         });
+
+                        ReloadEmp(training.TrainingId);
                     }
                 }
                 else
@@ -63,7 +66,7 @@ public partial class Admin_Page_TrainingCompleted : System.Web.UI.Page
             var trainList = context.Trainings.OrderBy(c => c.TrainingCode).ToList();
             if (trainList.Count > 0)
             {
-                foreach (var item in trainList) { cmbTrainingCode.Items.Add(item.TrainingCode);}
+                foreach (var item in trainList) { cmbTrainingCode.Items.Add(item.TrainingCode); }
             }
         }
     }
@@ -88,44 +91,90 @@ public partial class Admin_Page_TrainingCompleted : System.Web.UI.Page
         if (!Page.IsPostBack) { ReloadTrainingCode(); }
     }
 
+
+    public void ReloadEmp(int id)
+    {
+        using (var context = new DatabaseContext())
+        {
+            var list = context.EmployeeTrainings.Where(c => c.TrainingId == id).ToList();
+
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[3] { new DataColumn("EmployeeNumber"), new DataColumn("FullName"), new DataColumn("Comment") });
+
+            foreach (var item in list)
+            {
+                var emp = context.Employees.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                if (emp != null) { dt.Rows.Add(emp.EmployeeNumber, emp.FullName); }
+                else
+                {
+                    var user = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                    if (user != null) { dt.Rows.Add(user.EmployeeNumber, user.FullName); }
+                }
+            }
+            gridEmp.DataSource = dt;
+            gridEmp.DataBind();
+
+        }
+    }
+
     protected void btnSave_Click(object sender, EventArgs e)
     {
         using (var context = new DatabaseContext())
         {
-            lblcmbCodeMsg.Text = string.Empty;
-
-            if (string.IsNullOrEmpty(cmbTrainingCode.Text) == true) { lblcmbCodeMsg.Text = "Please select a training code first."; }
-            else
+            foreach (GridViewRow row in gridEmp.Rows)
             {
-                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == cmbTrainingCode.Text);
-                var empTrainList = context.EmployeeTrainings.Where(c => c.TrainingId == selectTraining.TrainingId).ToList();
-                if (empTrainList.Count > 0)
+                if (row.RowType == DataControlRowType.DataRow)
                 {
-                    foreach (var item in empTrainList)
+                    CheckBox chkRow = (row.Cells[2].FindControl("chkRow") as CheckBox);
+                    if (chkRow.Checked)
                     {
-                        CompleteEmployeeTraining completeTrain = new CompleteEmployeeTraining()
-                        {
-                            DateComplete = DateTime.Now.Date,
-                            EmployeeNumber = item.EmployeeNumber,
-                            Status = item.Status,
-                            TrainingId = item.TrainingId
-                        };
-                        context.CompleteEmployeeTrainings.Add(completeTrain);
-
+                        string empNo = row.Cells[0].Text;
+                        string comment = (row.Cells[2].FindControl("txtComment") as TextBox).Text;
                     }
-
-                    context.SaveChanges();
-
-                    foreach (var item in empTrainList) { context.EmployeeTrainings.Remove(item); }
-                    context.SaveChanges();
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Training successfully completed.');</script>");
-                    ReloadTraining(string.Empty);
-                }
-                else
-                {
-                    lblcmbCodeMsg.Text = "There are no employees registered in this training.";
+                    else
+                    {
+                        string empNo = row.Cells[0].Text;
+                        string comment = (row.Cells[2].FindControl("txtComment") as TextBox).Text;
+                    }
                 }
             }
+
+            #region MyRegion
+            //lblcmbCodeMsg.Text = string.Empty;
+
+            //if (string.IsNullOrEmpty(cmbTrainingCode.Text) == true) { lblcmbCodeMsg.Text = "Please select a training code first."; }
+            //else
+            //{
+            //    var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == cmbTrainingCode.Text);
+            //    var empTrainList = context.EmployeeTrainings.Where(c => c.TrainingId == selectTraining.TrainingId).ToList();
+            //    if (empTrainList.Count > 0)
+            //    {
+            //        foreach (var item in empTrainList)
+            //        {
+            //            CompleteEmployeeTraining completeTrain = new CompleteEmployeeTraining()
+            //            {
+            //                DateComplete = DateTime.Now.Date,
+            //                EmployeeNumber = item.EmployeeNumber,
+            //                Status = item.Status,
+            //                TrainingId = item.TrainingId
+            //            };
+            //            context.CompleteEmployeeTrainings.Add(completeTrain);
+
+            //        }
+
+            //        context.SaveChanges();
+
+            //        foreach (var item in empTrainList) { context.EmployeeTrainings.Remove(item); }
+            //        context.SaveChanges();
+            //        Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Training successfully completed.');</script>");
+            //        ReloadTraining(string.Empty);
+            //    }
+            //    else
+            //    {
+            //        lblcmbCodeMsg.Text = "There are no employees registered in this training.";
+            //    }
+            //} 
+            #endregion
         }
     }
 
@@ -172,4 +221,5 @@ public partial class Admin_Page_TrainingCompleted : System.Web.UI.Page
     {
         ReloadTraining(cmbTrainingCode.Text);
     }
+
 }

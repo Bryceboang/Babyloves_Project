@@ -91,6 +91,14 @@
                     <asp:TextBox CssClass="text" ID="txtParticipants" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="350px"></asp:TextBox>
                     <br />
                     <br />
+                    <asp:Label ID="Label1" runat="server" Text="Target Objectives:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
+                    <asp:TextBox CssClass="text" ID="txtObjectives" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="350px"></asp:TextBox>
+                    <br />
+                    <br />
+                    <asp:Label ID="Label3" runat="server" Text="Course Outline:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
+                    <asp:TextBox CssClass="text" ID="txtOutline" runat="server" ValidationGroup="AddTraining" TextMode="MultiLine" Width="350px"></asp:TextBox>
+                    <br />
+                    <br />
                 </div>
             </div>
         </div>

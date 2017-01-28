@@ -119,6 +119,8 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
                     txtTimeDuration.Text = selectTrain.TimeDuration;
                     txtProvider.Text = selectTrain.TrainingProvider;
                     txtParticipants.Text = selectTrain.TargetParticipants;
+                    txtOutline.Text = selectTrain.CourseOutline;
+                    txtObjectives.Text = selectTrain.TrainingObjectives;
                 }
             }
         }
@@ -135,6 +137,8 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
         txtTimeDuration.Text = string.Empty;
         txtProvider.Text = string.Empty;
         txtParticipants.Text = string.Empty;
+        txtOutline.Text = string.Empty;
+        txtObjectives.Text = string.Empty;
         lblCodeMsg.Text = string.Empty;
         lblTitleMsg.Text = string.Empty;
     }
@@ -167,6 +171,8 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
         txtTimeDuration.Text = string.Empty;
         txtProvider.Text = string.Empty;
         txtParticipants.Text = string.Empty;
+        txtOutline.Text = string.Empty;
+        txtObjectives.Text = string.Empty;
         lblCodeMsg.Text = string.Empty;
         lblTitleMsg.Text = string.Empty;
     }
@@ -223,6 +229,8 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
             //        txtTimeDuration.Text = string.Empty;
             //        txtProvider.Text = string.Empty;
             //        txtParticipants.Text = string.Empty;
+            //        txtOutline.Text = string.Empty;
+            //        txtObjectives.Text = string.Empty;
             //        lblHiddenTrainingCode.Text = string.Empty;
             //        Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Training successfully edited.');</script>");
             //        ReloadTraining(selectTrain.TrainingCode);
@@ -247,7 +255,9 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
             //            DateDuration = txtDateDuration.Text,
             //            TimeDuration = txtTimeDuration.Text,
             //            TrainingProvider = txtProvider.Text,
-            //            TargetParticipants = txtParticipants.Text
+            //            TargetParticipants = txtParticipants.Text,
+            //            TrainingObjective = txtObjectives.Text,
+            //            CourseOutline = txtOutline.Text
             //        };
             //        context.Trainings.Add(newTrain);
             //        context.SaveChanges();
@@ -258,6 +268,8 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
             //        txtTimeDuration.Text = string.Empty;
             //        txtProvider.Text = string.Empty;
             //        txtParticipants.Text = string.Empty;
+            //        txtOutline.Text = string.Empty;
+            //        txtObjectives.Text = string.Empty;
             //        Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Training successfully added.');</script>");
             //    }
             //}

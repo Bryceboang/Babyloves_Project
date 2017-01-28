@@ -76,6 +76,7 @@
                             <asp:BoundField  ItemStyle-HorizontalAlign="Center" DataField="SectionName" HeaderText="SECTION NAME"  />
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="EmployeeNumber" HeaderText="EMPLOYEE NUMBER" />
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="FullName" HeaderText="FULLNAME" />
+                              <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="ServiceYears" HeaderText="SERVICE YEARS" />
                             <asp:ButtonField  CommandName="Nominate" ImageUrl="~/Image/Button-Add-icon.png" Text=""     ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />
                             <asp:ButtonField  CommandName="Reject"  ImageUrl="~/Image/Button-Delete-icon.png" Text=""  ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" />
                             <asp:ButtonField  CommandName="Remove"   ImageUrl="~/Image/remove.jpg" Text=""              ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image"  />

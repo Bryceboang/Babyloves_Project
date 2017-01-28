@@ -37,6 +37,25 @@
                         </Columns>
                     </asp:GridView>
                     </center>
+                    <br />
+                    <center>
+                    <asp:GridView ID="gridEmp" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
+                        <Columns>
+                            <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
+                            <asp:BoundField DataField="FullName" HeaderText="Full Name" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="chkRow" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Country" ItemStyle-Width="150">
+                               <ItemTemplate>
+                                   <asp:TextBox ID="txtComment" runat="server" Text='<%# Eval("Comment") %>'></asp:TextBox>
+                               </ItemTemplate>
+                           </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                    </center>
                 </div>
             </div>
         </div>

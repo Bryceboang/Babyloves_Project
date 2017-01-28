@@ -47,7 +47,13 @@
                 <div class="left_content_train2">
                     <center>
                     <asp:Label ID="Label13" runat="server" Text="APPROVAL" ForeColor="White" Font-Bold="True"></asp:Label>
-                    <br />
+                       <asp:GridView ID="gridCapacity" CssClass="mydatagrid" PagerStyle-CssClass="pager" HeaderStyle-CssClass="header" RowStyle-CssClass="rows" runat="server" AutoGenerateColumns="false" EmptyDataText="No data uploaded" Font-Size="8pt">
+                        <Columns>
+                            <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="MaxNumber" HeaderText="MAX NUMBER" />
+                            <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="Remaining" HeaderText="REMAINING" />
+                         </Columns>
+                    </asp:GridView>
+                        <br />
                     <br />
                     <br />
                     <asp:Label ID="Label9" runat="server" Text="Department:" ForeColor="White" Font-Bold="True"></asp:Label>
@@ -70,6 +76,7 @@
                         <Columns>
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="EmployeeNumber" HeaderText="EMPLOYEE NUMBER" />
                             <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="FullName" HeaderText="FULLNAME" />
+                            <asp:BoundField ItemStyle-HorizontalAlign="Center" DataField="ServiceYears" HeaderText="SERVICE YEARS" />
                             <asp:ButtonField  ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/check.jpg" Text="" CommandName="Approve"/>
                             <asp:ButtonField  ItemStyle-HorizontalAlign="Center"  HeaderText="" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/Button-Delete-icon.png" Text="" CommandName="Decline"/>
                         </Columns>
