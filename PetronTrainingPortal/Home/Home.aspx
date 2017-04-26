@@ -16,7 +16,7 @@
         }
 
         body {
-            background-image: url("/Image/Picture1.png");
+            background-image: url("/Image/PictureTanker1.jpg");
             background-color: black;
         }
 
@@ -64,12 +64,15 @@
     <header>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <img class="auto-style1" src="../Image/header.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="ImageButton1" ImageUrl="~/Image/training program.jpg"  AlternateText="No Image available" runat="server" />
-        <asp:ImageButton ID="ImageButton2" ImageUrl="~/Image/training evaluation.jpg"  AlternateText="No Image available" runat="server" />
+        <asp:ImageButton ID="btnTrainingPrograms" ImageUrl="~/Image/training program.jpg"  AlternateText="No Image available" runat="server"/>
+        <asp:ImageButton ID="btnTrainingEvaluation" ImageUrl="~/Image/training evaluation.jpg"  AlternateText="No Image available" runat="server" />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <%--<asp:Button ID="Button2" runat="server" Text="Button" />--%>
     </header>
     </ul>
+    <div>
+
+    </div>
     <div>
 
     </div>
