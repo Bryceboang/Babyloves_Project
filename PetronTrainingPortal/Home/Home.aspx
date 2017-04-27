@@ -63,8 +63,9 @@
     <form id="form1" runat="server">
     <header>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <img class="auto-style1" src="../Image/header.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnTrainingPrograms" ImageUrl="~/Image/training program.jpg"  AlternateText="No Image available" runat="server"/>
+        <img class="auto-style1" src="../Image/header.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:ImageButton ID="btnTrainingPrograms" ImageUrl="~/Image/training program.jpg"  AlternateText="No Image available" runat="server" OnClick="btnTrainingPrograms_Click"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:ImageButton ID="btnTrainingEvaluation" ImageUrl="~/Image/training evaluation.jpg"  AlternateText="No Image available" runat="server" />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <%--<asp:Button ID="Button2" runat="server" Text="Button" />--%>
@@ -95,7 +96,7 @@
     <%--</div>--%>
     <div class="main">
     <div class="left">
-        <img src="../Image/Home%20Message.png" />
+        <img src="../Image/Refine%20message.jpg" />
     </div>
     <div class="right">
         <br /> <br />

@@ -11,4 +11,8 @@ public partial class Home_Home : System.Web.UI.Page
     {
 
     }
+    protected void btnTrainingPrograms_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/Default.aspx");
+    }
 }

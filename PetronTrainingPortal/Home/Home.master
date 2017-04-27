@@ -22,6 +22,7 @@
             padding: 0;
             overflow: hidden;
             background-color: white;
+            padding: 15px;
         }
 
         li {
@@ -32,12 +33,12 @@
                 display: inline-block;
                 color: white;
                 text-align: center;
-                padding: 14px 16px;
+                padding: 6px 8px;
                 text-decoration: none;
             }
 
                 li a:hover, .dropdown:hover .dropbtn {
-                    background-color: black;
+                    background-color: white;
                 }
 
             li.dropdown {
@@ -60,7 +61,7 @@
 
             .dropdown-content a {
                 color: black;
-                padding: 10px 14px;
+                padding: 8px 12px;
                 text-decoration: none;
                 display: block;
                 text-align: left;
@@ -75,9 +76,43 @@
         }
 
         body {
-            background-image: url(/Image/Picture2.png);
+            background-image: url(/Image/PicturePlant2.jpg);
             /*background-color: black;*/
         }
+        .header {
+            background-color: grey;
+            color: white;
+            padding: 15px;
+        }
+        .main {
+            width: 100%;
+            height: 499px;
+            overflow: auto;
+        }
+
+        .left {
+            float: left;
+            width: 40%;
+            margin-right: 1%;
+            background-color: #ffffff;
+            border: 1px solid black;
+            opacity: 0.6;
+            filter: alpha(opacity=60); /* For IE8 and earlier */
+        }
+
+        div.transbox {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+div.transbox p {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
     </style>
 
     <asp:ContentPlaceHolder id="head" runat="server">
@@ -85,48 +120,7 @@
 </head>
 <body>
     <ul>
-        <%--<li><a href="AdminReport.aspx">Registration</a></li>
-        <li><a href="TrainingCompleted.aspx">Complete Training</a></li>--%>
-<%--        <li><a href="ViewStatus.aspx">On Going Training</a></li>
-        <li><a href="ViewStatusTraining.aspx">Completed Trainings</a></li>
-
-  <li class="dropdown">
-      <a href="#" class="dropbtn">Trainings</a>
-      <div class="dropdown-content">
-          <a href="AddTraining.aspx">Add Training</a>
-          <a href="EditTraining.aspx">Edit Training</a>
-          <a href="DeleteTraining.aspx">Delete Training</a>
-      </div>
-  </li>
-        <li class="dropdown">
-            <a href="#" class="dropbtn">Users</a>
-            <div class="dropdown-content">
-                <a href="AddUser.aspx">Add User</a>
-                <a href="EditUser.aspx">Edit User</a>
-                <a href="DeleteUser.aspx">Delete User</a>
-            </div>
-            <li class="dropdown">
-                <a href="#" class="dropbtn">Employees</a>
-                <div class="dropdown-content">
-                    <a href="AddEmployee.aspx">Add Employee</a>
-                    <a href="EditEmployee.aspx">Edit Employee</a>
-                    <a href="DeleteEmployee.aspx">Delete Employee</a>
-                </div>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Departments</a>
-                    <div class="dropdown-content">
-                        <a href="AddDepartment.aspx">Add Department</a>
-                        <a href="EditDepartment.aspx">Edit Department</a>
-                        <a href="DeleteDepartment.aspx">Delete Department</a>
-                    </div>
-                    <li class="dropdown">
-                        <a href="#" class="dropbtn">Sections</a>
-                        <div class="dropdown-content">
-                            <a href="AddSection.aspx">Add Section</a>
-                            <a href="EditSection.aspx">Edit Section</a>
-                            <a href="DeleteSection.aspx">Delete Section</a>
-                        </div>
-                    </li>--%>
+        <img src="../Image/header.jpg" />
                     <li class="dropdown"><a href="Default.aspx" class="dropbtn">
                         <img src="../Image/threelines.png" /></a>
                         <div class="dropdown-content">
@@ -140,7 +134,11 @@
                     </li>
     </ul>
     <form id="form1" runat="server">
-    
+    <div class="main">
+    <div class="left">
+        <asp:Label ID="Label1" runat="server" Text="Training Programs" ForeColor="White"></asp:Label>
+    </div>
+    </div>
     <div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
