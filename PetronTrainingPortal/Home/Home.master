@@ -11,10 +11,6 @@
     <meta name="author" content="">
 
     <title>Petron Training</title>
-
-<%--    <link href="../startbootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../startbootstrap/css/logo-nav.css" rel="stylesheet" />--%>
-
     <style>
         ul {
             list-style-type: none;
@@ -76,8 +72,13 @@
         }
 
         body {
+<<<<<<< HEAD
             background-image: url(/Image/PicturePlant2.jpg);
             /*background-color: black;*/
+=======
+            background-image: url(/Image/Picture2.png);
+            background-color: burlywood;
+>>>>>>> origin/master
         }
         .header {
             background-color: grey;
@@ -115,11 +116,12 @@ div.transbox p {
 }
     </style>
 
-    <asp:ContentPlaceHolder id="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <ul>
+<<<<<<< HEAD
         <img src="../Image/header.jpg" />
                     <li class="dropdown"><a href="Default.aspx" class="dropbtn">
                         <img src="../Image/threelines.png" /></a>
@@ -144,6 +146,25 @@ div.transbox p {
         
         </asp:ContentPlaceHolder>
     </div>
+=======
+        <li class="dropdown"><a href="Default.aspx" class="dropbtn">
+            <img src="../Image/threelines.png" /></a>
+            <div class="dropdown-content">
+                <a href="AddSection.aspx">Home</a>
+                <a href="EditSection.aspx">Shop for trainings</a>
+                <a href="DeleteSection.aspx">Nominate/Approve</a>
+                <a href="DeleteSection.aspx">View Status</a>
+                <a href="DeleteSection.aspx">Download LSPP Form</a>
+                <a href="DeleteSection.aspx">Contact us</a>
+            </div>
+        </li>
+    </ul>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+>>>>>>> origin/master
     </form>
 </body>
 </html>
