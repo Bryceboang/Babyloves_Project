@@ -23,4 +23,8 @@ public partial class Home_Default : System.Web.UI.Page
     {
         Response.Redirect("~/Home/LocalTraining.aspx");
     }
+    protected void btnTrainingModules_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/TrainingModules.aspx");
+    }
 }

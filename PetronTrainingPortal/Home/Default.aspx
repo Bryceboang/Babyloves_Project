@@ -35,7 +35,7 @@
         <asp:ImageButton ID="btnLocalTraining" ImageUrl="~/Image/Buttons/LocalTraining.jpg"  AlternateText="No Image available" runat="server" OnClick="btnLocalTraining_Click"/>
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnTrainingModules" ImageUrl="~/Image/Buttons/TrainingModules.jpg"  AlternateText="No Image available" runat="server"/>
+        <asp:ImageButton ID="btnTrainingModules" ImageUrl="~/Image/Buttons/TrainingModules.jpg"  AlternateText="No Image available" runat="server" OnClick="btnTrainingModules_Click"/>
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:ImageButton ID="btnRefineryProgram" ImageUrl="~/Image/Buttons/RefineryEngineer.jpg"  AlternateText="No Image available" runat="server"/>
