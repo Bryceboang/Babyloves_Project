@@ -11,4 +11,16 @@ public partial class Home_Default : System.Web.UI.Page
     {
 
     }
+    protected void btnOnsiteTraining_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/Onsite.aspx");
+    }
+    protected void btnInHouseTraining_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/InHouse.aspx");
+    }
+    protected void btnLocalTraining_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/LocalTraining.aspx");
+    }
 }

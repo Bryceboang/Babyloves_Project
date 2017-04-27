@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Home.master.cs" Inherits="Home_Home" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="TrainingEvaluation.master.cs" Inherits="Home_TrainingEvaluation" %>
 
 <!DOCTYPE html>
 
@@ -11,6 +11,7 @@
     <meta name="author" content="">
 
     <title>REFINE.com</title>
+
     <style>
         ul {
             list-style-type: none;
@@ -71,54 +72,27 @@
         }
 
         body {
-            background-image: url(../Image/PicturePlant2.jpg);
+            background-image: url(../../Image/PicturePlant2.jpg);
             background-repeat: no-repeat;
         }
     </style>
 
-    <asp:ContentPlaceHolder ID="head" runat="server">
+    <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <ul>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../Image/header.jpg" />
-                    <li class="dropdown"><a href="Default.aspx" class="dropbtn">
-                        <img src="../Image/threelines blue.jpg" height="35px" /></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../Image/header.jpg" />
+                    <li class="dropdown"><a href="DefaultEvaluation.aspx" class="dropbtn">
+                        <img src="../../Image/threelines blue.jpg" height="35px" /></a>
                         <div class="dropdown-content">
-                            <a href="Home.aspx">Home</a>
-                            <a href="Default.aspx">Shop for trainings</a>
-                            <a href="DeleteSection.aspx">Nominate/Approve</a>
-                            <a href="DeleteSection.aspx">View Status</a>
+                            <a href="../Home.aspx">Home</a>
                             <a href="DeleteSection.aspx">Download LSPP Form</a>
                             <a href="DeleteSection.aspx">Contact us</a>
                         </div>
                     </li>
     </ul>
     <form id="form1" runat="server">
-    <%--<div class="main">
-    <div class="left">
-        <br />
-        &nbsp;&nbsp;
-        <asp:Label ID="Label1" runat="server" Text="Training Programs" ForeColor="Black" Font-Bold="True"></asp:Label> <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnOnsiteTraining" ImageUrl="~/Image/Buttons/OnsiteTraining.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnInHouseTraining" ImageUrl="~/Image/Buttons/InHouseTraining.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnLocalTraining" ImageUrl="~/Image/Buttons/LocalTraining.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnTrainingModules" ImageUrl="~/Image/Buttons/TrainingModules.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnRefineryProgram" ImageUrl="~/Image/Buttons/RefineryEngineer.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnOtherTraining" ImageUrl="~/Image/Buttons/OtherTraining.jpg"  AlternateText="No Image available" runat="server"/>
-    </div>
-    </div>--%>
     <div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
