@@ -27,4 +27,12 @@ public partial class Home_Default : System.Web.UI.Page
     {
         Response.Redirect("~/Home/TrainingModules.aspx");
     }
+    protected void btnRefineryProgram_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/RefineryEngineer.aspx");
+    }
+    protected void btnOtherTraining_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/OtherTraining.aspx");
+    }
 }

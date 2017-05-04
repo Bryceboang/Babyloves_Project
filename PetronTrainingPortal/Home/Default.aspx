@@ -38,10 +38,10 @@
         <asp:ImageButton ID="btnTrainingModules" ImageUrl="~/Image/Buttons/TrainingModules.jpg"  AlternateText="No Image available" runat="server" OnClick="btnTrainingModules_Click"/>
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnRefineryProgram" ImageUrl="~/Image/Buttons/RefineryEngineer.jpg"  AlternateText="No Image available" runat="server"/>
+        <asp:ImageButton ID="btnRefineryProgram" ImageUrl="~/Image/Buttons/RefineryEngineer.jpg"  AlternateText="No Image available" runat="server" OnClick="btnRefineryProgram_Click"/>
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnOtherTraining" ImageUrl="~/Image/Buttons/OtherTraining.jpg"  AlternateText="No Image available" runat="server"/>
+        <asp:ImageButton ID="btnOtherTraining" ImageUrl="~/Image/Buttons/OtherTraining.jpg"  AlternateText="No Image available" runat="server" OnClick="btnOtherTraining_Click"/>
     </div>
     </div>
 

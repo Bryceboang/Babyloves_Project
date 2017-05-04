@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Supervisor.master.cs" Inherits="Home_Supervisor_Supervisor" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>REFINE.com</title>
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+        <link href="Supervisor.css" rel="stylesheet" />
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <ul>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../Image/header.jpg" />
+                    <li class="dropdown"><a href="Default.aspx" class="dropbtn">
+                        <img src="../../Image/threelines blue.jpg" height="35px" /></a>
+                        <div class="dropdown-content">
+                            <a href="SupervisorList.aspx">Home</a>
+                            <a href="Default.aspx">Shop for trainings</a>
+                            <a href="DeleteSection.aspx">Nominate/Approve</a>
+                            <a href="DeleteSection.aspx">View Status</a>
+                            <a href="DeleteSection.aspx">Download LSPP Form</a>
+                            <a href="DeleteSection.aspx">Contact us</a>
+                        </div>
+                    </li>
+    </ul>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
