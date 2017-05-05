@@ -11,4 +11,20 @@ public partial class Home_Manager_ManagerList : System.Web.UI.Page
     {
 
     }
+    protected void btnShoppingCart_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/Default.aspx");
+    }
+    protected void btnNominate_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+    }
+    protected void btnApprove_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/Manager/ManagerApprove.aspx");
+    }
+    protected void btnViewStatus_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/Manager/ManagerStatus.aspx");
+    }
 }

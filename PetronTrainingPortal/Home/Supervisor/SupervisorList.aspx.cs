@@ -11,4 +11,16 @@ public partial class Home_Supervisor_SupervisorList : System.Web.UI.Page
     {
 
     }
+    protected void btnShoppingCart_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/Default.aspx");
+    }
+    protected void btnNominateApprove_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
+    }
+    protected void btnViewStatus_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Home/Supervisor/SupervisorStatus.aspx");
+    }
 }
