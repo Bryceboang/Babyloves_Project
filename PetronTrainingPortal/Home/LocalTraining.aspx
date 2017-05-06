@@ -28,7 +28,7 @@
             <img src="../Image/LocalTraining.jpg" />
         </div>
         <div class="right">
-            <asp:Panel ID="Panel1" runat="server" Height="100%" Width="650px"></asp:Panel>
+            <asp:Panel ID="menuPanel" runat="server" ></asp:Panel>
         </div>
     </div>
 </asp:Content>
