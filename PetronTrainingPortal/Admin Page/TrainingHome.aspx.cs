@@ -39,7 +39,7 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
 
                         trainView.Add(new TrainingReportViews()
                         {
-                            DateDuration = training.DateDuration,
+                            //DateDuration = training.DateDuration,
                             TargetParticipants = training.TargetParticipants,
                             TimeDuration = training.TimeDuration,
                             TrainingProvider = training.TrainingProvider,
@@ -61,7 +61,7 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
 
                         trainView.Add(new TrainingReportViews()
                         {
-                            DateDuration = training.DateDuration,
+                            //DateDuration = training.DateDuration,
                             TargetParticipants = training.TargetParticipants,
                             TimeDuration = training.TimeDuration,
                             TrainingProvider = training.TrainingProvider,
@@ -115,7 +115,7 @@ public partial class Admin_Page_TrainingHome : System.Web.UI.Page
                     txtCode.Text = selectTrain.TrainingCode;
                     txtTitle.Text = selectTrain.TrainingTitle;
                     txtVenue.Text = selectTrain.Venue;
-                    txtDateDuration.Text = selectTrain.DateDuration;
+                    //txtDateDuration.Text = selectTrain.DateDuration;
                     txtTimeDuration.Text = selectTrain.TimeDuration;
                     txtProvider.Text = selectTrain.TrainingProvider;
                     txtParticipants.Text = selectTrain.TargetParticipants;

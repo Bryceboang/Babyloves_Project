@@ -26,7 +26,7 @@ public partial class Admin_Page_TrainingSchedule : System.Web.UI.Page
                     trainView.Add(new TrainingReportViews()
                     {
                         TrainingTitle = training.TrainingTitle,
-                        DateDuration = training.DateDuration,
+                        //DateDuration = training.DateDuration,
                         TargetParticipants = training.TargetParticipants,
                         TimeDuration = training.TimeDuration,
                         TrainingProvider = training.TrainingProvider,

@@ -173,7 +173,7 @@ public partial class Manager_ViewStatus : System.Web.UI.Page
 
                     trainView.Add(new TrainingReportViews()
                     {
-                        DateDuration = training.DateDuration,
+                        //DateDuration = training.DateDuration,
                         TargetParticipants = training.TargetParticipants,
                         TimeDuration = training.TimeDuration,
                         TrainingProvider = training.TrainingProvider,

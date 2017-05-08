@@ -746,7 +746,7 @@ public partial class Admin_Page_AdminReport : System.Web.UI.Page
 
                     trainView.Add(new TrainingReportViews()
                     {
-                        DateDuration = training.DateDuration,
+                        //DateDuration = training.DateStart,
                         TargetParticipants = training.TargetParticipants,
                         TimeDuration = training.TimeDuration,
                         TrainingProvider = training.TrainingProvider,

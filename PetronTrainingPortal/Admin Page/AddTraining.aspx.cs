@@ -49,7 +49,7 @@ public partial class AddTraining : System.Web.UI.Page
                     TrainingCode = txtCode.Text,
                     TrainingTitle = txtTitle.Text,
                     Venue = txtVenue.Text,
-                    DateDuration = txtDateDuration.Text,
+                    //DateDuration = txtDateDuration.Text,
                     TimeDuration = txtTimeDuration.Text,
                     TrainingProvider = txtProvider.Text,
                     TargetParticipants = txtParticipants.Text

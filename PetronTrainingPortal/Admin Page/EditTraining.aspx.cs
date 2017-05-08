@@ -23,7 +23,7 @@ public partial class EditTraining : System.Web.UI.Page
                     txtTitle.Text = selectTraining.TrainingTitle;
                     txtCode.Text = selectTraining.TrainingCode;
                     txtVenue.Text = selectTraining.Venue;
-                    txtDateDuration.Text = selectTraining.DateDuration;
+                    //txtDateDuration.Text = selectTraining.DateDuration;
                     txtTimeDuration.Text = selectTraining.TimeDuration;
                     txtProvider.Text = selectTraining.TrainingProvider;
                     txtParticipants.Text = selectTraining.TargetParticipants;
@@ -82,7 +82,7 @@ public partial class EditTraining : System.Web.UI.Page
                 selectTrain.TrainingCode = txtCode.Text;
                 selectTrain.TrainingTitle = txtTitle.Text;
                 selectTrain.Venue = txtVenue.Text;
-                selectTrain.DateDuration = txtDateDuration.Text;
+                //selectTrain.DateDuration = txtDateDuration.Text;
                 selectTrain.TimeDuration = txtTimeDuration.Text;
                 selectTrain.TrainingProvider = txtProvider.Text;
                 selectTrain.TargetParticipants = txtParticipants.Text;
@@ -120,7 +120,7 @@ public partial class EditTraining : System.Web.UI.Page
                     txtTitle.Text = selectTraining.TrainingTitle;
                     txtCode.Text = selectTraining.TrainingCode;
                     txtVenue.Text = selectTraining.Venue;
-                    txtDateDuration.Text = selectTraining.DateDuration;
+                    //txtDateDuration.Text = selectTraining.DateDuration;
                     txtTimeDuration.Text = selectTraining.TimeDuration;
                     txtProvider.Text = selectTraining.TrainingProvider;
                     txtParticipants.Text = selectTraining.TargetParticipants;

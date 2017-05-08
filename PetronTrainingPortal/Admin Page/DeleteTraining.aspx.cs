@@ -23,7 +23,7 @@ public partial class DeleteTraining : System.Web.UI.Page
 
                 trainView.Add(new TrainingReportViews()
                 {
-                    DateDuration = trainingSelect.DateDuration,
+                    //DateDuration = trainingSelect.DateDuration,
                     TargetParticipants = trainingSelect.TargetParticipants,
                     TimeDuration = trainingSelect.TimeDuration,
                     TrainingProvider = trainingSelect.TrainingProvider,

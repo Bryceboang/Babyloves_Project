@@ -16,12 +16,14 @@ namespace PetronTrainingPortal.App_Code
         public string TrainingCode { get; set; }
         public string TrainingTitle { get; set; }
         public string Venue { get; set; }
-        public string DateDuration { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
         public string TimeDuration { get; set; }
         public string TrainingProvider { get; set; }
         public string TargetParticipants { get; set; }
         public string TrainingObjectives { get; set; }
         public string CourseOutline { get; set; }
+        public string TrainingType { get; set; }
         public int IsCompleted { get; set; }
     }
 }

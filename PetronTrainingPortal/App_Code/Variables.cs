@@ -15,6 +15,7 @@ namespace PetronTrainingPortal.App_Code
         public static string empNo { get; set; }
         public static int deptNo { get; set; }
         public static int secNo { get; set; }
+        public static string OnsiteCode { get; set; }
     }
 
     public class TrainingViews
@@ -25,7 +26,7 @@ namespace PetronTrainingPortal.App_Code
         public string SectionName { get; set; }
         public string Status { get; set; }
         public string Email { get; set; }
-        public string AccessType { get; set; }   
+        public string AccessType { get; set; }
         public string DateHired { get; set; }
         public string ServiceYears { get; set; }
     }
