@@ -1,27 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home/Home.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Home_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <style>
-        .main {
-            width: 100%;
-            height: 499px;
-            overflow: auto;
-        }
-
-        .left {
-            float: left;
-            width: 28%;
-            margin-right: 1%;
-            background-color: #ffffff;
-            opacity: 0.6;
-            filter: alpha(opacity=60); /* For IE8 and earlier */
-            height: 100%;
-        }
-    </style>
+    <link href="Home.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div class="main">
-    <div class="left">
+    <div class="maindefault">
+    <div class="leftdefault">
         <br />
         &nbsp;&nbsp;
         <asp:Label ID="Label1" runat="server" Text="Training Programs" ForeColor="Black" Font-Bold="True"></asp:Label> <br />

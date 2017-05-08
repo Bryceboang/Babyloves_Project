@@ -6,51 +6,12 @@
 <head runat="server">
     <title>REFINE.com</title>
     <style>
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: white;
-            height: 50px;
-        }
-
-        body {
-            background-image: url("../Image/PictureTanker1.jpg");
-            background-repeat: no-repeat;
-        }
-
-        .header {
-            background-color: white;
-            color: white;
-            padding: 15px;
-        }
-
-        .main {
-            width: 100%;
-            height: 505px;
-            overflow: auto;
-        }
-
-        .left {
-            float: left;
-            width: 79%;
-            margin-right: 1%;
-        }
-        /*.left img {
-                float: right;
-            }*/
-
-        .right {
-            float: right;
-            width: 15%;
-        }
-
         .auto-style1 {
             width: 221px;
             height: 51px;
         }
     </style>
+    <link href="Home.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -69,11 +30,11 @@
     </div>
     <div> <br />
     </div>
-    <div class="main">
-    <div class="left">
+    <div class="mainhome">
+    <div class="lefthome">
         <img src="../Image/Refine%20message.jpg" />
     </div>
-    <div class="right">
+    <div class="righthome">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <img src="../Image/Logo_of_Petron.svg.png" width="85px" height="100px" />
     </div>
