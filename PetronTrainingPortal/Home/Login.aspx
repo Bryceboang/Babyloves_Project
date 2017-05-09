@@ -57,9 +57,9 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="txtEmpNum" CssClass="txtLogin" runat="server" placeholder="Employee Number"></asp:TextBox> <br /> <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="txtPass" CssClass="txtLogin" runat="server" placeholder="Password"></asp:TextBox> <br /> <br />
+            <asp:TextBox ID="txtPass" CssClass="txtLogin" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox> <br /> <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="btnLogin" CssClass="btnLogin" runat="server" Text="LOGIN" /></div>
+            <asp:Button ID="btnLogin" CssClass="btnLogin" runat="server" Text="LOGIN" OnClick="btnLogin_Click" /></div>
         </div>
         <div class="right"> <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

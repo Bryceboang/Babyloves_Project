@@ -10,61 +10,87 @@ public partial class Home_Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["EmpNo"] != null)
+        if (!Page.IsPostBack)
         {
-            if (Session["AccountType"] == "Supervisor")
+            if (Session["EmpNo"] != null)
             {
-                Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
+                if (Session["AccountType"] == "Supervisor")
+                {
+                    Response.Redirect("~/Home/Supervisor/SupervisorList.aspx");
+                }
+                else if (Session["AccountType"] == "Manager")
+                {
+                    Response.Redirect("~/Home/Manager/ManagerList.aspx");
+                }
+                else { Response.Redirect("~/Admin Page/AdminReport.aspx"); }
             }
-            else if (Session["AccountType"] == "Manager")
-            {
-                Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
-            }
-            else { Response.Redirect("~/Admin Page/AdminReport.aspx"); }
         }
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        var empno = txtEmpNum.Text;
-        using (var context = new DatabaseContext())
+        try
         {
-            var selecteduser = context.Users.FirstOrDefault(c => c.EmployeeNumber == empno);
-            if (selecteduser != null)
+            var empno = txtEmpNum.Text.ToLower();
+            using (var context = new DatabaseContext())
             {
-                if (selecteduser.Password == txtPass.Text)
+                var selecteduser = context.Users.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empno);
+                if (selecteduser != null)
                 {
-                    Variables.EmployeeNumber = selecteduser.EmployeeNumber;
-                    Variables.AccessType = selecteduser.AccessType;
-                    if (selecteduser.AccessType == "Supervisor")
+                    if (selecteduser.Password == txtPass.Text)
                     {
-                        Session["EmpNo"] = selecteduser.EmployeeNumber;
-                        Session["FullName"] = selecteduser.FullName;
-                        Session["AccountType"] = "Supervisor";
-                        Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
-                    }
-                    else if (selecteduser.AccessType == "Manager")
-                    {
-                        Session["EmpNo"] = selecteduser.EmployeeNumber;
-                        Session["FullName"] = selecteduser.FullName;
-                        Session["AccountType"] = "Manager";
-                        Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
-                    }
-                    else if (selecteduser.AccessType == "Admin")
-                    {
-                        Session["EmpNo"] = selecteduser.EmployeeNumber;
-                        Session["FullName"] = selecteduser.FullName;
-                        Session["AccountType"] = "Admin";
-                        //Response.Redirect("~/Admin Page/AdminReport.aspx");
-                    }
-                }
-                else { Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Invalid Password" + "');", true); }
-            }
-            else { Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Invalid User');</script>"); }
+                        Variables.EmployeeNumber = selecteduser.EmployeeNumber;
+                        Variables.AccessType = selecteduser.AccessType;
+                        Variables.deptNo = selecteduser.DepartmentId;
+                        Variables.secNo = selecteduser.SectionId;
+                        if (selecteduser.AccessType == "Supervisor")
+                        {
+                            Session["EmpNo"] = selecteduser.EmployeeNumber;
+                            Session["FullName"] = selecteduser.FullName;
+                            Session["AccountType"] = "Supervisor";
+                            string code = Variables.OnsiteCode;
 
+
+                            var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empno && c.TrainingCode == code);
+                            if (checkDuplicate == null)
+                            {
+                                ShopTraining newShopTraining = new ShopTraining()
+                                {
+                                    EmployeeNumber = selecteduser.EmployeeNumber,
+                                    TrainingCode = code,
+                                    IsComfirmedByAdmin = false,
+                                    IsConfirmedByManger = false,
+                                    IsSubmitted = false,
+                                };
+                                context.ShopTrainings.Add(newShopTraining);
+                                context.SaveChanges();
+                            }
+                            Response.Redirect("~/Home/Supervisor/SupervisorList.aspx");
+                        }
+                        else if (selecteduser.AccessType == "Manager")
+                        {
+                            Session["EmpNo"] = selecteduser.EmployeeNumber;
+                            Session["FullName"] = selecteduser.FullName;
+                            Session["AccountType"] = "Manager";
+                            Response.Redirect("~/Home/Manager/ManagerList.aspx");
+                        }
+                        else if (selecteduser.AccessType == "Admin")
+                        {
+                            Session["EmpNo"] = selecteduser.EmployeeNumber;
+                            Session["FullName"] = selecteduser.FullName;
+                            Session["AccountType"] = "Admin";
+                            //Response.Redirect("~/Admin Page/AdminReport.aspx");
+                        }
+                    }
+                    else { Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Invalid Password" + "');", true); }
+                }
+                else { Page.ClientScript.RegisterStartupScript(this.GetType(), "scriptkey", "<script>alert('Invalid User');</script>"); }
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
         }
     }
-
-
 
 }

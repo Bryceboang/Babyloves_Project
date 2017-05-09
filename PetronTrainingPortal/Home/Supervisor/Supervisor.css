@@ -87,12 +87,21 @@
         }
         .right {
             float: left;
-            width: 53%;
-            background-color: red;
+            width: 71%;
             opacity: 0.7;
             filter: alpha(opacity=60); /* For IE8 and earlier */
             height: 20%;
         }
+
+         .firstDiv {
+            float: left;
+            width: 71%;
+            background-color: #cbdbea;
+            opacity: 0.7;
+            filter: alpha(opacity=60); /* For IE8 and earlier */
+            height: 20%;
+        }
+
         .rightsubmit {
             float: left;
             width: 58%;

@@ -16,6 +16,15 @@ namespace PetronTrainingPortal.App_Code
         public static int deptNo { get; set; }
         public static int secNo { get; set; }
         public static string OnsiteCode { get; set; }
+        public static string code { get; set; }
+        public static int shopTrainingId { get; set; }
+    }
+
+    public class EmployeeNomineeViews
+    {
+        public string EmployeeNumber { get; set; }
+        public string FullName { get; set; }
+        public string ServiceYears { get; set; }
     }
 
     public class TrainingViews
