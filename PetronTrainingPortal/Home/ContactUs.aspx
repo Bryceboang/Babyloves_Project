@@ -6,7 +6,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="maincontact">
         <div class="leftcontact">
-            
+            <div class="logodiv">
+                <img src="../Image/Logo_of_Petron.svg.png" width="85px" height="100px" />
+            </div>
+
         </div>
     </div>
 </asp:Content>
