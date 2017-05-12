@@ -71,26 +71,40 @@
 
         .main {
             width: 100%;
-            height: 499px;
+            height: 500px;
             overflow: auto;
         }
 
         .left {
+            top: 5px;
             float: left;
             width: 28%;
             margin-right: 1%;
             background-color: #ffffff;
             opacity: 0.8;
             filter: alpha(opacity=60); /* For IE8 and earlier */
-            height: 100%;
+            height: 90%;
             position: relative;
         }
         .right {
+            top: 5px;
             float: left;
-            width: 71%;
-            opacity: 0.7;
-            filter: alpha(opacity=60); /* For IE8 and earlier */
-            height: 20%;
+            width: 58%;
+            background-color: #ffffff;
+            height: 90%;
+            position: relative;
+            /*opacity: 0.7;
+            filter: alpha(opacity=60); /* For IE8 and earlier */*/
+            
+        }
+
+        .rightsecond {
+            float: left;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 70%;
+            bottom: 135px;
         }
 
          .firstDiv {
@@ -104,14 +118,43 @@
 
         .rightsubmit {
             float: left;
-            width: 58%;
+            position: absolute;
+            top: 40px;
+            left: 15px;
+            width: 70%;
+            bottom: 5px;
+            height: 10%;
+            border: 5px solid red;
+            padding: 10px;
+            margin: 10px;
             background-color: white;
+            /*float: left;
+            width: 58%;*/
+            
             /*opacity: 0.5;
             filter: alpha(opacity=60); /* For IE8 and earlier */*/
-            height: 20%;
+            
+            
+            
+        }
+        .rightsubmit2 {
+            float: left;
+            position: absolute;
+            top: 130px;
+            left: 15px;
+            width: 70%;
+            bottom: 10px;
+            height: 15%;
             border: 5px solid red;
-            padding: 15px;
-            margin: 15px;
+            padding: 10px;
+            margin: 10px;
+            background-color: white;
+            /*float: left;
+            width: 58%;*/
+            
+            /*opacity: 0.5;
+            filter: alpha(opacity=60); /* For IE8 and earlier */*/
+            
         }
         .rightconfirmation {
             float: left;
@@ -171,4 +214,14 @@
         }
         .hyperlink {
             float: right;
+        }
+        .mydatagrid {
+          width: 80%;
+          border: solid 2px black;
+          min-width: 80%;
+        }
+        .buttonAddDelete {
+            -webkit-transform: rotate(90deg);
+            width: 25;
+            height: 25px;
         }

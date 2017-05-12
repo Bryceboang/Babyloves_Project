@@ -18,15 +18,16 @@
         <div class="right">
             <br />
 &nbsp;&nbsp;&nbsp;
-            <asp:Label ID="Label5" runat="server" Text="Submit" Font-Bold="True" Font-Size="16pt" ForeColor="White"></asp:Label>
-        </div>
+            <asp:Label ID="Label5" runat="server" Text="Submit" Font-Bold="True" Font-Size="16pt" ForeColor="Black" Font-Names="Corbel"></asp:Label>
+        
         <div class="rightsubmit">
             <asp:Label ID="Label2" runat="server" Text="Please review list below if complete and final for compliance. Kindly key-in your full name for authentication then click the submit button." Font-Names="Corbel"></asp:Label>
         </div>
-        <div class="rightsubmit">
+        <div class="rightsubmit2">
             <asp:Label ID="Label4" runat="server" Text="I verify that the following registration is valid and will conform to the terms and conditions set by the Technical Training Department." Font-Names="Corbel"></asp:Label> <br />
             <asp:TextBox ID="TextBox1" CssClass="txtBox" placeholder="Enter Full Name here" runat="server"></asp:TextBox>
         </div>
+            </div>
     </div>
 </asp:Content>
 

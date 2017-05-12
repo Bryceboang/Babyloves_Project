@@ -8,7 +8,7 @@
     <div class="leftdefault">
         <br />
         &nbsp;&nbsp;
-        <asp:Label ID="Label1" runat="server" Text="Training Programs" ForeColor="Black" Font-Bold="True"></asp:Label> <br />
+        <asp:Label ID="Label1" runat="server" Text="Training Programs" ForeColor="Black" Font-Bold="True" Font-Names="Corbel"></asp:Label> <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:ImageButton ID="btnOnsiteTraining" ImageUrl="~/Image/Buttons/OnsiteTraining.jpg"  AlternateText="No Image available" runat="server" OnClick="btnOnsiteTraining_Click"/>
         <br />

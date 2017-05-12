@@ -14,7 +14,7 @@
         <asp:ImageButton ID="btnShoppingCart" ImageUrl="~/Image/Buttons/ShoppingCart.jpg"  AlternateText="No Image available" runat="server"/>
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnNominateApprove" ImageUrl="~/Image/Buttons/NominateApprove.jpg"  AlternateText="No Image available" runat="server" OnClick="btnNominateApprove_Click"/>
+        <asp:ImageButton ID="btnNominateApprove" ImageUrl="~/Image/Buttons/Nominate.jpg"  AlternateText="No Image available" runat="server" OnClick="btnNominateApprove_Click"/>
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
        <asp:ImageButton ID="btnViewStatus" ImageUrl="~/Image/Buttons/ViewStatus.jpg"  AlternateText="No Image available" runat="server"/> <br /> <br /> <br /> <br /> <br /> <br /> <br />

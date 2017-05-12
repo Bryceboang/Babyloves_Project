@@ -17,9 +17,9 @@
 
         .right {
             float: left;
-            width: 55%;
+            width: 72%;
             background-color: white;
-            height: 100%;
+            height: 512px;
         }
     </style>
 </asp:Content>
@@ -29,7 +29,7 @@
             <img src="../Image/Onsite.jpg" />
         </div >
      <div class="right">
-            <asp:Panel ID="menuPanel" runat="server"  >
+            <asp:Panel ID="menuPanel" runat="server" height="100px" >
             </asp:Panel>
        </div >
     </div>
