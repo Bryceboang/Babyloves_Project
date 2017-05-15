@@ -21,7 +21,6 @@
             <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="16pt" ForeColor="White" Text="Submit"></asp:Label>
         </div>
         <div class="rightsubmitbtn">
-            <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
         <asp:Button ID="btnSubmit" CssClass="submit" runat="server" Text="Submit" Font-Bold="True" Width="100px" />
         </div>
         </div>

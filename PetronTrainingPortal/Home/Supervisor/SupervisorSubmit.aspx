@@ -27,6 +27,9 @@
             <asp:Label ID="Label4" runat="server" Text="I verify that the following registration is valid and will conform to the terms and conditions set by the Technical Training Department." Font-Names="Corbel"></asp:Label> <br />
             <asp:TextBox ID="TextBox1" CssClass="txtBox" placeholder="Enter Full Name here" runat="server"></asp:TextBox>
         </div>
+        <div class="rightsubmitbtn">
+        <asp:Button ID="btnSubmit" CssClass="submit" runat="server" Text="Submit" Font-Bold="True" Width="100px" />
+        </div>
             </div>
     </div>
 </asp:Content>

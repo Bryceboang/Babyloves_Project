@@ -22,8 +22,8 @@
                     <li class="dropdown"><a href="Default.aspx" class="dropbtn">
                         <img src="../../Image/threelines blue.jpg" height="35px" /></a>
                         <div class="dropdown-content">
-                            <a href="SupervisorList.aspx">Home</a>
-                            <a href="Default.aspx">Shop for trainings</a>
+                            <a href="../Default.aspx">Home</a>
+                            <a href="SupervisorList.aspx">Shopping Cart</a>
                             <a href="DeleteSection.aspx">Nominate/Approve</a>
                             <a href="DeleteSection.aspx">View Status</a>
                             <a href="DeleteSection.aspx">Download LSPP Form</a>
