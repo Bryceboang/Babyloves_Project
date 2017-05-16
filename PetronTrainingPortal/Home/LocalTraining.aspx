@@ -27,8 +27,14 @@
         <div class="left">
             <img src="../Image/LocalTraining.jpg" />
         </div>
+        
         <div class="right">
-            <asp:Panel ID="menuPanel" runat="server" ></asp:Panel>
+                            <asp:LinkButton ID="lnkPrevious" runat="server" OnClick="lnkPrevious_Click"><<<</asp:LinkButton>   &nbsp;&nbsp;
+               <asp:Label ID="lblCount" runat="server" Text="1 of 2" ForeColor="Black" Font-Bold="True" Font-Names="Corbel"></asp:Label>   &nbsp;&nbsp;
+                  <asp:LinkButton ID="lnkNext" runat="server" OnClick="lnkNext_Click">>>></asp:LinkButton>
+            <asp:Panel ID="menuPanel" runat="server" >
+
+            </asp:Panel>
         </div>
     </div>
 </asp:Content>

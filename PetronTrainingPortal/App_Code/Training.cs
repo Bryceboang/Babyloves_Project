@@ -25,5 +25,6 @@ namespace PetronTrainingPortal.App_Code
         public string CourseOutline { get; set; }
         public string TrainingType { get; set; }
         public int IsCompleted { get; set; }
+        public string Status { get; set; }
     }
 }

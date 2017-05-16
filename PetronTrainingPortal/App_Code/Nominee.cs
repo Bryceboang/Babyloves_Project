@@ -16,5 +16,6 @@ namespace PetronTrainingPortal.App_Code
 
         public string EmployeeNumber { get; set; }
         public int ShopTrainingId { get; set; }
+        public string Status { get; set; }
     }
 }

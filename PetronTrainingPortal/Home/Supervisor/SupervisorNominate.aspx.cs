@@ -15,8 +15,6 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
     {
         try
         {
-
-
             //if (Session["EmpNo"] == null)
             //{
             //    Response.Redirect("~/Home/Login.aspx");
@@ -31,19 +29,7 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
             //    Response.Redirect("~/Home/Manager/ManagerList.aspx");
             //    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Supervisor only" + "');", true);
             //}
-            if (Session["FullName"] != null)
-            {
-                btnLogout.Visible = true;
-                lblHello.Visible = true;
-                lblName.Visible = true;
-                lblName.Text = Session["FullName"].ToString();
-            }
-            else
-            {
-                btnLogout.Visible = false;
-                lblHello.Visible = false;
-                lblName.Visible = false;
-            }
+
 
             List<ShopTraining> shopTrainingList = new List<ShopTraining>();
             using (var context = new DatabaseContext())
@@ -51,7 +37,7 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                 string empNo = string.Empty;
                 shopTrainingList.Clear();
                 empNo = Session["EmpNo"].ToString().ToLower();
-                shopTrainingList = context.ShopTrainings.Where(c => c.EmployeeNumber.ToLower() == empNo).ToList();
+                shopTrainingList = context.ShopTrainings.Where(c => c.EmployeeNumber.ToLower() == empNo && c.IsSubmitted == false).ToList();
                 int count = 0;
                 foreach (var item in shopTrainingList)
                 {
@@ -79,6 +65,100 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                     menuPanel.Controls.Add(mainDiv);
                 }
             }
+
+            if (!Page.IsPostBack)
+            {
+
+                if (Session["FullName"] != null)
+                {
+                    btnLogout.Visible = true;
+                    lblHello.Visible = true;
+                    lblName.Visible = true;
+                    lblName.Text = Session["FullName"].ToString();
+                    gridDiv.Visible = false;
+                    gridWhole.Visible = false;
+
+                    if (Variables.checkOutOnsiteCode != string.Empty)
+                    {
+                        ReloadCode(null, Variables.checkOutOnsiteCode);
+                    }
+                }
+                else
+                {
+                    btnLogout.Visible = false;
+                    lblHello.Visible = false;
+                    lblName.Visible = false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+    }
+
+
+    void ReloadCode(object sender, string Code)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                if (Code != string.Empty)
+                {
+                    string code = string.Empty;
+                    string empNo = Session["EmpNo"].ToString().ToLower();
+                    code = Code;
+                    var selectId = context.ShopTrainings.FirstOrDefault(c => c.TrainingCode == code && c.EmployeeNumber.ToLower() == empNo);
+                    Variables.shopTrainingId = selectId.ShopTrainingId;
+                    Variables.code = code;
+                    string header = string.Empty;
+                    string startMonth = string.Empty;
+                    string extension = string.Empty;
+                    int startDay = 0;
+                    string dateEnd = string.Empty;
+
+                    var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
+                    startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
+                    startDay = train.DateStart.Date.Day;
+                    dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
+                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
+                    lblHeader.Text = header;
+                    lblTrainingVenue.Text = train.Venue;
+                    lblFacilitator.Text = train.TrainingProvider;
+                    lblTarget.Text = train.TargetParticipants;
+                    ReloadGrid();
+                    gridDiv.Visible = false;
+                    gridWhole.Visible = true;
+                }
+                else
+                {
+
+                    string code = string.Empty;
+                    LinkButton clickedButton = (LinkButton)sender;
+                    code = clickedButton.Text;
+                    Variables.shopTrainingId = int.Parse(clickedButton.CommandName);
+                    Variables.code = clickedButton.CommandName;
+                    string header = string.Empty;
+                    string startMonth = string.Empty;
+                    string extension = string.Empty;
+                    int startDay = 0;
+                    string dateEnd = string.Empty;
+
+                    var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
+                    startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
+                    startDay = train.DateStart.Date.Day;
+                    dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
+                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
+                    lblHeader.Text = header;
+                    lblTrainingVenue.Text = train.Venue;
+                    lblFacilitator.Text = train.TrainingProvider;
+                    lblTarget.Text = train.TargetParticipants;
+                    ReloadGrid();
+                    gridDiv.Visible = false;
+                    gridWhole.Visible = true;
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -88,43 +168,8 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
 
     protected void lnkCode_Click(object sender, EventArgs e)
     {
-        try
-        {
-            using (var context = new DatabaseContext())
-            {
-                string code = string.Empty;
-                LinkButton clickedButton = (LinkButton)sender;
-                code = clickedButton.Text;
-                Variables.shopTrainingId = int.Parse(clickedButton.CommandName);
-                Variables.code = clickedButton.CommandName;
-                string header = string.Empty;
-                string startMonth = string.Empty;
-                string extension = string.Empty;
-                int startDay = 0;
-                string dateEnd = string.Empty;
-
-                var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
-                // create three labels and add them to the mainDiv
-                // 1,2,3 are the ordinal positions of the column names, this may need corrected since I have no idea what your table looks like.
-
-                startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
-                startDay = train.DateStart.Date.Day;
-                dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
-                header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
-                lblHeader.Text = header;
-                lblTrainingVenue.Text = train.Venue;
-                lblFacilitator.Text = train.TrainingProvider;
-                lblTarget.Text = train.TargetParticipants;
-                ReloadGrid();
-                gridDiv.Visible = false;
-
-
-            }
-        }
-        catch (Exception ex)
-        {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
-        }
+        Variables.checkOutOnsiteCode = string.Empty;
+        ReloadCode(sender, string.Empty);
     }
 
     private void Logout()
@@ -188,6 +233,9 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                 gridNominee.DataSource = empNomViewList.OrderBy(c => c.EmployeeNumber).ToList();
                 gridNominee.DataBind();
 
+                int count = context.Nominees.Where(c => c.ShopTrainingId == id).ToList().Count;
+                lblTotalNominee.Text = count.ToString();
+
             }
         }
         catch (Exception ex)
@@ -228,5 +276,43 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
     protected void lnkAddNominee_Click(object sender, EventArgs e)
     {
         gridDiv.Visible = true;
+    }
+
+    protected void lnkDelete_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                //Variables.shopTrainingId
+                bool yesCliked = true;
+
+                if (yesCliked == true)
+                {
+                    var list = context.Nominees.Where(c => c.ShopTrainingId == Variables.shopTrainingId).ToList();
+                    foreach (var item in list)
+                    {
+                        context.Nominees.Remove(item);
+                    }
+                    var selectShopTraining = context.ShopTrainings.FirstOrDefault(c => c.ShopTrainingId == Variables.shopTrainingId);
+                    context.ShopTrainings.Remove(selectShopTraining);
+                    context.SaveChanges();
+                    gridDiv.Visible = false;
+                    gridWhole.Visible = false;
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Shopped Training deleted." + "');", true);
+                }
+
+            }
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
+
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Home/Supervisor/SupervisorSubmit.aspx");
     }
 }

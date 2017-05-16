@@ -17,15 +17,20 @@ namespace PetronTrainingPortal.App_Code
         public static int secNo { get; set; }
         public static string OnsiteCode { get; set; }
         public static string code { get; set; }
+        public static string checkOutOnsiteCode { get; set; }
         public static int shopTrainingId { get; set; }
+        public static int queryNum { get; set; }
     }
 
     public class EmployeeNomineeViews
     {
+        public int NomineeId { get; set; }
         public string EmployeeNumber { get; set; }
         public string FullName { get; set; }
         public string ServiceYears { get; set; }
+        public string Status { get; set; }
     }
+
 
     public class TrainingViews
     {

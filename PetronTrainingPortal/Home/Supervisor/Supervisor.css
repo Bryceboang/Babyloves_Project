@@ -87,16 +87,14 @@
             position: relative;
         }
         .right {
-            top: 5px;
+            top: -479px;
             float: left;
             width: 57%;
             background-color: #ffffff;
-            height: 90%;
+            height: 443px;
             position: relative;
-            /*opacity: 0.7;
-            filter: alpha(opacity=60); /* For IE8 and earlier */*/
-            
-        }
+    left: 373px;
+}
 
         .rightsecond {
             float: left;
