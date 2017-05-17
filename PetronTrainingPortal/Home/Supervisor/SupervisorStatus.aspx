@@ -12,18 +12,12 @@
         &nbsp;<asp:Label ID="lblName" runat="server" Text="" ForeColor="Black" Font-Bold="True"></asp:Label> <br /> <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label3" runat="server" Text="Status Page" ForeColor="Black" Font-Bold="True" Font-Size="15"></asp:Label><br /> <br /> 
                         <asp:Panel ID="menuPanel" runat="server" ScrollBars="Vertical">
-            </asp:Panel><br /> <br /> <br /> <br /> <br />
+            </asp:Panel>
         <div class="logoutdiv">
             <asp:Button ID="btnLogout" CssClass="logout" runat="server" Text="Logout" Font-Bold="True" Width="100px" OnClick="btnLogout_Click" />
         </div>
         </div>
-        <%--<div class="right">
-            <asp:Label ID="Label4" runat="server" Text="Nominate" Font-Bold="True" Font-Size="16"></asp:Label>
-        </div>--%>
-    </div>
     <div id="gridWhole" runat="server" class="right">
-            <br />
-            &nbsp;&nbsp;&nbsp;
           <div class="rightsecond">
               <div class="rightsecondbox">
                   <asp:Label ID="lblHeader" runat="server" Text="Label" Font-Size="Large" Font-Bold="True"></asp:Label>
@@ -34,21 +28,17 @@
                   <asp:Label runat="server" Text="Facilitator: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblFacilitator" runat="server" Text="Mr. Texas Joe (We Do Limited Corp.)" Font-Names="Corbel"></asp:Label>
                   <br />
-                  <asp:LinkButton ID="lnkAboutTrainier" runat="server" Font-Names="Corbel">About Trainer</asp:LinkButton>
-                  |
-              <asp:LinkButton ID="lnkCourseOutline" runat="server" Font-Names="Corbel">Course Outline</asp:LinkButton>
-                  |
+                  <asp:LinkButton ID="lnkAboutTrainier" runat="server" Font-Names="Corbel">About Trainer</asp:LinkButton>|
+              <asp:LinkButton ID="lnkCourseOutline" runat="server" Font-Names="Corbel">Course Outline</asp:LinkButton>|
               <asp:LinkButton ID="lnkBackground" runat="server" Font-Names="Corbel">Background</asp:LinkButton>
                   <br />
                   <asp:Label ID="Label1" runat="server" Text="Target Participants: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblTarget" runat="server" Text="Production A- Process Engineers" Font-Names="Corbel"></asp:Label>
-                  <br />
-                  <br />
               </div>
               <br />
               <br />
               <br />
-              <div id="gridDiv" runat="server">
+              <div id="gridDiv" runat="server"  class="rightgrid">
                   <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                       <Columns>
                           <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
@@ -57,9 +47,10 @@
                         </Columns>
                   </asp:GridView>
                   <br />
-           
-                  <asp:Label runat="server" Text="Total Nominee Added: " Font-Names="Corbel"></asp:Label>
+                <div class="nominee">
+                  <asp:Label runat="server" Text="Total Nominee: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblTotalNominee" runat="server" Text="0" ForeColor="Red" Font-Names="Corbel"></asp:Label>
+                </div>
               </div>
           </div>
         </div>

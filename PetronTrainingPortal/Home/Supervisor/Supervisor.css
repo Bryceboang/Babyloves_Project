@@ -87,14 +87,16 @@
             position: relative;
         }
         .right {
-            top: -479px;
+            top: 5px;
             float: left;
             width: 57%;
             background-color: #ffffff;
-            height: 443px;
+            height: 90%;
             position: relative;
-    left: 373px;
-}
+            /*opacity: 0.7;
+            filter: alpha(opacity=60); /* For IE8 and earlier */*/
+            
+        }
 
         .rightsecond {
             float: left;
@@ -110,6 +112,12 @@
         .rightsecondboxlinks {
             background-color: red;
 
+        }
+        .rightgrid {
+            float: left;
+            position: absolute;
+            top: 350px;
+            left: 15px;
         }
 
          .firstDiv {
@@ -171,9 +179,23 @@
             background-color: transparent;
             height: 10%;
         }
-        .rightconfirmation {
+        .righttraining {
+            position: absolute;
             float: left;
-            width: 55%;
+            top: 2  0px;
+            width: 90%;
+            background-color: lightblue;
+            opacity: 0.8;
+            filter: alpha(opacity=60); /* For IE8 and earlier */
+            height: 20%;
+            padding: 15px;
+            margin: 15px;
+        }
+        .rightconfirmation {
+            position: absolute;
+            float: left;
+            top: 140px;
+            width: 90%;
             background-color: blue;
             opacity: 0.8;
             filter: alpha(opacity=60); /* For IE8 and earlier */
@@ -289,4 +311,11 @@
         }
         .hyperlink {
             float: right;
+        }
+        .nominee {
+            float: left;
+            position: absolute; 
+            bottom: 5px;
+            left: 590px;
+            width: 200px;
         }

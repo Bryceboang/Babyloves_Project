@@ -86,10 +86,10 @@
                         <div class="dropdown-content">
                             <a href="Home.aspx">Home</a>
                             <a href="Default.aspx">Shop for trainings</a>
-                            <a href="DeleteSection.aspx">Nominate/Approve</a>
-                            <a href="DeleteSection.aspx">View Status</a>
-                            <a href="DeleteSection.aspx">Download LSPP Form</a>
-                            <a href="DeleteSection.aspx">Contact us</a>
+                            <a href="Login.aspx">Nominate/Approve</a>
+                            <a href="Login.aspx">View Status</a>
+                            <a href="Home.aspx">Download LSPP Form</a>
+                            <a href="ContactUs.aspx">Contact us</a>
                         </div>
                     </li>
     </ul>
