@@ -211,9 +211,9 @@ public partial class Home_Onsite : System.Web.UI.Page
     {
         try
         {
-            Variables.checkOutOnsiteCode = string.Empty;
+            Variables.checkOutCode = string.Empty;
             LinkButton clickedButton = (LinkButton)sender;
-            Variables.OnsiteCode = clickedButton.CommandName;
+            Variables.code = clickedButton.CommandName;
             string code = string.Empty;
             string empNo = string.Empty;
             using (var context = new DatabaseContext())
@@ -246,7 +246,27 @@ public partial class Home_Onsite : System.Web.UI.Page
                     }
                     else if (Session["AccountType"] == "Manager")
                     {
-                        Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                        code = clickedButton.CommandName;
+                        empNo = Session["EmpNo"].ToString().ToLower();
+                        var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code);
+                        if (checkDuplicate != null)
+                        {
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "This Training is already in your shopping cart" + "');", true);
+                        }
+                        else
+                        {
+                            ShopTraining newShopTraining = new ShopTraining()
+                            {
+                                EmployeeNumber = Session["EmpNo"].ToString(),
+                                TrainingCode = code,
+                                IsComfirmedByAdmin = false,
+                                IsConfirmedByManger = false,
+                                IsSubmitted = false,
+                            };
+                            context.ShopTrainings.Add(newShopTraining);
+                            context.SaveChanges();
+                            Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                        }
                     }
                     else { Response.Redirect("~/Admin Page/AdminReport.aspx"); }
                 }
@@ -268,7 +288,8 @@ public partial class Home_Onsite : System.Web.UI.Page
         try
         {
             LinkButton clickedButton = (LinkButton)sender;
-            Variables.OnsiteCode = clickedButton.CommandName;
+            Variables.code = clickedButton.CommandName;
+            Variables.checkOutCode = clickedButton.CommandName;
             string code = string.Empty;
             string empNo = string.Empty;
             using (var context = new DatabaseContext())
@@ -282,7 +303,7 @@ public partial class Home_Onsite : System.Web.UI.Page
                         var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code);
                         if (checkDuplicate != null)
                         {
-                            Variables.checkOutOnsiteCode = clickedButton.CommandName;
+                            Variables.checkOutCode = clickedButton.CommandName;
 
                             if (checkDuplicate.IsSubmitted == true)
                             {
@@ -306,13 +327,43 @@ public partial class Home_Onsite : System.Web.UI.Page
                             };
                             context.ShopTrainings.Add(newShopTraining);
                             context.SaveChanges();
-                            Variables.checkOutOnsiteCode = clickedButton.CommandName;
+                            Variables.checkOutCode = clickedButton.CommandName;
                             Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
                         }
                     }
                     else if (Session["AccountType"] == "Manager")
                     {
-                        Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                        code = clickedButton.CommandName;
+                        empNo = Session["EmpNo"].ToString().ToLower();
+                        var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code);
+                        if (checkDuplicate != null)
+                        {
+                            Variables.checkOutCode = clickedButton.CommandName;
+
+                            if (checkDuplicate.IsSubmitted == true && checkDuplicate.IsConfirmedByManger == true)
+                            {
+                                Response.Redirect("~/Home/Manager/ManagerStatus.aspx");
+                            }
+                            else
+                            {
+                                Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                            }
+                        }
+                        else
+                        {
+                            ShopTraining newShopTraining = new ShopTraining()
+                            {
+                                EmployeeNumber = Session["EmpNo"].ToString(),
+                                TrainingCode = code,
+                                IsComfirmedByAdmin = false,
+                                IsConfirmedByManger = false,
+                                IsSubmitted = false,
+                            };
+                            context.ShopTrainings.Add(newShopTraining);
+                            context.SaveChanges();
+                            Variables.checkOutCode = clickedButton.CommandName;
+                            Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                        }
                     }
                     else { Response.Redirect("~/Admin Page/AdminReport.aspx"); }
                 }

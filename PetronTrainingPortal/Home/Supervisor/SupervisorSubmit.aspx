@@ -60,7 +60,7 @@
                           <asp:BoundField DataField="NomineeId" HeaderText="NomineeId" Visible="false" />
                           <asp:BoundField DataField="FullName" HeaderText="Full Name" />
                           <asp:BoundField DataField="ServiceYears" HeaderText="Service Years" />
-                          <asp:ButtonField  ItemStyle-HorizontalAlign="Center"  HeaderText="NOMINATE" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/Button-Delete-icon.png" Text="NOMINATE" CommandName="NominateEmployee"/>
+                          <asp:ButtonField  ItemStyle-HorizontalAlign="Center"  HeaderText="REMOVE" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/Button-Delete-icon.png" Text="NOMINATE" CommandName="NominateEmployee"/>
                       </Columns>
                   </asp:GridView>
                   <br />

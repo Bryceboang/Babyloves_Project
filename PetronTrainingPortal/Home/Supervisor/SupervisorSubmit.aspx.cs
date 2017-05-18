@@ -39,7 +39,7 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
         //    lblName.Visible = false;
         //}
 
-        ReloadCode(null, Variables.code);
+        ReloadCode(null, Variables.submitCode);
     }
 
     void ReloadCode(object sender, string Code)
@@ -82,7 +82,7 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
                     LinkButton clickedButton = (LinkButton)sender;
                     code = clickedButton.Text;
                     Variables.shopTrainingId = int.Parse(clickedButton.CommandName);
-                    Variables.code = clickedButton.CommandName;
+                    Variables.code = code;
                     string header = string.Empty;
                     string startMonth = string.Empty;
                     string extension = string.Empty;
@@ -128,11 +128,8 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
                     if (check != null)
                     {
                         DateTime now = DateTime.Today;
-                        int age = now.Year - check.DateHired.Year;
-                        age--;
-                        int month = now.Month;
-                        string service = (age + "." + month).ToString();
-
+                        Age age = new Age(check.DateHired, now);
+                        string service = (age.Years + "." + age.Months).ToString();
                         empList.Add(new EmployeeNomineeViews()
                         {
                             NomineeId = item.NomineeId,

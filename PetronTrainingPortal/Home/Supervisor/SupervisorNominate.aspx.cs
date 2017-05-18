@@ -78,9 +78,9 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                     gridDiv.Visible = false;
                     gridWhole.Visible = false;
 
-                    if (Variables.checkOutOnsiteCode != string.Empty)
+                    if (Variables.checkOutCode != string.Empty)
                     {
-                        ReloadCode(null, Variables.checkOutOnsiteCode);
+                        ReloadCode(null, Variables.checkOutCode);
                     }
                 }
                 else
@@ -138,7 +138,7 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                     LinkButton clickedButton = (LinkButton)sender;
                     code = clickedButton.Text;
                     Variables.shopTrainingId = int.Parse(clickedButton.CommandName);
-                    Variables.code = clickedButton.CommandName;
+                    Variables.code = code;
                     string header = string.Empty;
                     string startMonth = string.Empty;
                     string extension = string.Empty;
@@ -166,29 +166,6 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
         }
     }
 
-    protected void lnkCode_Click(object sender, EventArgs e)
-    {
-        Variables.checkOutOnsiteCode = string.Empty;
-        ReloadCode(sender, string.Empty);
-    }
-
-    private void Logout()
-    {
-        Session["EmpNo"] = null;
-        Session["FullName"] = null;
-        Session["AccountType"] = null;
-        Session.Clear();
-        Session.Abandon();
-
-        Response.Redirect("~/Home/Login.aspx");
-        lblHello.Text = " ";
-        lblName.Text = " ";
-    }
-    protected void btnLogout_Click(object sender, EventArgs e)
-    {
-        Logout();
-    }
-
     void ReloadGrid()
     {
         try
@@ -202,25 +179,26 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
 
                 var empList = context.Employees.Where(c => c.DepartmentId == deptId && c.SectionId == sectId).ToList();
 
-                foreach (var item in nomineeList)
+                List<Employee> newEmpList = new List<Employee>();
+                newEmpList.Clear();
+
+                foreach (var item in empList)
                 {
-                    var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                    var check = nomineeList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
                     if (check != null)
                     {
-                        empList.Remove(check);
+                        newEmpList.Add(item);
                     }
                 }
 
                 List<EmployeeNomineeViews> empNomViewList = new List<EmployeeNomineeViews>();
                 empNomViewList.Clear();
 
-                foreach (var item in empList)
+                foreach (var item in newEmpList)
                 {
-                    DateTime now = DateTime.Today;
-                    int age = now.Year - item.DateHired.Year;
-                    age--;
-                    int month = now.Month;
-                    string service = (age + "." + month).ToString();
+                    DateTime now = DateTime.Now;
+                    Age age = new Age(item.DateHired, now);
+                    string service = (age.Years + "." + age.Months).ToString();
                     empNomViewList.Add(new EmployeeNomineeViews()
                     {
                         EmployeeNumber = item.EmployeeNumber,
@@ -245,6 +223,30 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
 
     }
 
+    protected void lnkCode_Click(object sender, EventArgs e)
+    {
+        Variables.checkOutCode = string.Empty;
+        ReloadCode(sender, string.Empty);
+    }
+
+    private void Logout()
+    {
+        Session["EmpNo"] = null;
+        Session["FullName"] = null;
+        Session["AccountType"] = null;
+        Session.Clear();
+        Session.Abandon();
+
+        Response.Redirect("~/Home/Login.aspx");
+        lblHello.Text = " ";
+        lblName.Text = " ";
+    }
+    protected void btnLogout_Click(object sender, EventArgs e)
+    {
+        Logout();
+    }
+
+
     public void gridNominee_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
         using (var context = new DatabaseContext())
@@ -262,7 +264,8 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                 Nominee newNominee = new Nominee()
                 {
                     EmployeeNumber = empNo,
-                    ShopTrainingId = id
+                    ShopTrainingId = id,
+                    Status = "On waiting list"
                 };
                 context.Nominees.Add(newNominee);
                 context.SaveChanges();

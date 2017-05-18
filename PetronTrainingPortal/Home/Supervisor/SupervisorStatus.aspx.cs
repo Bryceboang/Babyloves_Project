@@ -41,65 +41,73 @@ public partial class Home_Supervisor_SupervisorStatus : System.Web.UI.Page
         //    lblName.Visible = false;
         //}
 
-        List<ShopTraining> shopTrainingList = new List<ShopTraining>();
-        using (var context = new DatabaseContext())
+        try
         {
-            string empNo = string.Empty;
-            shopTrainingList.Clear();
-            empNo = Session["EmpNo"].ToString().ToLower();
-            shopTrainingList = context.ShopTrainings.Where(c => c.EmployeeNumber.ToLower() == empNo && c.IsSubmitted == true).ToList();
-            int count = 0;
-            foreach (var item in shopTrainingList)
+            List<ShopTraining> shopTrainingList = new List<ShopTraining>();
+            using (var context = new DatabaseContext())
             {
-                count++;
-                string top = string.Empty;
-                if (count == 1) { top = "15px"; }
-                else { top = "30px"; }
-                HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
-                mainDiv.Attributes.Add("style", "commentBody");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
-
-                LinkButton lnkCode = new LinkButton();
-                lnkCode.Text = item.TrainingCode;
-                lnkCode.CommandName = item.ShopTrainingId.ToString();
-                lnkCode.ForeColor = Color.Red;
-                lnkCode.Font.Size = FontUnit.Larger;
-                lnkCode.Font.Bold = true;
-                lnkCode.Font.Underline = false;
-                lnkCode.Font.Name = "Goudy Old Style";
-                lnkCode.Click += new System.EventHandler(lnkCode_Click);
-                mainDiv.Controls.Add(lnkCode);
-
-                // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
-                menuPanel.Controls.Add(mainDiv);
-            }
-        }
-
-        if (!Page.IsPostBack)
-        {
-
-            if (Session["FullName"] != null)
-            {
-                btnLogout.Visible = true;
-                lblHello.Visible = true;
-                lblName.Visible = true;
-                lblName.Text = Session["FullName"].ToString();
-                gridDiv.Visible = false;
-                gridWhole.Visible = false;
-
-                if (Variables.checkOutOnsiteCode != string.Empty)
+                string empNo = string.Empty;
+                shopTrainingList.Clear();
+                empNo = Session["EmpNo"].ToString().ToLower();
+                shopTrainingList = context.ShopTrainings.Where(c => c.EmployeeNumber.ToLower() == empNo && c.IsSubmitted == true).ToList();
+                int count = 0;
+                foreach (var item in shopTrainingList)
                 {
-                    ReloadCode(null, Variables.checkOutOnsiteCode);
+                    count++;
+                    string top = string.Empty;
+                    if (count == 1) { top = "15px"; }
+                    else { top = "30px"; }
+                    HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
+                    mainDiv.Attributes.Add("style", "commentBody");
+                    mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
+                    mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
+
+                    LinkButton lnkCode = new LinkButton();
+                    lnkCode.Text = item.TrainingCode;
+                    lnkCode.CommandName = item.ShopTrainingId.ToString();
+                    lnkCode.ForeColor = Color.Red;
+                    lnkCode.Font.Size = FontUnit.Larger;
+                    lnkCode.Font.Bold = true;
+                    lnkCode.Font.Underline = false;
+                    lnkCode.Font.Name = "Goudy Old Style";
+                    lnkCode.Click += new System.EventHandler(lnkCode_Click);
+                    mainDiv.Controls.Add(lnkCode);
+
+                    // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
+                    menuPanel.Controls.Add(mainDiv);
                 }
             }
-            else
+
+            if (!Page.IsPostBack)
             {
-                btnLogout.Visible = false;
-                lblHello.Visible = false;
-                lblName.Visible = false;
+
+                if (Session["FullName"] != null)
+                {
+                    btnLogout.Visible = true;
+                    lblHello.Visible = true;
+                    lblName.Visible = true;
+                    lblName.Text = Session["FullName"].ToString();
+                    gridDiv.Visible = false;
+                    gridWhole.Visible = false;
+
+                    if (Variables.checkOutCode != string.Empty)
+                    {
+                        ReloadCode(null, Variables.checkOutCode);
+                    }
+                }
+                else
+                {
+                    btnLogout.Visible = false;
+                    lblHello.Visible = false;
+                    lblName.Visible = false;
+                }
             }
         }
+        catch (Exception ex)
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+
     }
 
     void ReloadGrid()
@@ -184,7 +192,7 @@ public partial class Home_Supervisor_SupervisorStatus : System.Web.UI.Page
                     LinkButton clickedButton = (LinkButton)sender;
                     code = clickedButton.Text;
                     Variables.shopTrainingId = int.Parse(clickedButton.CommandName);
-                    Variables.code = clickedButton.CommandName;
+                    Variables.code = code;
                     string header = string.Empty;
                     string startMonth = string.Empty;
                     string extension = string.Empty;
@@ -214,13 +222,14 @@ public partial class Home_Supervisor_SupervisorStatus : System.Web.UI.Page
 
     protected void lnkCode_Click(object sender, EventArgs e)
     {
-        Variables.checkOutOnsiteCode = string.Empty;
+        Variables.checkOutCode = string.Empty;
         ReloadCode(sender, string.Empty);
     }
 
 
     private void Logout()
     {
+        Variables.checkOutCode = string.Empty;
         Session["EmpNo"] = null;
         Session["FullName"] = null;
         Session["AccountType"] = null;

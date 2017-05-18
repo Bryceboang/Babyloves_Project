@@ -48,23 +48,26 @@ public partial class Home_Login : System.Web.UI.Page
                             Session["EmpNo"] = selecteduser.EmployeeNumber;
                             Session["FullName"] = selecteduser.FullName;
                             Session["AccountType"] = "Supervisor";
-                            string code = Variables.OnsiteCode;
+                            string code = Variables.code;
 
-                            if (Variables.checkOutOnsiteCode == string.Empty)
+                            if (string.IsNullOrWhiteSpace(Variables.checkOutCode) == true)
                             {
-                                var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empno && c.TrainingCode == code);
-                                if (checkDuplicate == null)
+                                if (string.IsNullOrWhiteSpace(code) != true)
                                 {
-                                    ShopTraining newShopTraining = new ShopTraining()
+                                    var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empno && c.TrainingCode == code);
+                                    if (checkDuplicate == null)
                                     {
-                                        EmployeeNumber = selecteduser.EmployeeNumber,
-                                        TrainingCode = code,
-                                        IsComfirmedByAdmin = false,
-                                        IsConfirmedByManger = false,
-                                        IsSubmitted = false,
-                                    };
-                                    context.ShopTrainings.Add(newShopTraining);
-                                    context.SaveChanges();
+                                        ShopTraining newShopTraining = new ShopTraining()
+                                        {
+                                            EmployeeNumber = selecteduser.EmployeeNumber,
+                                            TrainingCode = code,
+                                            IsComfirmedByAdmin = false,
+                                            IsConfirmedByManger = false,
+                                            IsSubmitted = false,
+                                        };
+                                        context.ShopTrainings.Add(newShopTraining);
+                                        context.SaveChanges();
+                                    }
                                 }
                                 Response.Redirect("~/Home/Supervisor/SupervisorList.aspx");
                             }
@@ -84,7 +87,7 @@ public partial class Home_Login : System.Web.UI.Page
                                     context.ShopTrainings.Add(newShopTraining);
                                     context.SaveChanges();
                                 }
-                                Variables.checkOutOnsiteCode = code;
+                                Variables.checkOutCode = code;
                                 Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
                             }
                         }
@@ -93,7 +96,50 @@ public partial class Home_Login : System.Web.UI.Page
                             Session["EmpNo"] = selecteduser.EmployeeNumber;
                             Session["FullName"] = selecteduser.FullName;
                             Session["AccountType"] = "Manager";
-                            Response.Redirect("~/Home/Manager/ManagerList.aspx");
+                            string code = Variables.code;
+
+                            if (string.IsNullOrWhiteSpace(Variables.checkOutCode) == true)
+                            {
+
+                                if (string.IsNullOrWhiteSpace(code) != true)
+                                {
+                                    var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empno && c.TrainingCode == code);
+                                    if (checkDuplicate == null)
+                                    {
+                                        ShopTraining newShopTraining = new ShopTraining()
+                                        {
+                                            EmployeeNumber = selecteduser.EmployeeNumber,
+                                            TrainingCode = code,
+                                            IsComfirmedByAdmin = false,
+                                            IsConfirmedByManger = false,
+                                            IsSubmitted = false,
+                                        };
+                                        context.ShopTrainings.Add(newShopTraining);
+                                        context.SaveChanges();
+                                    }
+
+                                }
+                                Response.Redirect("~/Home/Manager/ManagerList.aspx");
+                            }
+                            else
+                            {
+                                var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empno && c.TrainingCode == code);
+                                if (checkDuplicate == null)
+                                {
+                                    ShopTraining newShopTraining = new ShopTraining()
+                                    {
+                                        EmployeeNumber = selecteduser.EmployeeNumber,
+                                        TrainingCode = code,
+                                        IsComfirmedByAdmin = false,
+                                        IsConfirmedByManger = false,
+                                        IsSubmitted = false,
+                                    };
+                                    context.ShopTrainings.Add(newShopTraining);
+                                    context.SaveChanges();
+                                }
+                                Variables.checkOutCode = code;
+                                Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                            }
                         }
                         else if (selecteduser.AccessType == "Admin")
                         {

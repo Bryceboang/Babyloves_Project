@@ -29,7 +29,7 @@
             <img src="../Image/Onsite.jpg" />
         </div >
      <div class="right">
-            <asp:Panel ID="menuPanel" runat="server" height="100px" >
+            <asp:Panel ID="menuPanel" runat="server" height="500px" ScrollBars="Auto" >
             </asp:Panel>
        </div >
     </div>

@@ -78,7 +78,7 @@ public partial class Home_Supervisor_SupervisorConfirmation : System.Web.UI.Page
                     LinkButton clickedButton = (LinkButton)sender;
                     code = clickedButton.Text;
                     Variables.shopTrainingId = int.Parse(clickedButton.CommandName);
-                    Variables.code = clickedButton.CommandName;
+                    Variables.code = code;
                     string header = string.Empty;
                     string startMonth = string.Empty;
                     string extension = string.Empty;
