@@ -145,10 +145,7 @@
             width: 58%;*/
             
             /*opacity: 0.5;
-            filter: alpha(opacity=60); /* For IE8 and earlier */*/
-            
-            
-            
+            filter: alpha(opacity=60); /* For IE8 and earlier */
         }
         .rightsubmit2 {
             float: left;
@@ -166,8 +163,20 @@
             width: 58%;*/
             
             /*opacity: 0.5;
-            filter: alpha(opacity=60); /* For IE8 and earlier */*/
-            
+            filter: alpha(opacity=60); /* For IE8 and earlier */
+        }
+
+        .gridWhole {
+            float: left;
+            position: absolute;
+            top: 230px;
+            left: 15px;
+            width: 70%;
+            bottom: 5px;
+            height: 10%;
+            padding: 10px;
+            margin: 10px;
+            background-color: white;
         }
 
         .rightsubmitbtn {

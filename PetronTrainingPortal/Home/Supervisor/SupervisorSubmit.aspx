@@ -27,9 +27,7 @@
             <asp:Label ID="Label4" runat="server" Text="I verify that the following registration is valid and will conform to the terms and conditions set by the Technical Training Department." Font-Names="Corbel"></asp:Label> <br />
             <asp:TextBox ID="txtFullName" CssClass="txtBox" placeholder="Enter Full Name here" runat="server"></asp:TextBox>
         </div>
-         <div  id="gridWhole" runat="server" class="right">
-            <br />
-            &nbsp;&nbsp;&nbsp;
+         <div  id="gridWhole" runat="server" class="gridWhole">
           <div class="rightsecond">
               <div class="rightsecondbox">
               <asp:Label ID="lblHeader" runat="server" Text="Label" Font-Size="Large" Font-Bold="True"></asp:Label>
