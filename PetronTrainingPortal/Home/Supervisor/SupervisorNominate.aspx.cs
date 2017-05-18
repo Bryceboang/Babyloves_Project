@@ -185,7 +185,7 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                 foreach (var item in empList)
                 {
                     var check = nomineeList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                    if (check != null)
+                    if (check == null)
                     {
                         newEmpList.Add(item);
                     }
