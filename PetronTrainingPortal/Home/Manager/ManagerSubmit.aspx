@@ -13,28 +13,19 @@
             <br />
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Label ID="Label3" runat="server" Text="Review" ForeColor="Black" Font-Bold="True" Font-Size="15"></asp:Label><br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <asp:Label ID="Label3" runat="server" Text="Review" ForeColor="Black" Font-Bold="True" Font-Size="15"></asp:Label>
             <div class="logoutdiv">
                 <asp:Button ID="btnLogout" CssClass="logout" runat="server" Text="Logout" Font-Bold="True" Width="100px" />
             </div>
         </div>
-        <div class="right">
-            <br />
-            &nbsp;&nbsp;&nbsp;
-            <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="16pt" ForeColor="White" Text="Submit"></asp:Label>
-        </div>
         <div id="gridWhole" runat="server" class="right">
-            <br />
-            &nbsp;&nbsp;&nbsp;
+            <div class="headernominate">
+                  <center><asp:Label ID="Label2" runat="server" Text="Submit" Font-Names="Corbel" Font-Bold="true" Font-Size="XX-Large"></asp:Label></center>
+              </div>
           <div class="rightsecond">
               <div class="rightsecondbox">
-                  <asp:Label ID="lblHeader" runat="server" Text="Label" Font-Size="Large" Font-Bold="True"></asp:Label>
+                  <asp:Label ID="Label5" runat="server" Text="Please review the  list of attendees you nominated." Font-Names="Corbel" Font-Size="Large"></asp:Label> <br /> <br />
+                  <asp:Label ID="lblHeader" runat="server" Text="Label" Font-Size="Large" Font-Bold="True" ForeColor="Red"></asp:Label>
                   <br />
                   <asp:Label runat="server" Text="Training Venue: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblTrainingVenue" runat="server" Text="Executive Lounge, PBR Housing Compound" Font-Names="Corbel"></asp:Label>
@@ -50,15 +41,11 @@
                   <br />
                   <asp:Label ID="Label1" runat="server" Text="Target Participants: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblTarget" runat="server" Text="Production A- Process Engineers" Font-Names="Corbel"></asp:Label>
-                  <br />
-                  <br />
               </div>
               <div>
-                  <br />
-                  <br />
-                  <br />
                   <div id="gridDiv" runat="server">
-                      <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
+                      <div class="grid">
+                      <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="10pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                           <Columns>
                               <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
                               <asp:BoundField DataField="NomineeId" HeaderText="NomineeId" Visible="false" />
@@ -66,17 +53,22 @@
                               <asp:BoundField DataField="ServiceYears" HeaderText="Service Years" />
                           </Columns>
                       </asp:GridView>
+                    </div>
                       <br />
-                      &nbsp;&nbsp;
-                  &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;
+                      <div class="label">
                   <asp:Label runat="server" Text="Total Nominee Added: " Font-Names="Corbel"></asp:Label>
                       <asp:Label ID="lblTotalNominee" runat="server" Text="0" ForeColor="Red" Font-Names="Corbel"></asp:Label>
+                      </div>
                   </div>
               </div>
+              <br /> <br />
+              <div>
+                  <asp:Label ID="Label4" runat="server" Text="I verify through inputting  my name here that the list is  complete and accurate." Font-Names="Corbel" Font-Size="Large"></asp:Label> <br />
+                  <asp:TextBox ID="txtFullName" CssClass="txtBox" placeholder="Enter Full Name here" runat="server"></asp:TextBox>
+              </div>
           </div>
-
             <div class="rightsubmitbtn">
-                 <asp:TextBox ID="txtFullName" CssClass="txtBox" placeholder="Enter Full Name here" runat="server"></asp:TextBox>
+                 
                 <asp:Button ID="btnSubmit" CssClass="submit" runat="server" Text="Submit" Font-Bold="True" Width="110px" OnClick="btnSubmit_Click" />
             </div>
         </div>

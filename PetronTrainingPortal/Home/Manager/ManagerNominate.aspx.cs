@@ -292,7 +292,7 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Home/Supervisor/SupervisorSubmit.aspx");
+        Response.Redirect("~/Home/Manager/ManagerSubmit.aspx");
     }
 
     private void Logout()

@@ -16,20 +16,19 @@
         </div>
         </div>
         <div class="right">
-            <br />
-&nbsp;&nbsp;&nbsp;
-            <asp:Label ID="Label5" runat="server" Text="Submit" Font-Bold="True" Font-Size="16pt" ForeColor="Black" Font-Names="Corbel"></asp:Label>
-        
-        <div class="rightsubmit">
+            <div class="headernominate">
+                  <center><asp:Label ID="Label6" runat="server" Text="Submit" Font-Names="Corbel" Font-Bold="true" Font-Size="XX-Large"></asp:Label></center>
+              </div>
+            <div class="rightsubmit">
             <asp:Label ID="Label2" runat="server" Text="Please review list below if complete and final for compliance. Kindly key-in your full name for authentication then click the submit button." Font-Names="Corbel" Font-Size="Smaller"></asp:Label>
         </div>
         <div class="rightsubmit2">
             <asp:Label ID="Label4" runat="server" Text="I verify that the following registration is valid and will conform to the terms and conditions set by the Technical Training Department." Font-Names="Corbel" Font-Size="Smaller"></asp:Label>
             <asp:TextBox ID="txtFullName" CssClass="txtBox" placeholder="Enter Full Name here" runat="server"></asp:TextBox>
         </div>
-         <div  id="gridWhole" runat="server" class="gridWhole">
-          <div class="rightsecond">
-              <div class="rightsecondbox">
+         <div  id="gridWhole" runat="server">
+          <div class="rightsubmit3">
+              <div class="rightsubmit4">
               <asp:Label ID="lblHeader" runat="server" Text="Label" Font-Size="Large" Font-Bold="True"></asp:Label>
               <br />
               <asp:Label runat="server" Text="Training Venue: " Font-Names="Corbel" Font-Size="Small"></asp:Label>
@@ -47,6 +46,7 @@
               </div>
               <br />
               <div id="gridDiv" runat="server">
+                  <div class="grid">
                   <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" OnRowCommand="gridNominee_RowCommand"  CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                       <Columns>
                           <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
@@ -56,11 +56,12 @@
                           <asp:ButtonField  ItemStyle-HorizontalAlign="Center"  HeaderText="REMOVE" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/Button-Delete-icon.png" Text="NOMINATE" CommandName="NominateEmployee"/>
                       </Columns>
                   </asp:GridView>
+                </div>
                   <br />
-                  &nbsp;&nbsp;
-                  &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;
+                  <div class="labelsubmit">
                   <asp:Label runat="server" Text="Total Nominee Added: " Font-Names="Corbel" Font-Size="Small"></asp:Label>
                   <asp:Label ID="lblTotalNominee" runat="server" Text="0" ForeColor="Red" Font-Names="Corbel" Font-Size="Small"></asp:Label>
+                </div>
               </div>
         </div>
 

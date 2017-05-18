@@ -83,7 +83,7 @@
             background-color: #ffffff;
             opacity: 0.8;
             filter: alpha(opacity=60); /* For IE8 and earlier */
-            height: 90%;
+            height: 99%;
             position: relative;
         }
         .right {
@@ -91,7 +91,7 @@
             float: left;
             width: 57%;
             background-color: #ffffff;
-            height: 90%;
+            height: 99%;
             position: relative;
             /*opacity: 0.7;
             filter: alpha(opacity=60); /* For IE8 and earlier */*/
@@ -101,13 +101,14 @@
         .rightsecond {
             float: left;
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 50px;
+            left: 11px;
             width: 97%;
             bottom: 135px;
         }
         .rightsecondbox {
-            background-color: red;
+            background-color: #85bfff;
+            padding: 10px;
         }
         .rightsecondboxlinks {
             background-color: red;
@@ -132,12 +133,12 @@
         .rightsubmit {
             float: left;
             position: absolute;
-            top: 40px;
+            top: 50px;
             left: 15px;
             width: 93%;
             bottom: 5px;
             height: 8%;
-            border: 5px solid red;
+            border: 3px solid red;
             padding: 2px;
             margin: 2px;
             background-color: white;
@@ -150,12 +151,12 @@
         .rightsubmit2 {
             float: left;
             position: absolute;
-            top: 90px;
+            top: 100px;
             left: 11px;
             width: 92%;
             bottom: 10px;
             height: 13%;
-            border: 5px solid red;
+            border: 3px solid red;
             padding: 5px;
             margin: 6px;
             background-color: white;
@@ -166,10 +167,25 @@
             filter: alpha(opacity=60); /* For IE8 and earlier */
         }
 
-        .gridWhole {
+        .rightsubmit3 {
             float: left;
             position: absolute;
-            top: 170px;
+            top: 185px;
+            left: 11px;
+            width: 96%;
+            bottom: 135px;
+        }
+
+        .rightsubmit4 {
+            background-color: #85bfff;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        /*.gridWhole {
+            float: left;
+            position: absolute;
+            top: 100px;
             left: 5px;
             width: 70%;
             bottom: 5px;
@@ -177,17 +193,28 @@
             padding: 8px;
             margin: 8px;
             background-color: white;
-        }
+        }*/
 
-        .rightsubmitbtn {
+        .rightnominatebtn {
             position: absolute;
             float: left;
-            top: 270px;
+            top: 399px;
             left: 600px;
             width: 20%;
             background-color: transparent;
             height: 10%;
         }
+
+        .rightsubmitbtn {
+            position: absolute;
+            float: left;
+            top: 445px;
+            left: 600px;
+            width: 20%;
+            background-color: transparent;
+            height: 10%;
+        }
+
         .righttraining {
             position: absolute;
             float: left;
@@ -261,14 +288,80 @@
         .hyperlink {
             float: right;
         }
-        .mydatagrid {
-          width: 80%;
-          border: solid 2px black;
-          min-width: 80%;
+
+        .grid {
+          overflow-y: scroll;
+          height: 120px;
+          width: 100%;
         }
+
+        .mydatagrid {
+          width: 99%;
+          border: solid 2px black;
+          /*min-width: 80%;*/
+        }
+
+        .header {
+          background-color: #000;
+          font-family: Arial;
+          color: White;
+          height: 25px;         
+          text-align: center;
+          font-size: 10px;
+        }
+
+        .rows {
+          background-color: #fff;
+          font-family: Arial;
+          font-size: 15px;
+          color: #000;
+          min-height: 25px;
+          text-align: left;
+        }
+
+        .rows:hover {
+          background-color: #5badff;
+          color: #fff;
+        }
+
+        .mydatagrid a /** FOR THE PAGING ICONS  **/ {
+          background-color: Transparent;
+          padding: 5px 5px 5px 5px;
+          color: #fff;
+          text-decoration: none;
+          font-weight: bold;
+        }
+
+        .mydatagrid a:hover /** FOR THE PAGING ICONS  HOVER STYLES**/ {
+          background-color: #000;
+          color: #fff;
+        }
+
+        .mydatagrid span /** FOR THE PAGING ICONS CURRENT PAGE INDICATOR **/ {
+          background-color: #fff;
+          color: #000;
+          padding: 5px 5px 5px 5px;
+        }
+
+        .pager {
+          background-color: #5badff;
+          font-family: Arial;
+          color: White;
+          height: 30px;
+          text-align: left;
+        }
+
+        .mydatagrid td {
+          padding: 5px;
+        }
+
+        .mydatagrid th {
+          padding: 5px;
+        }
+
         .buttonAddDelete {
             -webkit-transform: rotate(90deg);
-            width: 25;
+            width: 25px;
             height: 25px;
         }
         .submit {
@@ -327,4 +420,18 @@
             bottom: 5px;
             left: 590px;
             width: 200px;
+        }
+
+        .label {
+          float: right;
+        }
+
+        .labelsubmit {
+          float: left;
+        }
+
+        .headernominate {
+            display: block;
+            background-color: blue;
+            height: 45px;
         }

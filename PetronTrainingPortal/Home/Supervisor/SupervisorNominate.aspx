@@ -21,8 +21,9 @@
             </div>
         </div>
         <div id="gridWhole" runat="server" class="right">
-            <br />
-            &nbsp;&nbsp;&nbsp;
+            <div class="headernominate">
+                  <center><asp:Label ID="Label2" runat="server" Text="Nominate" Font-Names="Corbel" Font-Bold="true" Font-Size="XX-Large"></asp:Label></center>
+              </div>
           <div class="rightsecond">
               <div class="rightsecondbox">
                   <asp:Label ID="lblHeader" runat="server" Text="Label" Font-Size="Large" Font-Bold="True"></asp:Label>
@@ -41,10 +42,8 @@
                   <br />
                   <asp:Label ID="Label1" runat="server" Text="Target Participants: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblTarget" runat="server" Text="Production A- Process Engineers" Font-Names="Corbel"></asp:Label>
-                  <br />
-                  <br />
               </div>
-              <div>
+              <div class="hyperlink">
                   <asp:LinkButton ID="lnkAddNominee" runat="server" OnClick="lnkAddNominee_Click" Font-Names="Corbel">Add Nominee</asp:LinkButton>
                   &nbsp;&nbsp;
                     <asp:LinkButton ID="lnkPassForConfirmation" runat="server" Font-Names="Corbel">Pass For Confirmation</asp:LinkButton>
@@ -53,8 +52,8 @@
               </div>
               <br />
               <br />
-              <br />
               <div id="gridDiv" runat="server">
+                  <div class="grid">
                   <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" OnRowCommand="gridNominee_RowCommand" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                       <Columns>
                           <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
@@ -63,17 +62,19 @@
                           <asp:ButtonField ItemStyle-HorizontalAlign="Center" HeaderText="NOMINATE" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/Button-Add-icon.png" Text="NOMINATE" CommandName="NominateEmployee" />
                       </Columns>
                   </asp:GridView>
+                </div>
                   <br />
                   <asp:Label ID="lblDepartment" runat="server" Text="Department" Font-Names="Corbel"></asp:Label>
                   &nbsp;&nbsp;
                 <asp:Label ID="lblSection" runat="server" Text="Section" Font-Names="Corbel"></asp:Label>
-                  &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;
+                 <div class="label">
                   <asp:Label runat="server" Text="Total Nominee Added: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblTotalNominee" runat="server" Text="0" ForeColor="Red" Font-Names="Corbel"></asp:Label>
+                </div>
               </div>
           </div>
-            <div class="rightsubmitbtn">
-                <asp:Button ID="btnSubmit" CssClass="submit" runat="server" Text="Submit" Font-Bold="True" Width="110px" OnClick="btnSubmit_Click" />
+            <div class="rightnominatebtn">
+                <asp:Button ID="btnSubmit" CssClass="submit" runat="server" Text="Nominate" Font-Bold="True" Width="120px" OnClick="btnSubmit_Click" />
             </div>
         </div>
     </div>
