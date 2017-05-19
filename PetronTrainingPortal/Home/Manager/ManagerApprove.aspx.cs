@@ -131,10 +131,6 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
         }
     }
 
-
-
-
-
     void ReloadCode(object sender, string Code)
     {
         try
@@ -312,8 +308,41 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
 
     protected void lnkSubmit_Click(object sender, EventArgs e)
     {
-        //Variables.submitShopTrainingId
-        Response.Redirect("~/Home/Manager/ManagerSubmit.aspx");
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                int id = Variables.shopTrainingId;
+                var nomineeList = context.Nominees.Where(c => c.ShopTrainingId == id).ToList();
+                bool check = false;
+
+                foreach (var item in nomineeList)
+                {
+                    if (item.Status == "On Waiting List")
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+
+                if (check == true)
+                {
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please Accept or decline all the employee in this training." + "');", true);
+                }
+                else
+                {
+                    Response.Redirect("~/Home/Manager/ManagerSubmit.aspx");
+                }
+
+                
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
     }
 
     protected void lnkDecline_Click(object sender, EventArgs e)

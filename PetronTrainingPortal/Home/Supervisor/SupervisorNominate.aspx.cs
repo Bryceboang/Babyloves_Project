@@ -175,6 +175,12 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                 int id = Variables.shopTrainingId;
                 int deptId = Variables.deptNo;
                 int sectId = Variables.secNo;
+              
+                var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == deptId);
+                var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == sectId);
+                lblSection.Text = selectSec.SectionName;
+                lblDepartment.Text = selectDept.DepartmentName;
+           
                 var nomineeList = context.Nominees.Where(c => c.ShopTrainingId == id).ToList();
 
                 var empList = context.Employees.Where(c => c.DepartmentId == deptId && c.SectionId == sectId).ToList();
@@ -316,6 +322,23 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Home/Supervisor/SupervisorSubmit.aspx");
+
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                int id = Variables.shopTrainingId;
+                var nomineeList = context.Nominees.Where(c => c.ShopTrainingId == id).ToList();
+                if (nomineeList.Count() > 0)
+                {
+                    Response.Redirect("~/Home/Supervisor/SupervisorSubmit.aspx");
+                }
+                else { Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please nominate an employee first." + "');", true); }
+            }
+        }
+        catch (Exception ex)
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
     }
 }

@@ -14,6 +14,8 @@
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="Label3" runat="server" Text="Review" ForeColor="Black" Font-Bold="True" Font-Size="15"></asp:Label>
+              <asp:Panel ID="menuPanel" runat="server" ScrollBars="Vertical">
+            </asp:Panel>
             <div class="logoutdiv">
                 <asp:Button ID="btnLogout" CssClass="logout" runat="server" Text="Logout" Font-Bold="True" Width="100px" />
             </div>
@@ -45,12 +47,13 @@
               <div>
                   <div id="gridDiv" runat="server">
                       <div class="grid">
-                      <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="10pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
+                      <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" OnRowCommand="gridNominee_RowCommand" EmptyDataText="No data uploaded" Font-Size="10pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                           <Columns>
                               <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
                               <asp:BoundField DataField="NomineeId" HeaderText="NomineeId" Visible="false" />
                               <asp:BoundField DataField="FullName" HeaderText="Full Name" />
                               <asp:BoundField DataField="ServiceYears" HeaderText="Service Years" />
+                             <asp:ButtonField ItemStyle-HorizontalAlign="Center"  HeaderText="REMOVE" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/Button-Delete-icon.png" Text="NOMINATE" CommandName="NominateEmployee"/>
                           </Columns>
                       </asp:GridView>
                     </div>

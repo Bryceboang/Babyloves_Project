@@ -11,13 +11,13 @@
         <asp:Label ID="lblHello" runat="server" Text="Hello!" ForeColor="Black" Font-Bold="True">
         </asp:Label> &nbsp;<asp:Label ID="lblName" runat="server" Text="" ForeColor="Black" Font-Bold="True"></asp:Label> <br /> <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnShoppingCart" ImageUrl="~/Image/Buttons/ShoppingCart.jpg"  AlternateText="No Image available" runat="server"/>
+        <asp:ImageButton ID="btnShoppingCart" ImageUrl="~/Image/Buttons/ShoppingCart.jpg"  AlternateText="No Image available" runat="server" OnClick="btnNominateApprove_Click"/>
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:ImageButton ID="btnNominateApprove" ImageUrl="~/Image/Buttons/Nominate.jpg"  AlternateText="No Image available" runat="server" OnClick="btnNominateApprove_Click"/>
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <asp:ImageButton ID="btnViewStatus" ImageUrl="~/Image/Buttons/ViewStatus.jpg"  AlternateText="No Image available" runat="server"/> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+       <asp:ImageButton ID="btnViewStatus" ImageUrl="~/Image/Buttons/ViewStatus.jpg"  AlternateText="No Image available" runat="server" OnClick="btnViewStatus_Click"/> <br /> <br /> <br /> <br /> <br /> <br /> <br />
        <div class="logoutdiv">
             <asp:Button ID="btnLogout" CssClass="logout" runat="server" Text="Logout" Font-Bold="True" Width="100px" OnClick="btnLogout_Click" />
        </div>

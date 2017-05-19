@@ -1,10 +1,12 @@
 ﻿using PetronTrainingPortal.App_Code;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
@@ -25,21 +27,60 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
         //    Response.Redirect("~/Home/Manager/ManagerList.aspx");
         //    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Supervisor only" + "');", true);
         //}
-        //if (Session["FullName"] != null)
-        //{
-        //    btnLogout.Visible = true;
-        //    lblHello.Visible = true;
-        //    lblName.Visible = true;
-        //    lblName.Text = Session["FullName"].ToString();
-        //}
-        //else
-        //{
-        //    btnLogout.Visible = false;
-        //    lblHello.Visible = false;
-        //    lblName.Visible = false;
-        //}
 
-        ReloadCode(null, Variables.submitCode);
+
+        if (Session["FullName"] != null)
+        {
+            btnLogout.Visible = true;
+            lblHello.Visible = true;
+            lblName.Visible = true;
+            lblName.Text = Session["FullName"].ToString();
+        }
+        else
+        {
+            btnLogout.Visible = false;
+            lblHello.Visible = false;
+            lblName.Visible = false;
+        }
+
+        using (var context = new DatabaseContext())
+        {
+            string empNo = string.Empty;
+            empNo = Session["EmpNo"].ToString().ToLower();
+            var shopTraning = context.ShopTrainings.FirstOrDefault(c => c.ShopTrainingId == Variables.shopTrainingId);
+            int count = 0;
+
+            count++;
+            string top = string.Empty;
+            if (count == 1) { top = "15px"; }
+            else { top = "30px"; }
+            HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
+            mainDiv.Attributes.Add("style", "commentBody");
+            mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
+            mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
+
+            LinkButton lnkCode = new LinkButton();
+            lnkCode.Text = shopTraning.TrainingCode;
+            lnkCode.CommandName = shopTraning.ShopTrainingId.ToString();
+            lnkCode.ForeColor = Color.Red;
+            lnkCode.Font.Size = FontUnit.Larger;
+            lnkCode.Font.Bold = true;
+            lnkCode.Font.Underline = false;
+            lnkCode.Font.Name = "Goudy Old Style";
+            lnkCode.Click += new System.EventHandler(lnkCode_Click);
+            mainDiv.Controls.Add(lnkCode);
+
+            // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
+            menuPanel.Controls.Add(mainDiv);
+        }
+        ReloadCode(null, Variables.code);
+
+    }
+
+    protected void lnkCode_Click(object sender, EventArgs e)
+    {
+        Variables.checkOutCode = string.Empty;
+        ReloadCode(sender, string.Empty);
     }
 
     void ReloadCode(object sender, string Code)
@@ -77,7 +118,6 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
                 }
                 else
                 {
-
                     string code = string.Empty;
                     LinkButton clickedButton = (LinkButton)sender;
                     code = clickedButton.Text;
@@ -143,7 +183,7 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
                 gridNominee.DataSource = null;
                 gridNominee.DataSource = empList.OrderBy(c => c.EmployeeNumber).ToList();
                 gridNominee.DataBind();
-                        int count = context.Nominees.Where(c => c.ShopTrainingId == id).ToList().Count;
+                int count = context.Nominees.Where(c => c.ShopTrainingId == id).ToList().Count;
                 lblTotalNominee.Text = count.ToString();
             }
         }

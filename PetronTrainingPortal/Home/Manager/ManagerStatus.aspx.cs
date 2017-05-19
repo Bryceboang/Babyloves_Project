@@ -43,15 +43,36 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
 
         try
         {
-            List<ShopTraining> shopTrainingList = new List<ShopTraining>();
+      
             using (var context = new DatabaseContext())
             {
                 string empNo = string.Empty;
-                shopTrainingList.Clear();
                 empNo = Session["EmpNo"].ToString().ToLower();
-                shopTrainingList = context.ShopTrainings.Where(c => c.EmployeeNumber.ToLower() == empNo && c.IsSubmitted == true).ToList();
                 int count = 0;
-                foreach (var item in shopTrainingList)
+                int dept = Variables.deptNo;
+                var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
+
+                var shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == true).ToList();
+                List<ShopTraining> newShopList = new List<ShopTraining>();
+                newShopList.Clear();
+                foreach (var item in shopList)
+                {
+                    var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                    if (check != null)
+                    {
+                        newShopList.Add(item);
+                    }
+                    else
+                    {
+                        var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                        if (checkUser != null)
+                        {
+                            newShopList.Add(item);
+                        }
+                    }
+                }
+
+                foreach (var item in newShopList)
                 {
                     count++;
                     string top = string.Empty;

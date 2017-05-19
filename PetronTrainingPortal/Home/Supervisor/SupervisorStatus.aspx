@@ -35,10 +35,6 @@
                   <asp:Label ID="Label1" runat="server" Text="Target Participants: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblTarget" runat="server" Text="Production A- Process Engineers" Font-Names="Corbel"></asp:Label>
               </div>
-              <br />
-              <br />
-              <br />
-              <div id="gridDiv" runat="server"  class="rightgrid">
                   <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                       <Columns>
                           <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
@@ -46,6 +42,10 @@
                           <asp:BoundField DataField="Status" HeaderText="Status" />
                         </Columns>
                   </asp:GridView>
+              <br />
+              <br />
+              <br />
+              <div id="gridDiv" runat="server"  class="rightgrid">
                   <br />
                 <div class="nominee">
                   <asp:Label runat="server" Text="Total Nominee: " Font-Names="Corbel"></asp:Label>

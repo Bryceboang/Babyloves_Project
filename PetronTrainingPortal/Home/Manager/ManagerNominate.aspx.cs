@@ -292,7 +292,20 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Home/Manager/ManagerSubmit.aspx");
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                int id = Variables.shopTrainingId;
+                var nomineeList = context.Nominees.Where(c => c.ShopTrainingId == id).ToList();
+                if (nomineeList.Count() > 0)
+                {
+                    Response.Redirect("~/Home/Manager/ManagerSubmit.aspx");
+                }
+                else { Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please nominate an employee first." + "');", true); }
+            }
+        }
+        catch (Exception ex) { Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true); }
     }
 
     private void Logout()
