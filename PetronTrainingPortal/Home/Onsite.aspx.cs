@@ -118,9 +118,21 @@ public partial class Home_Onsite : System.Web.UI.Page
                     secondDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "50px");
                     secondDiv.Style.Add(HtmlTextWriterStyle.MarginBottom, "0px");
 
+                    // asp:LinkButton 
+                    // ID = "lnkDelete"
+                    // runat = "server" 
+                    // CssClass = "btn btn-danger"
+                    // OnClientClick = "return getConfirmation(this, 'Please confirm','Are you sure you want to delete?');" 
+                    // OnClick = "lnkDelete_Click" >< i class="glyphicon glyphicon-trash">
+             
+
+
+
                     LinkButton lnkAboutTraininer = new LinkButton();
                     lnkAboutTraininer.Text = "About The Trainer";
-                    //link.Click += new System.EventHandler(LinkButtonTest_Click);
+                    lnkAboutTraininer.ID = "lnkAboutTraininerId" + count;
+                    lnkAboutTraininer.OnClientClick = "return getConfirmation(this, 'About Trainer','To God be The Glory!');";
+                    //lnkAboutTraininer.Click += new System.EventHandler(lnkAboutTrainer);
                     secondDiv.Controls.Add(lnkAboutTraininer);
                     secondDiv.Controls.Add(new Label() { Text = " | " });
 
@@ -313,7 +325,7 @@ public partial class Home_Onsite : System.Web.UI.Page
                             {
                                 Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
                             }
-  
+
                         }
                         else
                         {
