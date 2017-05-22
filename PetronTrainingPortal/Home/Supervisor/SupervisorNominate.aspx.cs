@@ -34,6 +34,7 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
             List<ShopTraining> shopTrainingList = new List<ShopTraining>();
             using (var context = new DatabaseContext())
             {
+                menuPanel.Controls.Clear();
                 string empNo = string.Empty;
                 shopTrainingList.Clear();
                 empNo = Session["EmpNo"].ToString().ToLower();
@@ -97,6 +98,44 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
         }
     }
 
+    void ReloadTraining()
+    {
+        List<ShopTraining> shopTrainingList = new List<ShopTraining>();
+        using (var context = new DatabaseContext())
+        {
+            menuPanel.Controls.Clear();
+            string empNo = string.Empty;
+            shopTrainingList.Clear();
+            empNo = Session["EmpNo"].ToString().ToLower();
+            shopTrainingList = context.ShopTrainings.Where(c => c.EmployeeNumber.ToLower() == empNo && c.IsSubmitted == false).ToList();
+            int count = 0;
+            foreach (var item in shopTrainingList)
+            {
+                count++;
+                string top = string.Empty;
+                if (count == 1) { top = "15px"; }
+                else { top = "30px"; }
+                HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
+                mainDiv.Attributes.Add("style", "commentBody");
+                mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
+                mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
+
+                LinkButton lnkCode = new LinkButton();
+                lnkCode.Text = item.TrainingCode;
+                lnkCode.CommandName = item.ShopTrainingId.ToString();
+                lnkCode.ForeColor = Color.Red;
+                lnkCode.Font.Size = FontUnit.Larger;
+                lnkCode.Font.Bold = true;
+                lnkCode.Font.Underline = false;
+                lnkCode.Font.Name = "Goudy Old Style";
+                lnkCode.Click += new System.EventHandler(lnkCode_Click);
+                mainDiv.Controls.Add(lnkCode);
+
+                // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
+                menuPanel.Controls.Add(mainDiv);
+            }
+        }
+    }
 
     void ReloadCode(object sender, string Code)
     {
@@ -308,10 +347,6 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
         {
             using (var context = new DatabaseContext())
             {
-                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertConfirmation();", true);
-
-                //bool yesCliked = Convert.ToBoolean(hdnVal.Value);
-
                 bool yesCliked = true;
 
                 if (yesCliked == true)
@@ -326,14 +361,9 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                     context.SaveChanges();
                     gridDiv.Visible = false;
                     gridWhole.Visible = false;
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Shopped Training deleted." + "');", true);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertSuccess('" + "Shopped Training deleted." + "');", true);
+                    ReloadTraining();
                 }
-
-                //if (ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertConfirmation();", true) == true)
-                //{
-
-                //}
-
             }
         }
         catch (Exception ex)
