@@ -251,7 +251,17 @@ public partial class Home_InHouse : System.Web.UI.Page
                             }
                             else
                             {
-                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This training has already been shopped by your manager." + "');", true);
+                                ShopTraining newShopTraining = new ShopTraining()
+                                {
+                                    EmployeeNumber = Session["EmpNo"].ToString(),
+                                    TrainingCode = code,
+                                    IsComfirmedByAdmin = false,
+                                    IsConfirmedByManger = false,
+                                    IsSubmitted = false,
+                                };
+                                context.ShopTrainings.Add(newShopTraining);
+                                context.SaveChanges();
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertSuccess('" + "Training successfully added." + "');", true);
                             }
                         }
                         else
@@ -353,6 +363,7 @@ public partial class Home_InHouse : System.Web.UI.Page
                 {
                     if (Session["AccountType"] == "Supervisor")
                     {
+                        #region Supervisor
                         code = clickedButton.CommandName;
                         empNo = Session["EmpNo"].ToString().ToLower();
 
@@ -378,7 +389,7 @@ public partial class Home_InHouse : System.Web.UI.Page
                             {
                                 Variables.checkOutCode = clickedButton.CommandName;
 
-                                if (checkDuplicate.IsSubmitted == true)
+                                if (selectEmpCheck.IsSubmitted == true)
                                 {
                                     Response.Redirect("~/Home/Supervisor/SupervisorStatus.aspx");
                                 }
@@ -389,7 +400,17 @@ public partial class Home_InHouse : System.Web.UI.Page
                             }
                             else
                             {
-                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This training has already been shopped by your manager." + "');", true);
+                                ShopTraining newShopTraining = new ShopTraining()
+                                {
+                                    EmployeeNumber = Session["EmpNo"].ToString(),
+                                    TrainingCode = code,
+                                    IsComfirmedByAdmin = false,
+                                    IsConfirmedByManger = false,
+                                    IsSubmitted = false,
+                                };
+                                context.ShopTrainings.Add(newShopTraining);
+                                context.SaveChanges();
+                                Variables.checkOutCode = clickedButton.CommandName;
                             }
                         }
                         else
@@ -407,9 +428,11 @@ public partial class Home_InHouse : System.Web.UI.Page
                             Variables.checkOutCode = clickedButton.CommandName;
                             Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
                         }
+                        #endregion
                     }
                     else if (Session["AccountType"] == "Manager")
                     {
+                        #region Manager
                         code = clickedButton.CommandName;
                         empNo = Session["EmpNo"].ToString().ToLower();
 
@@ -464,6 +487,7 @@ public partial class Home_InHouse : System.Web.UI.Page
                             Variables.checkOutCode = clickedButton.CommandName;
                             Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
                         }
+                        #endregion
                     }
                     else { Response.Redirect("~/Admin Page/AdminReport.aspx"); }
                 }

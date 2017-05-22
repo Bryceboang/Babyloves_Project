@@ -22,7 +22,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
 
                 HtmlGenericControl mainDiv = new HtmlGenericControl("Div");
                 mainDiv.Attributes.Add("style", "commentBody");
-                mainDiv.ID = "createDiv";
                 mainDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#edcbca");
                 mainDiv.Style.Add(HtmlTextWriterStyle.Color, "Black");
                 mainDiv.Style.Add(HtmlTextWriterStyle.Height, "100px");
@@ -43,7 +42,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
                 header = item.TrainingCode + ":" + item.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
 
                 HtmlGenericControl lblHeader = new HtmlGenericControl("Label");
-                lblHeader.ID = "createDiv";
                 lblHeader.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#edcbca");
                 lblHeader.Style.Add(HtmlTextWriterStyle.Color, "#a40519");
                 lblHeader.Style.Add(HtmlTextWriterStyle.Height, "100px");
@@ -54,7 +52,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
                 mainDiv.Controls.Add(new LiteralControl("<br />"));
 
                 HtmlGenericControl lblVenue = new HtmlGenericControl("Label");
-                lblVenue.ID = "createDiv";
                 lblVenue.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#edcbca");
                 lblVenue.Style.Add(HtmlTextWriterStyle.Color, "Black");
                 lblVenue.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
@@ -62,7 +59,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
                 mainDiv.Controls.Add(lblVenue);
 
                 HtmlGenericControl txtVenue = new HtmlGenericControl("Label");
-                txtVenue.ID = "createDiv";
                 txtVenue.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#edcbca");
                 txtVenue.Style.Add(HtmlTextWriterStyle.Color, "Black");
                 txtVenue.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
@@ -71,7 +67,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
                 mainDiv.Controls.Add(new LiteralControl("<br />"));
 
                 HtmlGenericControl lblFacilitator = new HtmlGenericControl("Label");
-                lblFacilitator.ID = "createDiv";
                 lblFacilitator.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#edcbca");
                 lblFacilitator.Style.Add(HtmlTextWriterStyle.Color, "Black");
                 lblFacilitator.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
@@ -79,7 +74,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
                 mainDiv.Controls.Add(lblFacilitator);
 
                 HtmlGenericControl txtFacilitator = new HtmlGenericControl("Label");
-                txtFacilitator.ID = "createDiv";
                 txtFacilitator.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#edcbca");
                 txtFacilitator.Style.Add(HtmlTextWriterStyle.Color, "Black");
                 txtFacilitator.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
@@ -89,7 +83,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
 
                 HtmlGenericControl secondDiv = new HtmlGenericControl("Div");
                 secondDiv.Attributes.Add("style", "commentBody");
-                secondDiv.ID = "secondDiv";
                 secondDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#edcbca");
                 secondDiv.Style.Add(HtmlTextWriterStyle.Color, "Black");
                 secondDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
@@ -117,7 +110,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
                 mainDiv.Controls.Add(secondDiv);
 
                 HtmlGenericControl lblStatus = new HtmlGenericControl("Label");
-                lblStatus.ID = "createDiv";
                 lblStatus.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#edcbca");
                 lblStatus.Style.Add(HtmlTextWriterStyle.Color, "Black");
                 lblStatus.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
@@ -125,7 +117,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
                 mainDiv.Controls.Add(lblStatus);
 
                 HtmlGenericControl txtStatus = new HtmlGenericControl("Label");
-                txtStatus.ID = "createDiv";
                 txtStatus.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#edcbca");
                 txtStatus.Style.Add(HtmlTextWriterStyle.Color, "Black");
                 txtStatus.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
@@ -137,7 +128,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
 
                 HtmlGenericControl lowerDiv = new HtmlGenericControl("Div");
                 lowerDiv.Attributes.Add("style", "commentBody");
-                lowerDiv.ID = "createDiv";
 
                 lowerDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "White");
                 lowerDiv.Style.Add(HtmlTextWriterStyle.Color, "Black");
@@ -145,7 +135,6 @@ public partial class Home_LocalTraining : System.Web.UI.Page
 
                 HtmlGenericControl blueDiv = new HtmlGenericControl("Div");
                 blueDiv.Attributes.Add("style", "commentBody");
-                blueDiv.ID = "createDiv";
                 blueDiv.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#abaefd");
                 blueDiv.Style.Add(HtmlTextWriterStyle.Color, "Black");
                 blueDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "40px");

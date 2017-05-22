@@ -184,26 +184,34 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
                     string empNo = Session["EmpNo"].ToString().ToLower();
                     code = Code;
                     var selectId = context.ShopTrainings.FirstOrDefault(c => c.TrainingCode == code && c.EmployeeNumber.ToLower() == empNo);
-                    Variables.shopTrainingId = selectId.ShopTrainingId;
-                    Variables.code = code;
-                    string header = string.Empty;
-                    string startMonth = string.Empty;
-                    string extension = string.Empty;
-                    int startDay = 0;
-                    string dateEnd = string.Empty;
+                    if (selectId.IsSubmitted == true)
+                    {
+                        Variables.shopTrainingId = selectId.ShopTrainingId;
+                        Variables.code = code;
+                        string header = string.Empty;
+                        string startMonth = string.Empty;
+                        string extension = string.Empty;
+                        int startDay = 0;
+                        string dateEnd = string.Empty;
 
-                    var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
-                    startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
-                    startDay = train.DateStart.Date.Day;
-                    dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
-                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
-                    lblHeader.Text = header;
-                    lblTrainingVenue.Text = train.Venue;
-                    lblFacilitator.Text = train.TrainingProvider;
-                    lblTarget.Text = train.TargetParticipants;
-                    ReloadGrid();
-                    gridDiv.Visible = false;
-                    gridWhole.Visible = true;
+                        var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
+                        startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
+                        startDay = train.DateStart.Date.Day;
+                        dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
+                        header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
+                        lblHeader.Text = header;
+                        lblTrainingVenue.Text = train.Venue;
+                        lblFacilitator.Text = train.TrainingProvider;
+                        lblTarget.Text = train.TargetParticipants;
+                        ReloadGrid();
+                        gridDiv.Visible = false;
+                        gridWhole.Visible = true;
+                    }
+                    else
+                    {
+                        gridDiv.Visible = false;
+                        gridWhole.Visible = false;
+                    }
                 }
                 else
                 {

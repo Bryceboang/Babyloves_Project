@@ -76,7 +76,7 @@ public partial class Home_Login : System.Web.UI.Page
 
                                     if (string.IsNullOrWhiteSpace(code) != true)
                                     {
-                                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
+                                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code && c.EmployeeNumber == selecteduser.EmployeeNumber);
                                         if (checkDuplicate == null)
                                         {
                                             ShopTraining newShopTraining = new ShopTraining()
@@ -126,6 +126,17 @@ public partial class Home_Login : System.Web.UI.Page
                                         }
                                         else
                                         {
+                                            ShopTraining newShopTraining = new ShopTraining()
+                                            {
+                                                EmployeeNumber = selecteduser.EmployeeNumber,
+                                                TrainingCode = code,
+                                                IsComfirmedByAdmin = false,
+                                                IsConfirmedByManger = false,
+                                                IsSubmitted = false,
+                                            };
+                                            context.ShopTrainings.Add(newShopTraining);
+                                            context.SaveChanges();
+                                            Variables.checkOutCode = code;
                                             Response.Redirect("~/Home/Supervisor/SupervisorList.aspx");
                                         }
                                     }
