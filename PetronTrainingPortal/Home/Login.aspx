@@ -52,6 +52,41 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <script src="SweetAlert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="SweetAlert/dist/sweetalert.css">
+
+    <script>
+        function sweetAlertMessage(myTitle, myText) {
+            swal(
+             title = myTitle,
+             text = myText
+         );
+        }
+
+        function sweetAlertWarning(myText) {
+            swal(
+             title = "Warning",
+             text = myText,
+             type = "warning"
+         );
+        }
+
+        function sweetAlertError(myText) {
+            swal(
+             title = "Error",
+             text = myText,
+             type = "error"
+         );
+        }
+
+        function sweetAlertInfo(myText) {
+            swal(
+             title = "Information",
+             text = myText,
+             type = "info"
+         );
+        }
+    </script>
     <div class="main">
         <div class="left"> <div> <br /> <br /> <br /> <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -12,31 +12,31 @@
 
     <title>REFINE.com</title>
 
-    <asp:ContentPlaceHolder id="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
         <link href="Manager.css" rel="stylesheet" />
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <ul>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../Image/header.jpg" />
-                    <li class="dropdown"><a href="Default.aspx" class="dropbtn">
-                        <img src="../../Image/threelines blue.jpg" height="35px" /></a>
-                        <div class="dropdown-content">
-                            <a href="SupervisorList.aspx">Home</a>
-                            <a href="Default.aspx">Shop for trainings</a>
-                            <a href="DeleteSection.aspx">Nominate/Approve</a>
-                            <a href="DeleteSection.aspx">View Status</a>
-                            <a href="DeleteSection.aspx">Download LSPP Form</a>
-                            <a href="DeleteSection.aspx">Contact us</a>
-                        </div>
-                    </li>
+        <li class="dropdown"><a href="Default.aspx" class="dropbtn">
+            <img src="../../Image/threelines blue.jpg" height="35px" /></a>
+            <div class="dropdown-content">
+                <a href="../Home.aspx">Home</a>
+                <a href="../Default.aspx">Shop for trainings</a>
+                <a href="ManagerList.aspx">Manager List</a>
+                <a href="ManagerNominate.aspx">Nominate/Approve</a>
+                <a href="ManagerStatus.aspx">View Status</a>
+                <a href="">Download LSPP Form</a>
+                <a href="">Contact us</a>
+            </div>
+        </li>
     </ul>
     <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
-        
-        </asp:ContentPlaceHolder>
-    </div>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
     </form>
 </body>
 </html>

@@ -4,6 +4,100 @@
     <link href="Manager.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+     <script src="../SweetAlert/dist/sweetalert.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../Sweetalert/dist/sweetalert.css">
+    <script>
+        function sweetAlertMessage(myTitle, myText) {
+            swal(
+             title = myTitle,
+             text = myText
+         );
+        }
+
+        function sweetAlertSuccess(myText) {
+            swal(
+             title = myText,
+             type = "success"
+         );
+        }
+
+        function sweetAlertWarning(myText) {
+            swal(
+             title = "Warning",
+             text = myText,
+             type = "warning"
+         );
+        }
+
+        function sweetAlertError(myText) {
+            swal(
+             title = "Error",
+             text = myText,
+             type = "error"
+         );
+        }
+
+        function sweetAlertInfo(myText) {
+            swal(
+             title = "Information",
+             text = myText,
+             type = "info"
+         );
+        }
+
+        function sweetAlertConfirmation() {
+            document.querySelector('#from1').addEventListener('submit', function (e) {
+                var form = this;
+                e.preventDefault();
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Yes, I am sure!',
+                    cancelButtonText: "No, cancel it!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        swal({
+                            title: 'Shortlisted!',
+                            text: 'Candidates are successfully shortlisted!',
+                            type: 'success'
+                        }, function () {
+                            form.submit();
+                        });
+
+                    } else {
+                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                    }
+                });
+            });
+        }
+
+
+        $('.confirmation').click(function (e) {
+            e.preventDefault(); // Prevent the href from redirecting directly
+            var linkURL = $(this).attr("href");
+            warnBeforeRedirect(linkURL);
+        });
+
+        function warnBeforeRedirect(linkURL) {
+            swal({
+                title: "Leave this site?",
+                text: "If you click 'OK', you will be redirected to " + linkURL,
+                type: "warning",
+                showCancelButton: true
+            }, function () {
+                // Redirect the user
+                window.location.href = linkURL;
+            });
+        }
+
+    </script>
     <div class="main">
         <div class="left">
         <br />
@@ -31,11 +125,11 @@
                   <asp:Label runat="server" Text="Facilitator: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblFacilitator" runat="server" Text="Mr. Texas Joe (We Do Limited Corp.)" Font-Names="Corbel"></asp:Label>
                   <br />
-                  <asp:LinkButton ID="lnkAboutTrainier" runat="server" Font-Names="Corbel">About Trainer</asp:LinkButton>
+                  <asp:LinkButton ID="lnkAboutTrainier" runat="server" Font-Names="Corbel" OnClick="lnkAboutTrainer_Click">About Trainer</asp:LinkButton>
                   |
-              <asp:LinkButton ID="lnkCourseOutline" runat="server" Font-Names="Corbel">Course Outline</asp:LinkButton>
+              <asp:LinkButton ID="lnkCourseOutline" runat="server" Font-Names="Corbel" OnClick="lnkCourseOutline_Click">Course Outline</asp:LinkButton>
                   |
-              <asp:LinkButton ID="lnkBackground" runat="server" Font-Names="Corbel">Background</asp:LinkButton>
+              <asp:LinkButton ID="lnkBackground" runat="server" Font-Names="Corbel" OnClick="lnkBackground_Click">Background</asp:LinkButton>
                   <br />
                   <asp:Label ID="Label1" runat="server" Text="Target Participants: " Font-Names="Corbel"></asp:Label>
                   <asp:Label ID="lblTarget" runat="server" Text="Production A- Process Engineers" Font-Names="Corbel"></asp:Label>

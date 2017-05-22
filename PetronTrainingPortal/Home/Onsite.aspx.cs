@@ -124,27 +124,26 @@ public partial class Home_Onsite : System.Web.UI.Page
                     // CssClass = "btn btn-danger"
                     // OnClientClick = "return getConfirmation(this, 'Please confirm','Are you sure you want to delete?');" 
                     // OnClick = "lnkDelete_Click" >< i class="glyphicon glyphicon-trash">
-             
-
 
 
                     LinkButton lnkAboutTraininer = new LinkButton();
                     lnkAboutTraininer.Text = "About The Trainer";
-                    lnkAboutTraininer.ID = "lnkAboutTraininerId" + count;
-                    lnkAboutTraininer.OnClientClick = "return getConfirmation(this, 'About Trainer','To God be The Glory!');";
-                    //lnkAboutTraininer.Click += new System.EventHandler(lnkAboutTrainer);
+                    lnkAboutTraininer.ID = item.AboutTrainer;
+                    lnkAboutTraininer.Click += new System.EventHandler(lnkAboutTrainer_Click);
                     secondDiv.Controls.Add(lnkAboutTraininer);
                     secondDiv.Controls.Add(new Label() { Text = " | " });
 
                     LinkButton lnkCourseOutline = new LinkButton();
                     lnkCourseOutline.Text = "Course Outline";
-                    //link.Click += new System.EventHandler(LinkButtonTest_Click);
+                    lnkCourseOutline.ID = item.CourseOutline;
+                    lnkCourseOutline.Click += new System.EventHandler(lnkCourseOutline_Click);
                     secondDiv.Controls.Add(lnkCourseOutline);
                     secondDiv.Controls.Add(new Label() { Text = " | " });
 
                     LinkButton lnkBackground = new LinkButton();
                     lnkBackground.Text = "Backgound";
-                    //link.Click += new System.EventHandler(LinkButtonTest_Click);
+                    lnkBackground.ID = item.Background;
+                    lnkBackground.Click += new System.EventHandler(lnkBackground_Click);
                     secondDiv.Controls.Add(lnkBackground);
                     secondDiv.Controls.Add(new LiteralControl("<br />"));
                     mainDiv.Controls.Add(secondDiv);
@@ -214,9 +213,8 @@ public partial class Home_Onsite : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
-
     }
 
     protected void lnkCart_Click(object sender, EventArgs e)
@@ -260,10 +258,42 @@ public partial class Home_Onsite : System.Web.UI.Page
                     {
                         code = clickedButton.CommandName;
                         empNo = Session["EmpNo"].ToString().ToLower();
-                        var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code);
+
+                        int dept = Variables.deptNo;
+                        var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
+                        var shopList = context.ShopTrainings.ToList();
+                        List<ShopTraining> newShopList = new List<ShopTraining>();
+                        newShopList.Clear();
+                        foreach (var item in shopList)
+                        {
+                            var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                            if (check != null)
+                            {
+                                newShopList.Add(item);
+                            }
+                            else
+                            {
+                                var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                                if (checkUser != null)
+                                {
+                                    newShopList.Add(item);
+                                }
+                            }
+                        }
+
+                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
                         if (checkDuplicate != null)
                         {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "This Training is already in your shopping cart" + "');", true);
+                            var selectDup = newShopList.FirstOrDefault(c => c.TrainingCode == code && c.EmployeeNumber.ToLower() == empNo);
+
+                            if (selectDup != null)
+                            {
+                                Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "This Training is already in your shopping cart" + "');", true);
+                            }
+                            else
+                            {
+                                Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "This Training is already in the shopping cart of one of your supervisors." + "');", true);
+                            }
                         }
                         else
                         {
@@ -273,7 +303,7 @@ public partial class Home_Onsite : System.Web.UI.Page
                                 TrainingCode = code,
                                 IsComfirmedByAdmin = false,
                                 IsConfirmedByManger = false,
-                                IsSubmitted = false,
+                                IsSubmitted = true,
                             };
                             context.ShopTrainings.Add(newShopTraining);
                             context.SaveChanges();
@@ -290,7 +320,7 @@ public partial class Home_Onsite : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
@@ -347,7 +377,30 @@ public partial class Home_Onsite : System.Web.UI.Page
                     {
                         code = clickedButton.CommandName;
                         empNo = Session["EmpNo"].ToString().ToLower();
-                        var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code);
+
+                        int dept = Variables.deptNo;
+                        var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
+                        var shopList = context.ShopTrainings.ToList();
+                        List<ShopTraining> newShopList = new List<ShopTraining>();
+                        newShopList.Clear();
+                        foreach (var item in shopList)
+                        {
+                            var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                            if (check != null)
+                            {
+                                newShopList.Add(item);
+                            }
+                            else
+                            {
+                                var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                                if (checkUser != null)
+                                {
+                                    newShopList.Add(item);
+                                }
+                            }
+                        }
+
+                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
                         if (checkDuplicate != null)
                         {
                             Variables.checkOutCode = clickedButton.CommandName;
@@ -369,7 +422,7 @@ public partial class Home_Onsite : System.Web.UI.Page
                                 TrainingCode = code,
                                 IsComfirmedByAdmin = false,
                                 IsConfirmedByManger = false,
-                                IsSubmitted = false,
+                                IsSubmitted = true,
                             };
                             context.ShopTrainings.Add(newShopTraining);
                             context.SaveChanges();
@@ -387,8 +440,55 @@ public partial class Home_Onsite : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
+    protected void lnkAboutTrainer_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LinkButton clickedButton = (LinkButton)sender;
+            string myTitle = "About Trainer";
+            string myMessage = clickedButton.ID;
+
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkCourseOutline_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LinkButton clickedButton = (LinkButton)sender;
+            string myTitle = "Course Outline";
+            string myMessage = clickedButton.ID;
+
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkBackground_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            LinkButton clickedButton = (LinkButton)sender;
+            string myTitle = "Background";
+            string myMessage = clickedButton.ID;
+
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
 }

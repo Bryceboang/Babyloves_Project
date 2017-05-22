@@ -105,7 +105,7 @@ public partial class Home_Supervisor_SupervisorStatus : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
 
     }
@@ -147,9 +147,8 @@ public partial class Home_Supervisor_SupervisorStatus : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
-
     }
 
     void ReloadCode(object sender, string Code)
@@ -216,14 +215,21 @@ public partial class Home_Supervisor_SupervisorStatus : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
     protected void lnkCode_Click(object sender, EventArgs e)
     {
-        Variables.checkOutCode = string.Empty;
-        ReloadCode(sender, string.Empty);
+        try
+        {
+            Variables.checkOutCode = string.Empty;
+            ReloadCode(sender, string.Empty);
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
     }
 
 

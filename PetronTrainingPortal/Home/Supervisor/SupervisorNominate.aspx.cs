@@ -93,7 +93,7 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
@@ -162,7 +162,7 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
@@ -175,12 +175,12 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                 int id = Variables.shopTrainingId;
                 int deptId = Variables.deptNo;
                 int sectId = Variables.secNo;
-              
+
                 var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == deptId);
                 var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == sectId);
                 lblSection.Text = selectSec.SectionName;
                 lblDepartment.Text = selectDept.DepartmentName;
-           
+
                 var nomineeList = context.Nominees.Where(c => c.ShopTrainingId == id).ToList();
 
                 var empList = context.Employees.Where(c => c.DepartmentId == deptId && c.SectionId == sectId).ToList();
@@ -224,15 +224,22 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
 
     }
 
     protected void lnkCode_Click(object sender, EventArgs e)
     {
-        Variables.checkOutCode = string.Empty;
-        ReloadCode(sender, string.Empty);
+        try
+        {
+            Variables.checkOutCode = string.Empty;
+            ReloadCode(sender, string.Empty);
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
     }
 
     private void Logout()
@@ -255,30 +262,38 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
 
     public void gridNominee_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
-        using (var context = new DatabaseContext())
+        try
         {
-            if (e.CommandName == "NominateEmployee")
+
+            using (var context = new DatabaseContext())
             {
-                int index = Convert.ToInt32(e.CommandArgument);
-
-                GridViewRow selectedRow = gridNominee.Rows[index];
-                TableCell employeeNumber = selectedRow.Cells[0];
-                string empNo = employeeNumber.Text;
-                string code = Variables.code;
-                int id = Variables.shopTrainingId;
-
-                Nominee newNominee = new Nominee()
+                if (e.CommandName == "NominateEmployee")
                 {
-                    EmployeeNumber = empNo,
-                    ShopTrainingId = id,
-                    Status = "On waiting list"
-                };
-                context.Nominees.Add(newNominee);
-                context.SaveChanges();
-                ReloadGrid();
-                int count = context.Nominees.Where(c => c.ShopTrainingId == id).ToList().Count;
-                lblTotalNominee.Text = count.ToString();
+                    int index = Convert.ToInt32(e.CommandArgument);
+
+                    GridViewRow selectedRow = gridNominee.Rows[index];
+                    TableCell employeeNumber = selectedRow.Cells[0];
+                    string empNo = employeeNumber.Text;
+                    string code = Variables.code;
+                    int id = Variables.shopTrainingId;
+
+                    Nominee newNominee = new Nominee()
+                    {
+                        EmployeeNumber = empNo,
+                        ShopTrainingId = id,
+                        Status = "On waiting list"
+                    };
+                    context.Nominees.Add(newNominee);
+                    context.SaveChanges();
+                    ReloadGrid();
+                    int count = context.Nominees.Where(c => c.ShopTrainingId == id).ToList().Count;
+                    lblTotalNominee.Text = count.ToString();
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
@@ -293,7 +308,10 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
         {
             using (var context = new DatabaseContext())
             {
-                //Variables.shopTrainingId
+                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertConfirmation();", true);
+
+                //bool yesCliked = Convert.ToBoolean(hdnVal.Value);
+
                 bool yesCliked = true;
 
                 if (yesCliked == true)
@@ -311,18 +329,21 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Shopped Training deleted." + "');", true);
                 }
 
+                //if (ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertConfirmation();", true) == true)
+                //{
+
+                //}
+
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-
-            throw;
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-
         try
         {
             using (var context = new DatabaseContext())
@@ -333,12 +354,66 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                 {
                     Response.Redirect("~/Home/Supervisor/SupervisorSubmit.aspx");
                 }
-                else { Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please nominate an employee first." + "');", true); }
+                else { ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "Please nominate an employee first." + "');", true); }
             }
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkAboutTrainer_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "About Trainer";
+                string myMessage = selectTraining.AboutTrainer;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkCourseOutline_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "Course Outline";
+                string myMessage = selectTraining.CourseOutline;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkBackground_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "Background";
+                string myMessage = selectTraining.Background;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 }
