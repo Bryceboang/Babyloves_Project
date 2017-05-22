@@ -19,12 +19,11 @@
 <body>
     <ul>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../Image/header.jpg" />
-<<<<<<< HEAD
                     <li class="dropdown"><a href="Default.aspx" class="dropbtn">
                         <img src="../../Image/threelines blue.jpg" height="35px" /></a>
                         <div class="dropdown-content">
-                            <a href="../Default.aspx">Home</a>
-                            <a href="../Home.aspx">Shop for trainings</a>
+                            <a href="../Home.aspx">Home</a>
+                            <a href="../Default.aspx">Shop for trainings</a>
                             <a href="ManagerList.aspx">My Page</a>
                             <a href="ManagerNominate.aspx">Nominate</a>
                             <a href="ManagerApprove.aspx">Approve</a>
@@ -33,20 +32,6 @@
                             <a href="../ContactUs.aspx">Contact us</a>
                         </div>
                     </li>
-=======
-        <li class="dropdown"><a href="Default.aspx" class="dropbtn">
-            <img src="../../Image/threelines blue.jpg" height="35px" /></a>
-            <div class="dropdown-content">
-                <a href="../Home.aspx">Home</a>
-                <a href="../Default.aspx">Shop for trainings</a>
-                <a href="ManagerList.aspx">Manager List</a>
-                <a href="ManagerNominate.aspx">Nominate/Approve</a>
-                <a href="ManagerStatus.aspx">View Status</a>
-                <a href="">Download LSPP Form</a>
-                <a href="">Contact us</a>
-            </div>
-        </li>
->>>>>>> c768d2be6c50ae29660494df87dc0cca3c4638fd
     </ul>
     <form id="form1" runat="server">
         <div>

@@ -112,8 +112,9 @@
         </div>
         </div>
         <div id="gridWhole" runat="server" class="right">
-            <br />
-            &nbsp;&nbsp;&nbsp;
+            <div class="headernominate">
+                  <center><asp:Label ID="Label2" runat="server" Text="Approval" Font-Names="Corbel" Font-Bold="true" Font-Size="XX-Large"></asp:Label></center>
+              </div>
           <div class="rightsecond">
               <div class="rightsecondbox">
                   <asp:Label ID="lblHeader" runat="server" Text="Label" Font-Size="Large" Font-Bold="True"></asp:Label>
@@ -146,6 +147,7 @@
               <br />
               <br />
               <div id="gridDiv" runat="server">
+                  <div class="grid">
                   <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" OnRowCommand="gridNominee_RowCommand" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                       <Columns>
                           <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
@@ -156,6 +158,7 @@
                           <asp:ButtonField ItemStyle-HorizontalAlign="Center" HeaderText="DECLINE" ControlStyle-CssClass="buttonAddDelete" ButtonType="Image" ImageUrl="~/Image/Button-Delete-icon.png" Text="DECLINE" CommandName="DeclineEmployee" />
                       </Columns>
                   </asp:GridView>
+                </div>
                   <br />
                   &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;    &nbsp;&nbsp;
                   <asp:Label runat="server" Text="Total Nominees: " Font-Names="Corbel"></asp:Label>

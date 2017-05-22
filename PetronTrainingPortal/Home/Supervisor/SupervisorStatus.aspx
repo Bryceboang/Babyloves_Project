@@ -63,6 +63,9 @@
             </div>
         </div>
         <div id="gridWhole" runat="server" class="right">
+            <div class="headernominate">
+                <center><asp:Label ID="Label2" runat="server" Text="Status" Font-Names="Corbel" Font-Bold="true" Font-Size="XX-Large"></asp:Label></center>
+            </div>
             <div class="rightsecond">
                 <div class="rightsecondbox">
                     <asp:Label ID="lblHeader" runat="server" Text="Label" Font-Size="Large" Font-Bold="True"></asp:Label>

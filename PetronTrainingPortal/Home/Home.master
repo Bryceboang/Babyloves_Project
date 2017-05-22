@@ -94,30 +94,6 @@
                     </li>
     </ul>
     <form id="form1" runat="server">
-    <%--<div class="main">
-    <div class="left">
-        <br />
-        &nbsp;&nbsp;
-        <asp:Label ID="Label1" runat="server" Text="Training Programs" ForeColor="Black" Font-Bold="True"></asp:Label> <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnOnsiteTraining" ImageUrl="~/Image/Buttons/OnsiteTraining.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnInHouseTraining" ImageUrl="~/Image/Buttons/InHouseTraining.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnLocalTraining" ImageUrl="~/Image/Buttons/LocalTraining.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnTrainingModules" ImageUrl="~/Image/Buttons/TrainingModules.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnRefineryProgram" ImageUrl="~/Image/Buttons/RefineryEngineer.jpg"  AlternateText="No Image available" runat="server"/>
-        <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:ImageButton ID="btnOtherTraining" ImageUrl="~/Image/Buttons/OtherTraining.jpg"  AlternateText="No Image available" runat="server"/>
-    </div>
-    </div>--%>
     <div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         

@@ -198,7 +198,7 @@
         .rightnominatebtn {
             position: absolute;
             float: left;
-            top: 399px;
+            top: 445px;
             left: 600px;
             width: 20%;
             background-color: transparent;
@@ -291,7 +291,7 @@
 
         .grid {
           overflow-y: scroll;
-          height: 120px;
+          height: 180px;
           width: 100%;
         }
 

@@ -19,12 +19,11 @@
 <body>
     <ul>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../../Image/header.jpg" />
-<<<<<<< HEAD
                     <li class="dropdown"><a href="Default.aspx" class="dropbtn">
                         <img src="../../Image/threelines blue.jpg" height="35px" /></a>
                         <div class="dropdown-content">
-                            <a href="../Default.aspx">Home</a>
-                            <a href="../Home.aspx">Shop for trainings</a>
+                            <a href="../Home.aspx">Home</a>
+                            <a href="../Default.aspx">Shop for trainings</a>
                             <a href="SupervisorList.aspx">My Page</a>
                             <a href="SupervisorNominate.aspx">Nominate</a>
                             <a href="SupervisorStatus.aspx">View Status</a>
@@ -32,34 +31,8 @@
                             <a href="../ContactUs.aspx">Contact us</a>
                         </div>
                     </li>
-=======
-        <li class="dropdown"><a href="Default.aspx" class="dropbtn">
-            <img src="../../Image/threelines blue.jpg" height="35px" /></a>
-            <div class="dropdown-content">
-                <a href="../Home.aspx">Home</a>
-                <a href="../Default.aspx">Shopping Cart</a>
-                <a href="SupervisorList.aspx">Supervisor List</a>
-                <a href="SupervisorNominate.aspx">Nominate</a>
-                <a href="SupervisorStatus.aspx">View Status</a>
-                <a href="DeleteSection.aspx">Download LSPP Form</a>
-                <a href="DeleteSection.aspx">Contact us</a>
-            </div>
-        </li>
->>>>>>> c768d2be6c50ae29660494df87dc0cca3c4638fd
     </ul>
     <form id="form1" runat="server">
-        <%--<div class="main">
-            <div class="left">
-            <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="Label1" runat="server" Text="Hello!" ForeColor="Black" Font-Bold="True">
-        </asp:Label> &nbsp;<asp:Label ID="lblName" runat="server" Text="" ForeColor="Black" Font-Bold="True"></asp:Label> <br /> <br />
-        <div class="logoutdiv">
-        <asp:Button ID="btnLogout" CssClass="logout" runat="server" Text="Logout" Font-Bold="True" Width="100px" />
-        </div>
-                </div>
-        </div>--%>
-
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
