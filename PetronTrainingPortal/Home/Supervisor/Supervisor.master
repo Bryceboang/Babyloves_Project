@@ -23,11 +23,12 @@
                         <img src="../../Image/threelines blue.jpg" height="35px" /></a>
                         <div class="dropdown-content">
                             <a href="../Default.aspx">Home</a>
-                            <a href="SupervisorList.aspx">Shopping Cart</a>
-                            <a href="DeleteSection.aspx">Nominate/Approve</a>
-                            <a href="DeleteSection.aspx">View Status</a>
+                            <a href="../Home.aspx">Shop for trainings</a>
+                            <a href="SupervisorList.aspx">My Page</a>
+                            <a href="SupervisorNominate.aspx">Nominate</a>
+                            <a href="SupervisorStatus.aspx">View Status</a>
                             <a href="DeleteSection.aspx">Download LSPP Form</a>
-                            <a href="DeleteSection.aspx">Contact us</a>
+                            <a href="../ContactUs.aspx">Contact us</a>
                         </div>
                     </li>
     </ul>
