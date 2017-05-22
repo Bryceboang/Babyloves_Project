@@ -64,34 +64,9 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-<<<<<<< HEAD
-    <%-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
-    <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css" rel="stylesheet" type="text/css" />
 
-
-    <script type="text/javascript">
-        $("[id*=btnModalPopup]").live("click", function () {
-            $("#modal_dialog").dialog({
-                title: "jQuery Modal Dialog Popup",
-                buttons: {
-                    Close: function () {
-                        $(this).dialog('close');
-                    }
-                },
-                modal: true
-            });
-            return false;
-        });
-    </script>
-    <div id="modal_dialog" style="display: none">
-        This is a Modal Background popup
-    </div>
-    <asp:Button ID="btnModalPopup" runat="server" Text="Show Modal Popup" />--%>
-=======
     <script src="SweetAlert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="SweetAlert/dist/sweetalert.css">
->>>>>>> c768d2be6c50ae29660494df87dc0cca3c4638fd
 
   <script>
         function sweetAlertMessage(myTitle, myText) {
