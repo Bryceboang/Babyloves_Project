@@ -23,19 +23,19 @@ public partial class Home_Manager_ManagerSuccessful : System.Web.UI.Page
         //    Response.Redirect("~/Home/Supervisor/SupervisorList.aspx");
         //    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Manager only" + "');", true);
         //}
-        //if (Session["FullName"] != null)
-        //{
-        //    btnLogout.Visible = true;
-        //    lblHello.Visible = true;
-        //    lblName.Visible = true;
-        //    lblName.Text = Session["FullName"].ToString();
-        //}
-        //else
-        //{
-        //    btnLogout.Visible = false;
-        //    lblHello.Visible = false;
-        //    lblName.Visible = false;
-        //}
+        if (Session["FullName"] != null)
+        {
+            btnLogout.Visible = true;
+            lblHello.Visible = true;
+            lblName.Visible = true;
+            lblName.Text = Session["FullName"].ToString();
+        }
+        else
+        {
+            btnLogout.Visible = false;
+            lblHello.Visible = false;
+            lblName.Visible = false;
+        }
     }
 
     private void Logout()

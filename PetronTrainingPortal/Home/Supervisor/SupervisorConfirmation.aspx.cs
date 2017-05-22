@@ -25,19 +25,19 @@ public partial class Home_Supervisor_SupervisorConfirmation : System.Web.UI.Page
         //    Response.Redirect("~/Home/Manager/ManagerList.aspx");
         //    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Supervisor only" + "');", true);
         //}
-        //if (Session["FullName"] != null)
-        //{
-        //    btnLogout.Visible = true;
-        //    lblHello.Visible = true;
-        //    lblName.Visible = true;
-        //    lblName.Text = Session["FullName"].ToString();
-        //}
-        //else
-        //{
-        //    btnLogout.Visible = false;
-        //    lblHello.Visible = false;
-        //    lblName.Visible = false;
-        //}
+        if (Session["FullName"] != null)
+        {
+            btnLogout.Visible = true;
+            lblHello.Visible = true;
+            lblName.Visible = true;
+            lblName.Text = Session["FullName"].ToString();
+        }
+        else
+        {
+            btnLogout.Visible = false;
+            lblHello.Visible = false;
+            lblName.Visible = false;
+        }
         ReloadCode(null, Variables.code);
     }
 
@@ -99,7 +99,7 @@ public partial class Home_Supervisor_SupervisorConfirmation : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 

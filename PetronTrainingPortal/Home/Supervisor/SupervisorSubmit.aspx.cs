@@ -13,74 +13,90 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (Session["EmpNo"] == null)
-        //{
-        //    Response.Redirect("~/Home/Login.aspx");
-        //}
-        //else if (Session["AccountType"] == "Admin")
-        //{
-        //    Response.Redirect("~/Administrator/ReportAdmin.aspx");
-        //    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Supervisor only" + "');", true);
-        //}
-        //else if (Session["AccountType"] == "Manager")
-        //{
-        //    Response.Redirect("~/Home/Manager/ManagerList.aspx");
-        //    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Supervisor only" + "');", true);
-        //}
-
-
-        if (Session["FullName"] != null)
+        try
         {
-            btnLogout.Visible = true;
-            lblHello.Visible = true;
-            lblName.Visible = true;
-            lblName.Text = Session["FullName"].ToString();
+
+            //if (Session["EmpNo"] == null)
+            //{
+            //    Response.Redirect("~/Home/Login.aspx");
+            //}
+            //else if (Session["AccountType"] == "Admin")
+            //{
+            //    Response.Redirect("~/Administrator/ReportAdmin.aspx");
+            //    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Supervisor only" + "');", true);
+            //}
+            //else if (Session["AccountType"] == "Manager")
+            //{
+            //    Response.Redirect("~/Home/Manager/ManagerList.aspx");
+            //    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Supervisor only" + "');", true);
+            //}
+
+
+            if (Session["FullName"] != null)
+            {
+                btnLogout.Visible = true;
+                lblHello.Visible = true;
+                lblName.Visible = true;
+                lblName.Text = Session["FullName"].ToString();
+            }
+            else
+            {
+                btnLogout.Visible = false;
+                lblHello.Visible = false;
+                lblName.Visible = false;
+            }
+
+            using (var context = new DatabaseContext())
+            {
+                string empNo = string.Empty;
+                empNo = Session["EmpNo"].ToString().ToLower();
+                var shopTraning = context.ShopTrainings.FirstOrDefault(c => c.ShopTrainingId == Variables.shopTrainingId);
+                int count = 0;
+
+                count++;
+                string top = string.Empty;
+                if (count == 1) { top = "15px"; }
+                else { top = "30px"; }
+                HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
+                mainDiv.Attributes.Add("style", "commentBody");
+                mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
+                mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
+
+                LinkButton lnkCode = new LinkButton();
+                lnkCode.Text = shopTraning.TrainingCode;
+                lnkCode.CommandName = shopTraning.ShopTrainingId.ToString();
+                lnkCode.ForeColor = Color.Red;
+                lnkCode.Font.Size = FontUnit.Larger;
+                lnkCode.Font.Bold = true;
+                lnkCode.Font.Underline = false;
+                lnkCode.Font.Name = "Goudy Old Style";
+                lnkCode.Click += new System.EventHandler(lnkCode_Click);
+                mainDiv.Controls.Add(lnkCode);
+
+                // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
+                menuPanel.Controls.Add(mainDiv);
+            }
+            ReloadCode(null, Variables.code);
         }
-        else
+        catch (Exception ex)
         {
-            btnLogout.Visible = false;
-            lblHello.Visible = false;
-            lblName.Visible = false;
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
-
-        using (var context = new DatabaseContext())
-        {
-            string empNo = string.Empty;
-            empNo = Session["EmpNo"].ToString().ToLower();
-            var shopTraning = context.ShopTrainings.FirstOrDefault(c => c.ShopTrainingId == Variables.shopTrainingId);
-            int count = 0;
-
-            count++;
-            string top = string.Empty;
-            if (count == 1) { top = "15px"; }
-            else { top = "30px"; }
-            HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
-            mainDiv.Attributes.Add("style", "commentBody");
-            mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
-            mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
-
-            LinkButton lnkCode = new LinkButton();
-            lnkCode.Text = shopTraning.TrainingCode;
-            lnkCode.CommandName = shopTraning.ShopTrainingId.ToString();
-            lnkCode.ForeColor = Color.Red;
-            lnkCode.Font.Size = FontUnit.Larger;
-            lnkCode.Font.Bold = true;
-            lnkCode.Font.Underline = false;
-            lnkCode.Font.Name = "Goudy Old Style";
-            lnkCode.Click += new System.EventHandler(lnkCode_Click);
-            mainDiv.Controls.Add(lnkCode);
-
-            // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
-            menuPanel.Controls.Add(mainDiv);
-        }
-        ReloadCode(null, Variables.code);
-
     }
 
     protected void lnkCode_Click(object sender, EventArgs e)
     {
-        Variables.checkOutCode = string.Empty;
-        ReloadCode(sender, string.Empty);
+        try
+        {
+
+            Variables.checkOutCode = string.Empty;
+            ReloadCode(sender, string.Empty);
+
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
     }
 
     void ReloadCode(object sender, string Code)
@@ -146,7 +162,7 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
@@ -189,7 +205,7 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
 
     }
@@ -245,7 +261,7 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
                 string fullName = txtFullName.Text;
                 if (string.IsNullOrWhiteSpace(fullName) == true)
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please enter your full name." + "');", true);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "Please enter your full name." + "');", true);
                 }
                 else
                 {
@@ -257,32 +273,34 @@ public partial class Home_Supervisor_SupervisorSubmit : System.Web.UI.Page
                         if (selectUser.FullName == fullName)
                         {
                             var selectShopTraining = context.ShopTrainings.FirstOrDefault(c => c.ShopTrainingId == Variables.shopTrainingId);
-                            selectShopTraining.IsSubmitted = true;
 
-
-                            var nomList = context.Nominees.Where(c => c.ShopTrainingId == Variables.shopTrainingId).ToList();
-
-                            foreach (var item in nomList)
+                            var list = context.Nominees.Where(c => c.ShopTrainingId == selectShopTraining.ShopTrainingId).ToList();
+                            if (list.Count() > 0)
                             {
-                                item.Status = "On Waiting List";
+                                selectShopTraining.IsSubmitted = true;
+                                var nomList = context.Nominees.Where(c => c.ShopTrainingId == Variables.shopTrainingId).ToList();
+                                foreach (var item in nomList) { item.Status = "On Waiting List"; }
+                                context.SaveChanges();
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertSuccess('" + "Submit successful!" + "');", true);
+                                Response.Redirect("~/Home/Supervisor/SupervisorConfirmation.aspx");
                             }
-
-                            context.SaveChanges();
-                            Response.Redirect("~/Home/Supervisor/SupervisorConfirmation.aspx");
+                            else
+                            {
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + "There are no nominees in this training. Please nominate an employee first." + "');", true);
+                            }
                         }
                         else
                         {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Your fullname is: " + selectUser.FullName + "');", true);
+                            string message = "Your fullname is: " + selectUser.FullName;
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + message + "');", true);
                         }
                     }
                 }
-
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-
-            //throw;
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 }

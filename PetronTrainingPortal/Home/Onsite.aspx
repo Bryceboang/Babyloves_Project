@@ -21,10 +21,50 @@
             background-color: white;
             height: 512px;
         }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
     </style>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<<<<<<< HEAD
     <%-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
     <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -48,50 +88,49 @@
         This is a Modal Background popup
     </div>
     <asp:Button ID="btnModalPopup" runat="server" Text="Show Modal Popup" />--%>
+=======
+    <script src="SweetAlert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="SweetAlert/dist/sweetalert.css">
+>>>>>>> c768d2be6c50ae29660494df87dc0cca3c4638fd
 
+  <script>
+        function sweetAlertMessage(myTitle, myText) {
+            swal(
+             title = myTitle,
+             text = myText
+         );
+        }
 
-   <%-- Eto sya baby, kapag nakacomment sya okay naman kaso nakashow kc yung modal kapag ganun pero kapag hindi sira design pero working--%>
+        function sweetAlertSuccess(myText) {
+            swal(
+             title = myText
+         );
+        }
 
-    <link rel="stylesheet" rel="stylesheet" type="text/css"  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        function sweetAlertWarning(myText) {
+            swal(
+             title = "Warning",
+             text = myText,
+             type = "warning"
+         );
+        }
 
-   
+        function sweetAlertError(myText) {
+            swal(
+             title = "Error",
+             text = myText,
+             type = "error"
+         );
+        }
 
-    <script type="text/javascript">
-        function getConfirmation(sender, title, message) {
-            $("#spnTitle").text(title);
-            $("#spnMsg").text(message);
-            $('#modalPopUp').modal('show');
-            $('#btnConfirm').attr('onclick', "$('#modalPopUp').modal('hide');setTimeout(function(){" + $(sender).prop('href') + "}, 50);");
-            return false;
+        function sweetAlertInfo(myText) {
+            swal(
+             title = "Information",
+             text = myText,
+             type = "info"
+         );
         }
     </script>
-
-    <div>
-        <div id="modalPopUp" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">
-                            <span id="spnTitle"></span>
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            <span id="spnMsg"></span>.
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" id="btnConfirm" class="btn btn-danger">
-                            Yes, please</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="main">

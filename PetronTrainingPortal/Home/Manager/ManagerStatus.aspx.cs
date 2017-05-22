@@ -43,7 +43,6 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
 
         try
         {
-      
             using (var context = new DatabaseContext())
             {
                 string empNo = string.Empty;
@@ -126,7 +125,7 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
 
     }
@@ -168,7 +167,7 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
 
     }
@@ -185,26 +184,34 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
                     string empNo = Session["EmpNo"].ToString().ToLower();
                     code = Code;
                     var selectId = context.ShopTrainings.FirstOrDefault(c => c.TrainingCode == code && c.EmployeeNumber.ToLower() == empNo);
-                    Variables.shopTrainingId = selectId.ShopTrainingId;
-                    Variables.code = code;
-                    string header = string.Empty;
-                    string startMonth = string.Empty;
-                    string extension = string.Empty;
-                    int startDay = 0;
-                    string dateEnd = string.Empty;
+                    if (selectId.IsSubmitted == true)
+                    {
+                        Variables.shopTrainingId = selectId.ShopTrainingId;
+                        Variables.code = code;
+                        string header = string.Empty;
+                        string startMonth = string.Empty;
+                        string extension = string.Empty;
+                        int startDay = 0;
+                        string dateEnd = string.Empty;
 
-                    var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
-                    startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
-                    startDay = train.DateStart.Date.Day;
-                    dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
-                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
-                    lblHeader.Text = header;
-                    lblTrainingVenue.Text = train.Venue;
-                    lblFacilitator.Text = train.TrainingProvider;
-                    lblTarget.Text = train.TargetParticipants;
-                    ReloadGrid();
-                    gridDiv.Visible = false;
-                    gridWhole.Visible = true;
+                        var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
+                        startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
+                        startDay = train.DateStart.Date.Day;
+                        dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
+                        header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
+                        lblHeader.Text = header;
+                        lblTrainingVenue.Text = train.Venue;
+                        lblFacilitator.Text = train.TrainingProvider;
+                        lblTarget.Text = train.TargetParticipants;
+                        ReloadGrid();
+                        gridDiv.Visible = false;
+                        gridWhole.Visible = true;
+                    }
+                    else
+                    {
+                        gridDiv.Visible = false;
+                        gridWhole.Visible = false;
+                    }
                 }
                 else
                 {
@@ -237,14 +244,22 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
     protected void lnkCode_Click(object sender, EventArgs e)
     {
-        Variables.checkOutCode = string.Empty;
-        ReloadCode(sender, string.Empty);
+        try
+        {
+
+            Variables.checkOutCode = string.Empty;
+            ReloadCode(sender, string.Empty);
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
     }
 
     private void Logout()
@@ -263,5 +278,59 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
     protected void btnLogout_Click(object sender, EventArgs e)
     {
         Logout();
+    }
+
+    protected void lnkAboutTrainer_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "About Trainer";
+                string myMessage = selectTraining.AboutTrainer;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkCourseOutline_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "Course Outline";
+                string myMessage = selectTraining.CourseOutline;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkBackground_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "Background";
+                string myMessage = selectTraining.Background;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
     }
 }

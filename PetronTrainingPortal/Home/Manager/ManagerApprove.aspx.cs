@@ -43,20 +43,12 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
         //}
         try
         {
-            List<ShopTraining> shopTrainingList = new List<ShopTraining>();
             using (var context = new DatabaseContext())
             {
                 string empNo = string.Empty;
-                shopTrainingList.Clear();
                 empNo = Session["EmpNo"].ToString().ToLower();
                 int dept = Variables.deptNo;
                 var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
-
-                //foreach (var item in collection)
-                //{
-                //    var selectShop = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber == )
-                //}
-
                 var shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == false).ToList();
                 List<ShopTraining> newShopList = new List<ShopTraining>();
                 newShopList.Clear();
@@ -127,7 +119,7 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
@@ -196,7 +188,7 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
@@ -240,64 +232,78 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
 
     }
 
     protected void lnkCode_Click(object sender, EventArgs e)
     {
-        Variables.checkOutCode = string.Empty;
-        ReloadCode(sender, string.Empty);
+        try
+        {
+            Variables.checkOutCode = string.Empty;
+            ReloadCode(sender, string.Empty);
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
     }
 
 
     public void gridNominee_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
-        using (var context = new DatabaseContext())
+        try
         {
-            if (e.CommandName == "ConfirmEmployee")
+            using (var context = new DatabaseContext())
             {
-                int index = Convert.ToInt32(e.CommandArgument);
-
-                GridViewRow selectedRow = gridNominee.Rows[index];
-                TableCell employeeNumber = selectedRow.Cells[0];
-                string empNo = employeeNumber.Text;
-                string code = Variables.code;
-                int id = Variables.shopTrainingId;
-
-
-                var selectNominee = context.Nominees.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo.ToLower() && c.ShopTrainingId == id);
-                if (selectNominee != null)
+                if (e.CommandName == "ConfirmEmployee")
                 {
-                    selectNominee.Status = "For registration (for confirmation of TTD)";
-                    context.SaveChanges();
+                    int index = Convert.ToInt32(e.CommandArgument);
+
+                    GridViewRow selectedRow = gridNominee.Rows[index];
+                    TableCell employeeNumber = selectedRow.Cells[0];
+                    string empNo = employeeNumber.Text;
+                    string code = Variables.code;
+                    int id = Variables.shopTrainingId;
+
+
+                    var selectNominee = context.Nominees.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo.ToLower() && c.ShopTrainingId == id);
+                    if (selectNominee != null)
+                    {
+                        selectNominee.Status = "For registration (for confirmation of TTD)";
+                        context.SaveChanges();
+                    }
+
+                    ReloadGrid();
+                    int count = context.Nominees.Where(c => c.ShopTrainingId == id).ToList().Count;
+                    lblTotalNominee.Text = count.ToString();
                 }
-
-                ReloadGrid();
-                int count = context.Nominees.Where(c => c.ShopTrainingId == id).ToList().Count;
-                lblTotalNominee.Text = count.ToString();
-            }
-            else if (e.CommandName == "DeclineEmployee")
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-
-                GridViewRow selectedRow = gridNominee.Rows[index];
-                TableCell employeeNumber = selectedRow.Cells[0];
-                string empNo = employeeNumber.Text;
-                string code = Variables.code;
-                int id = Variables.shopTrainingId;
-
-                var selectNominee = context.Nominees.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo.ToLower() && c.ShopTrainingId == id);
-                if (selectNominee != null)
+                else if (e.CommandName == "DeclineEmployee")
                 {
-                    selectNominee.Status = "Declined";
-                    context.SaveChanges();
+                    int index = Convert.ToInt32(e.CommandArgument);
+
+                    GridViewRow selectedRow = gridNominee.Rows[index];
+                    TableCell employeeNumber = selectedRow.Cells[0];
+                    string empNo = employeeNumber.Text;
+                    string code = Variables.code;
+                    int id = Variables.shopTrainingId;
+
+                    var selectNominee = context.Nominees.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo.ToLower() && c.ShopTrainingId == id);
+                    if (selectNominee != null)
+                    {
+                        selectNominee.Status = "Declined";
+                        context.SaveChanges();
+                    }
+                    ReloadGrid();
+                    int count = context.Nominees.Where(c => c.ShopTrainingId == id).ToList().Count;
+                    lblTotalNominee.Text = count.ToString();
                 }
-                ReloadGrid();
-                int count = context.Nominees.Where(c => c.ShopTrainingId == id).ToList().Count;
-                lblTotalNominee.Text = count.ToString();
             }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
@@ -316,32 +322,33 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
                 var nomineeList = context.Nominees.Where(c => c.ShopTrainingId == id).ToList();
                 bool check = false;
 
-                foreach (var item in nomineeList)
+                if (nomineeList.Count() > 0)
                 {
-                    if (item.Status == "On Waiting List")
+                    foreach (var item in nomineeList)
                     {
-                        check = true;
-                        break;
+                        if (item.Status == "On Waiting List")
+                        {
+                            check = true;
+                            break;
+                        }
                     }
-                }
 
-                if (check == true)
-                {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Please Accept or decline all the employee in this training." + "');", true);
+                    if (check == true)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + "Please Accept or decline all the employee in this training." + "');", true);
+                    }
+                    else { Response.Redirect("~/Home/Manager/ManagerSubmit.aspx"); }
                 }
                 else
                 {
-                    Response.Redirect("~/Home/Manager/ManagerSubmit.aspx");
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + "Please nominate an employee in this training first." + "');", true);
                 }
-
-                
-
             }
 
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
 
@@ -365,16 +372,15 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
                     context.SaveChanges();
                     gridDiv.Visible = false;
                     gridWhole.Visible = false;
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Training declined." + "');", true);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertSuccess('" + "Training declined." + "');", true);
                 }
             }
         }
         catch (Exception ex)
         {
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
-
 
     private void Logout()
     {
@@ -394,5 +400,57 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
         Logout();
     }
 
+    protected void lnkAboutTrainer_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "About Trainer";
+                string myMessage = selectTraining.AboutTrainer;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
 
+    protected void lnkCourseOutline_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "Course Outline";
+                string myMessage = selectTraining.CourseOutline;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkBackground_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "Background";
+                string myMessage = selectTraining.Background;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
 }
