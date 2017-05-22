@@ -234,10 +234,33 @@ public partial class Home_Onsite : System.Web.UI.Page
                     {
                         code = clickedButton.CommandName;
                         empNo = Session["EmpNo"].ToString().ToLower();
-                        var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code);
+
+                        int dept = Variables.deptNo;
+                        var userList = context.Users.Where(c => c.DepartmentId == dept).ToList();
+                        var shopList = context.ShopTrainings.ToList();
+                        List<ShopTraining> newShopList = new List<ShopTraining>();
+                        newShopList.Clear();
+                        foreach (var item in shopList)
+                        {
+                            var check = userList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                            if (check != null)
+                            {
+                                newShopList.Add(item);
+                            }
+                        }
+
+                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
                         if (checkDuplicate != null)
                         {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "This Training is already in your shopping cart" + "');", true);
+                            var selectEmpCheck = newShopList.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code);
+                            if (selectEmpCheck != null)
+                            {
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This Training is already in your shopping cart" + "');", true);
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This training has already been shopped by your manager." + "');", true);
+                            }
                         }
                         else
                         {
@@ -288,11 +311,11 @@ public partial class Home_Onsite : System.Web.UI.Page
 
                             if (selectDup != null)
                             {
-                                Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "This Training is already in your shopping cart" + "');", true);
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This Training is already in your shopping cart" + "');", true);
                             }
                             else
                             {
-                                Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "This Training is already in the shopping cart of one of your supervisors." + "');", true);
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This Training is already in the shopping cart of one of your supervisors." + "');", true);
                             }
                         }
                         else
@@ -324,7 +347,6 @@ public partial class Home_Onsite : System.Web.UI.Page
         }
     }
 
-
     protected void lnkCheckout_Click(object sender, EventArgs e)
     {
         try
@@ -342,20 +364,42 @@ public partial class Home_Onsite : System.Web.UI.Page
                     {
                         code = clickedButton.CommandName;
                         empNo = Session["EmpNo"].ToString().ToLower();
-                        var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code);
+
+                        int dept = Variables.deptNo;
+                        var userList = context.Users.Where(c => c.DepartmentId == dept).ToList();
+                        var shopList = context.ShopTrainings.ToList();
+                        List<ShopTraining> newShopList = new List<ShopTraining>();
+                        newShopList.Clear();
+                        foreach (var item in shopList)
+                        {
+                            var check = userList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                            if (check != null)
+                            {
+                                newShopList.Add(item);
+                            }
+                        }
+
+                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
                         if (checkDuplicate != null)
                         {
-                            Variables.checkOutCode = clickedButton.CommandName;
-
-                            if (checkDuplicate.IsSubmitted == true)
+                            var selectEmpCheck = newShopList.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code);
+                            if (selectEmpCheck != null)
                             {
-                                Response.Redirect("~/Home/Supervisor/SupervisorStatus.aspx");
+                                Variables.checkOutCode = clickedButton.CommandName;
+
+                                if (checkDuplicate.IsSubmitted == true)
+                                {
+                                    Response.Redirect("~/Home/Supervisor/SupervisorStatus.aspx");
+                                }
+                                else
+                                {
+                                    Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
+                                }
                             }
                             else
                             {
-                                Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This training has already been shopped by your manager." + "');", true);
                             }
-
                         }
                         else
                         {

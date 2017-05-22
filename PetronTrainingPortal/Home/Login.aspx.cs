@@ -51,6 +51,7 @@ public partial class Home_Login : System.Web.UI.Page
                             Variables.secNo = selecteduser.SectionId;
                             if (selecteduser.AccessType == "Supervisor")
                             {
+                                #region Code for Supervisor
                                 Session["EmpNo"] = selecteduser.EmployeeNumber;
                                 Session["FullName"] = selecteduser.FullName;
                                 Session["AccountType"] = "Supervisor";
@@ -58,9 +59,24 @@ public partial class Home_Login : System.Web.UI.Page
 
                                 if (string.IsNullOrWhiteSpace(Variables.checkOutCode) == true)
                                 {
+
+                                    int dept = Variables.deptNo;
+                                    var userList = context.Users.Where(c => c.DepartmentId == dept).ToList();
+                                    var shopList = context.ShopTrainings.ToList();
+                                    List<ShopTraining> newShopList = new List<ShopTraining>();
+                                    newShopList.Clear();
+                                    foreach (var item in shopList)
+                                    {
+                                        var check = userList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                                        if (check != null)
+                                        {
+                                            newShopList.Add(item);
+                                        }
+                                    }
+
                                     if (string.IsNullOrWhiteSpace(code) != true)
                                     {
-                                        var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empno && c.TrainingCode == code);
+                                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
                                         if (checkDuplicate == null)
                                         {
                                             ShopTraining newShopTraining = new ShopTraining()
@@ -73,14 +89,47 @@ public partial class Home_Login : System.Web.UI.Page
                                             };
                                             context.ShopTrainings.Add(newShopTraining);
                                             context.SaveChanges();
+                                            Response.Redirect("~/Home/Supervisor/SupervisorList.aspx");
+                                        }
+                                        else
+                                        {
+                                            Response.Redirect("~/Home/Supervisor/SupervisorList.aspx");
                                         }
                                     }
-                                    Response.Redirect("~/Home/Supervisor/SupervisorList.aspx");
+                                    else { Response.Redirect("~/Home/Supervisor/SupervisorList.aspx"); }
                                 }
                                 else
                                 {
-                                    var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empno && c.TrainingCode == code);
-                                    if (checkDuplicate == null)
+
+                                    int dept = Variables.deptNo;
+                                    var userList = context.Users.Where(c => c.DepartmentId == dept).ToList();
+                                    var shopList = context.ShopTrainings.ToList();
+                                    List<ShopTraining> newShopList = new List<ShopTraining>();
+                                    newShopList.Clear();
+                                    foreach (var item in shopList)
+                                    {
+                                        var check = userList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                                        if (check != null)
+                                        {
+                                            newShopList.Add(item);
+                                        }
+                                    }
+
+                                    var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
+                                    if (checkDuplicate != null)
+                                    {
+                                        var selectEmpCheck = newShopList.FirstOrDefault(c => c.EmployeeNumber == selecteduser.EmployeeNumber && c.TrainingCode == code);
+                                        if (selectEmpCheck != null)
+                                        {
+                                            Variables.checkOutCode = code;
+                                            Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
+                                        }
+                                        else
+                                        {
+                                            Response.Redirect("~/Home/Supervisor/SupervisorList.aspx");
+                                        }
+                                    }
+                                    else
                                     {
                                         ShopTraining newShopTraining = new ShopTraining()
                                         {
@@ -92,13 +141,16 @@ public partial class Home_Login : System.Web.UI.Page
                                         };
                                         context.ShopTrainings.Add(newShopTraining);
                                         context.SaveChanges();
+
+                                        Variables.checkOutCode = code;
+                                        Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
                                     }
-                                    Variables.checkOutCode = code;
-                                    Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
                                 }
+                                #endregion
                             }
                             else if (selecteduser.AccessType == "Manager")
                             {
+                                #region Code for manager
                                 Session["EmpNo"] = selecteduser.EmployeeNumber;
                                 Session["FullName"] = selecteduser.FullName;
                                 Session["AccountType"] = "Manager";
@@ -193,6 +245,7 @@ public partial class Home_Login : System.Web.UI.Page
                                     Variables.checkOutCode = code;
                                     Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
                                 }
+                                #endregion
                             }
                             else if (selecteduser.AccessType == "Admin")
                             {

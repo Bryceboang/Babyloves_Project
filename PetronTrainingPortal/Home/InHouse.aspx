@@ -41,6 +41,14 @@
              type = "warning"
          );
         }
+
+        function sweetAlertInfo(myText) {
+            swal(
+             title = "Information",
+             text = myText,
+             type = "info"
+         );
+        }
     </script>
     <div class="main">
         <div class="left">

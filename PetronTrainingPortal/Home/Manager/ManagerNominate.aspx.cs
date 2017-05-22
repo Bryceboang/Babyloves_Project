@@ -440,4 +440,29 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
     }
+
+    protected void gridNominee_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                GridViewRow row = gridNominee.SelectedRow;
+                TableCell employeeNumber = row.Cells[0];
+                string empNo = employeeNumber.Text;
+                var selectEmp = context.Employees.FirstOrDefault(c => c.EmployeeNumber == empNo);
+
+                var selectDept = context.Departments.FirstOrDefault(c => c.DepartmentId == selectEmp.DepartmentId);
+                var selectSect = context.Sections.FirstOrDefault(c => c.SectionId == selectEmp.SectionId);
+
+                lblDepartment.Text = selectDept.DepartmentName;
+                lblSection.Text = selectSect.SectionName;
+            }
+
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
 }

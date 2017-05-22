@@ -145,7 +145,7 @@
               <br />
               <div id="gridDiv" runat="server">
                   <div class="grid">
-                  <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" OnRowCommand="gridNominee_RowCommand" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
+                  <asp:GridView ID="gridNominee" runat="server" AutoGenerateColumns="false" OnSelectedIndexChanged="gridNominee_SelectedIndexChanged" OnRowCommand="gridNominee_RowCommand" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                       <Columns>
                           <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
                           <asp:BoundField DataField="FullName" HeaderText="Full Name" />
