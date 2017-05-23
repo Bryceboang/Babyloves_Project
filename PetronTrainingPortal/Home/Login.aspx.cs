@@ -86,6 +86,7 @@ public partial class Home_Login : System.Web.UI.Page
                                                 IsComfirmedByAdmin = false,
                                                 IsConfirmedByManger = false,
                                                 IsSubmitted = false,
+                                                SectionId = Variables.secNo
                                             };
                                             context.ShopTrainings.Add(newShopTraining);
                                             context.SaveChanges();
@@ -133,6 +134,7 @@ public partial class Home_Login : System.Web.UI.Page
                                                 IsComfirmedByAdmin = false,
                                                 IsConfirmedByManger = false,
                                                 IsSubmitted = false,
+                                                SectionId = Variables.secNo
                                             };
                                             context.ShopTrainings.Add(newShopTraining);
                                             context.SaveChanges();
@@ -149,6 +151,7 @@ public partial class Home_Login : System.Web.UI.Page
                                             IsComfirmedByAdmin = false,
                                             IsConfirmedByManger = false,
                                             IsSubmitted = false,
+                                            SectionId = Variables.secNo
                                         };
                                         context.ShopTrainings.Add(newShopTraining);
                                         context.SaveChanges();
@@ -162,101 +165,106 @@ public partial class Home_Login : System.Web.UI.Page
                             else if (selecteduser.AccessType == "Manager")
                             {
                                 #region Code for manager
+                                //Session["EmpNo"] = selecteduser.EmployeeNumber;
+                                //Session["FullName"] = selecteduser.FullName;
+                                //Session["AccountType"] = "Manager";
+                                //string code = Variables.code;
+
+                                //if (string.IsNullOrWhiteSpace(Variables.checkOutCode) == true)
+                                //{
+
+                                //    if (string.IsNullOrWhiteSpace(code) != true)
+                                //    {
+                                //        int dept = Variables.deptNo;
+                                //        var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
+                                //        var shopList = context.ShopTrainings.ToList();
+                                //        List<ShopTraining> newShopList = new List<ShopTraining>();
+                                //        newShopList.Clear();
+                                //        foreach (var item in shopList)
+                                //        {
+                                //            var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                                //            if (check != null)
+                                //            {
+                                //                newShopList.Add(item);
+                                //            }
+                                //            else
+                                //            {
+                                //                var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                                //                if (checkUser != null)
+                                //                {
+                                //                    newShopList.Add(item);
+                                //                }
+                                //            }
+                                //        }
+
+
+                                //        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
+                                //        if (checkDuplicate == null)
+                                //        {
+                                //            ShopTraining newShopTraining = new ShopTraining()
+                                //            {
+                                //                EmployeeNumber = selecteduser.EmployeeNumber,
+                                //                TrainingCode = code,
+                                //                IsComfirmedByAdmin = false,
+                                //                IsConfirmedByManger = false,
+                                //                IsSubmitted = false,
+                                //            };
+                                //            context.ShopTrainings.Add(newShopTraining);
+                                //            context.SaveChanges();
+                                //        }
+
+                                //    }
+                                //    Response.Redirect("~/Home/Manager/ManagerList.aspx");
+                                //}
+                                //else
+                                //{
+
+                                //    int dept = Variables.deptNo;
+                                //    var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
+                                //    var shopList = context.ShopTrainings.ToList();
+                                //    List<ShopTraining> newShopList = new List<ShopTraining>();
+                                //    newShopList.Clear();
+                                //    foreach (var item in shopList)
+                                //    {
+                                //        var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                                //        if (check != null)
+                                //        {
+                                //            newShopList.Add(item);
+                                //        }
+                                //        else
+                                //        {
+                                //            var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                                //            if (checkUser != null)
+                                //            {
+                                //                newShopList.Add(item);
+                                //            }
+                                //        }
+                                //    }
+
+
+                                //    var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
+                                //    if (checkDuplicate == null)
+                                //    {
+                                //        ShopTraining newShopTraining = new ShopTraining()
+                                //        {
+                                //            EmployeeNumber = selecteduser.EmployeeNumber,
+                                //            TrainingCode = code,
+                                //            IsComfirmedByAdmin = false,
+                                //            IsConfirmedByManger = false,
+                                //            IsSubmitted = true,
+                                //        };
+                                //        context.ShopTrainings.Add(newShopTraining);
+                                //        context.SaveChanges();
+                                //    }
+                                //    Variables.checkOutCode = code;
+                                //    Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                                //}
+                                #endregion
+
                                 Session["EmpNo"] = selecteduser.EmployeeNumber;
                                 Session["FullName"] = selecteduser.FullName;
                                 Session["AccountType"] = "Manager";
-                                string code = Variables.code;
-
-                                if (string.IsNullOrWhiteSpace(Variables.checkOutCode) == true)
-                                {
-
-                                    if (string.IsNullOrWhiteSpace(code) != true)
-                                    {
-                                        int dept = Variables.deptNo;
-                                        var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
-                                        var shopList = context.ShopTrainings.ToList();
-                                        List<ShopTraining> newShopList = new List<ShopTraining>();
-                                        newShopList.Clear();
-                                        foreach (var item in shopList)
-                                        {
-                                            var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                                            if (check != null)
-                                            {
-                                                newShopList.Add(item);
-                                            }
-                                            else
-                                            {
-                                                var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                                                if (checkUser != null)
-                                                {
-                                                    newShopList.Add(item);
-                                                }
-                                            }
-                                        }
-
-
-                                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
-                                        if (checkDuplicate == null)
-                                        {
-                                            ShopTraining newShopTraining = new ShopTraining()
-                                            {
-                                                EmployeeNumber = selecteduser.EmployeeNumber,
-                                                TrainingCode = code,
-                                                IsComfirmedByAdmin = false,
-                                                IsConfirmedByManger = false,
-                                                IsSubmitted = false,
-                                            };
-                                            context.ShopTrainings.Add(newShopTraining);
-                                            context.SaveChanges();
-                                        }
-
-                                    }
-                                    Response.Redirect("~/Home/Manager/ManagerList.aspx");
-                                }
-                                else
-                                {
-
-                                    int dept = Variables.deptNo;
-                                    var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
-                                    var shopList = context.ShopTrainings.ToList();
-                                    List<ShopTraining> newShopList = new List<ShopTraining>();
-                                    newShopList.Clear();
-                                    foreach (var item in shopList)
-                                    {
-                                        var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                                        if (check != null)
-                                        {
-                                            newShopList.Add(item);
-                                        }
-                                        else
-                                        {
-                                            var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                                            if (checkUser != null)
-                                            {
-                                                newShopList.Add(item);
-                                            }
-                                        }
-                                    }
-
-
-                                    var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
-                                    if (checkDuplicate == null)
-                                    {
-                                        ShopTraining newShopTraining = new ShopTraining()
-                                        {
-                                            EmployeeNumber = selecteduser.EmployeeNumber,
-                                            TrainingCode = code,
-                                            IsComfirmedByAdmin = false,
-                                            IsConfirmedByManger = false,
-                                            IsSubmitted = true,
-                                        };
-                                        context.ShopTrainings.Add(newShopTraining);
-                                        context.SaveChanges();
-                                    }
-                                    Variables.checkOutCode = code;
-                                    Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
-                                }
-                                #endregion
+                                Response.Redirect("~/Home/Manager/ManagerList.aspx");
                             }
                             else if (selecteduser.AccessType == "Admin")
                             {

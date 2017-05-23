@@ -84,11 +84,11 @@
                         <asp:Label runat="server" Text="Facilitator: " Font-Names="Corbel" Font-Size="Small"></asp:Label>
                         <asp:Label ID="lblFacilitator" runat="server" Text="Mr. Texas Joe (We Do Limited Corp.)" Font-Names="Corbel" Font-Size="Small"></asp:Label>
                         <br />
-                        <asp:LinkButton ID="lnkAboutTrainier" runat="server" Font-Names="Corbel" Font-Size="Small">About Trainer</asp:LinkButton>
+                        <asp:LinkButton ID="lnkAboutTrainier" runat="server" Font-Names="Corbel" Font-Size="Small" OnClick="lnkAboutTrainer_Click">About Trainer</asp:LinkButton>
                         |
-              <asp:LinkButton ID="lnkCourseOutline" runat="server" Font-Names="Corbel" Font-Size="Small">Course Outline</asp:LinkButton>
+              <asp:LinkButton ID="lnkCourseOutline" runat="server" Font-Names="Corbel" Font-Size="Small" OnClick="lnkCourseOutline_Click">Course Outline</asp:LinkButton>
                         |
-              <asp:LinkButton ID="lnkBackground" runat="server" Font-Names="Corbel" Font-Size="Small">Background</asp:LinkButton>
+              <asp:LinkButton ID="lnkBackground" runat="server" Font-Names="Corbel" Font-Size="Small" OnClick="lnkBackground_Click">Background</asp:LinkButton>
                         <br />
                         <asp:Label ID="Label1" runat="server" Text="Target Participants: " Font-Names="Corbel" Font-Size="Small"></asp:Label>
                         <asp:Label ID="lblTarget" runat="server" Text="Production A- Process Engineers" Font-Names="Corbel" Font-Size="Small"></asp:Label>

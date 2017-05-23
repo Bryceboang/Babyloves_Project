@@ -20,14 +20,14 @@
                     <br />
                     <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red" Text=""></asp:Label>
                     <br />
-                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Enter" ValidationGroup="user" OnClick="btnSearch_Click"></asp:Button>
+                    <asp:Button CssClass="button_enter" ID="btnSearch" runat="server" Text="Enter" ValidationGroup="user" ></asp:Button>
                     &nbsp;
-                    <asp:Button CssClass="button_enter" ID="btnClear1" runat="server" Text="Clear" ValidationGroup="employee" OnClick="btnClear1_Click"></asp:Button>
+                    <asp:Button CssClass="button_enter" ID="btnClear1" runat="server" Text="Clear" ValidationGroup="employee" ></asp:Button>
                     </center>
                 </div>
                 <div class="right1_content_user_home ">
                     <center>
-                    <asp:GridView ID="gridEmployee" OnRowCommand="gridEmployee_RowCommand" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
+                    <asp:GridView ID="gridEmployee"  runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                         <Columns>
                              <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
                             <asp:BoundField DataField="FullName" HeaderText="Full Name" />
@@ -77,7 +77,7 @@
                     <br />
                     <br />
                     <asp:Label ID="Label5" runat="server" Text="Access Type:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
-                    <asp:DropDownList ID="cmbAccessType" CssClass="custom-dropdown" OnSelectedIndexChanged="cmbBoxAccessType_SelectedIndexChanged" AutoPostBack="true" runat="server">
+                    <asp:DropDownList ID="cmbAccessType" CssClass="custom-dropdown"  AutoPostBack="true" runat="server">
                     <asp:ListItem>Supervisor</asp:ListItem>
                     <asp:ListItem>Manager</asp:ListItem>
                     <asp:ListItem>Admin</asp:ListItem>
@@ -85,7 +85,7 @@
                     <br />
                     <br />
                     <asp:Label ID="labelDept" runat="server" Text="Department:" ForeColor="White" Font-Bold="True" Width="120"></asp:Label>
-                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true" OnSelectedIndexChanged="cmbDepartment_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true"  runat="server"></asp:DropDownList>
                     <br />
                     <asp:Label ID="lblDepartmentMsg" runat="server" ForeColor="Red" ></asp:Label>
                     <br />

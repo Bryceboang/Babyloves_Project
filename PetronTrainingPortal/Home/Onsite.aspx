@@ -66,7 +66,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <script src="sweetalert-master/dist/sweetalert.min.js"></script>
     <link href="sweetalert-master/dist/sweetalert.css" rel="stylesheet" />
-  <script>
+    <script>
         function sweetAlertMessage(myTitle, myText) {
             swal(
              title = myTitle,
@@ -111,6 +111,12 @@
             <img src="../Image/Onsite.jpg" />
         </div>
         <div class="right">
+            <div id="sectionDiv" runat="server">
+                <asp:Label ID="Label3" runat="server" Text="Section: " ForeColor="Black" Font-Names="Goudy Old Style" Font-Size="23pt" Font-Bold="True" />
+                <asp:DropDownList ID="cmbSections" runat="server"></asp:DropDownList>
+            </div>
+            <br />
+            <br />
             <asp:Panel ID="menuPanel" runat="server" Height="500px" ScrollBars="Auto">
             </asp:Panel>
         </div>

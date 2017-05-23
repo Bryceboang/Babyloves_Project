@@ -22,6 +22,8 @@ namespace PetronTrainingPortal.App_Code
         public static string checkOutCode { get; set; }
         public static int shopTrainingId { get; set; }
         public static int queryNum { get; set; }
+        public static int selectedSecId { get; set; }
+        public static string currentcmbSec { get; set; }
     }
 
     public class EmployeeNomineeViews

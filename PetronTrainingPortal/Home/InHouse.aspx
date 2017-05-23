@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home/Home.master" AutoEventWireup="true" CodeFile="InHouse.aspx.cs" Inherits="Home_InHouse" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-     <style>
-    .main {
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <style>
+        .main {
             width: 100%;
             height: 100%;
             overflow: auto;
@@ -14,18 +14,19 @@
             margin-right: 0%;
             height: 100%;
         }
+
         .right {
             float: left;
             width: 72%;
             background-color: white;
             height: 100%;
         }
-        </style>
+    </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <script src="sweetalert-master/dist/sweetalert.min.js"></script>
     <link href="sweetalert-master/dist/sweetalert.css" rel="stylesheet" />
-     <script>
+    <script>
         function sweetAlertMessage(myTitle, myText) {
             swal(
              title = myTitle,
@@ -68,7 +69,13 @@
             <img src="../Image/InHouse.jpg" />
         </div>
         <div class="right">
-            <asp:Panel ID="menuPanel" runat="server" Height="504px" ></asp:Panel>
+            <div id="sectionDiv" runat="server">
+                <asp:Label ID="Label3" runat="server" Text="Section: " ForeColor="Black" Font-Names="Goudy Old Style" Font-Size="23pt" Font-Bold="True" />
+                <asp:DropDownList ID="cmbSections" runat="server"></asp:DropDownList>
+            </div>
+            <br />
+            <br />
+            <asp:Panel ID="menuPanel" runat="server" Height="504px"></asp:Panel>
         </div>
     </div>
 </asp:Content>

@@ -241,7 +241,6 @@ public partial class Home_Supervisor_SupervisorStatus : System.Web.UI.Page
         }
     }
 
-
     private void Logout()
     {
         Variables.checkOutCode = string.Empty;
@@ -258,5 +257,59 @@ public partial class Home_Supervisor_SupervisorStatus : System.Web.UI.Page
     protected void btnLogout_Click(object sender, EventArgs e)
     {
         Logout();
+    }
+
+    protected void lnkAboutTrainer_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "About Trainer";
+                string myMessage = selectTraining.AboutTrainer;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkCourseOutline_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "Course Outline";
+                string myMessage = selectTraining.CourseOutline;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
+    }
+
+    protected void lnkBackground_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new DatabaseContext())
+            {
+                var selectTraining = context.Trainings.FirstOrDefault(c => c.TrainingCode == Variables.code);
+                string myTitle = "Background";
+                string myMessage = selectTraining.Background;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertMessage('" + myTitle + "','" + myMessage + "');", true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
     }
 }

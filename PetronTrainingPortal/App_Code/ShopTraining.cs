@@ -18,5 +18,6 @@ namespace PetronTrainingPortal.App_Code
         public bool IsSubmitted { get; set; }
         public bool IsConfirmedByManger { get; set; }
         public bool IsComfirmedByAdmin { get; set; }
+        public int SectionId { get; set; }
     }
 }

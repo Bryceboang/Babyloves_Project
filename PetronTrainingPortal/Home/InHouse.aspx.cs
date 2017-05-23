@@ -18,6 +18,31 @@ public partial class Home_InHouse : System.Web.UI.Page
             List<Training> trainingList = new List<Training>();
             using (var context = new DatabaseContext())
             {
+                string emp = string.Empty;
+                if (Session["EmpNo"] != null)
+                {
+                    emp = Session["AccountType"].ToString();
+
+                    if (string.IsNullOrWhiteSpace(emp) == true)
+                        sectionDiv.Visible = false;
+                    else
+                        if (emp == "Manager")
+                        sectionDiv.Visible = true;
+                    else
+                        sectionDiv.Visible = false;
+
+
+                    if (!Page.IsPostBack)
+                    {
+                        cmbSections.Items.Clear();
+                        var list = context.Sections.Where(c => c.DepartmentId == Variables.deptNo).ToList();
+                        foreach (var item in list) { cmbSections.Items.Add(item.SectionName); }
+                    }
+                }
+                else
+                    sectionDiv.Visible = false;
+
+
                 trainingList.Clear();
                 trainingList = context.Trainings.Where(c => c.TrainingType == "InHouse").ToList();
                 int count = 0;
@@ -224,6 +249,7 @@ public partial class Home_InHouse : System.Web.UI.Page
                 {
                     if (Session["AccountType"] == "Supervisor")
                     {
+                        #region Supervisor
                         code = clickedButton.CommandName;
                         empNo = Session["EmpNo"].ToString().ToLower();
 
@@ -258,6 +284,7 @@ public partial class Home_InHouse : System.Web.UI.Page
                                     IsComfirmedByAdmin = false,
                                     IsConfirmedByManger = false,
                                     IsSubmitted = false,
+                                    SectionId = Variables.secNo
                                 };
                                 context.ShopTrainings.Add(newShopTraining);
                                 context.SaveChanges();
@@ -273,66 +300,48 @@ public partial class Home_InHouse : System.Web.UI.Page
                                 IsComfirmedByAdmin = false,
                                 IsConfirmedByManger = false,
                                 IsSubmitted = false,
+                                SectionId = Variables.secNo
                             };
                             context.ShopTrainings.Add(newShopTraining);
                             context.SaveChanges();
-                            Response.Redirect("~/Home/Supervisor/SupervisorNominate.aspx");
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertSuccess('" + "Training successfully added." + "');", true);
                         }
+                        #endregion
                     }
                     else if (Session["AccountType"] == "Manager")
                     {
+                        #region Manager
                         code = clickedButton.CommandName;
                         empNo = Session["EmpNo"].ToString().ToLower();
+
                         int dept = Variables.deptNo;
                         var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
-                        var shopList = context.ShopTrainings.ToList();
-                        List<ShopTraining> newShopList = new List<ShopTraining>();
-                        newShopList.Clear();
-                        foreach (var item in shopList)
-                        {
-                            var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                            if (check != null)
-                            {
-                                newShopList.Add(item);
-                            }
-                            else
-                            {
-                                var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                                if (checkUser != null)
-                                {
-                                    newShopList.Add(item);
-                                }
-                            }
-                        }
+                        var selectId = context.Sections.FirstOrDefault(c => c.SectionName == cmbSections.Text);
+                        var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code && c.SectionId == selectId.SectionId);
 
-                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
-                        if (checkDuplicate != null)
-                        {
-                            var selectDup = newShopList.FirstOrDefault(c => c.TrainingCode == code && c.EmployeeNumber.ToLower() == empNo);
-
-                            if (selectDup != null)
-                            {
-                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This Training is already in your shopping cart" + "');", true);
-                            }
-                            else
-                            {
-                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This Training is already in the shopping cart of one of your supervisors." + "');", true);
-                            }
-                        }
+                        if (selectId == null)
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "Please select a section first." + "');", true);
                         else
                         {
-                            ShopTraining newShopTraining = new ShopTraining()
+                            if (checkDuplicate != null)
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "This Training under the section <" + cmbSections.Text + "> is already in your shopping cart" + "');", true);
+                            else
                             {
-                                EmployeeNumber = Session["EmpNo"].ToString(),
-                                TrainingCode = code,
-                                IsComfirmedByAdmin = false,
-                                IsConfirmedByManger = false,
-                                IsSubmitted = true,
-                            };
-                            context.ShopTrainings.Add(newShopTraining);
-                            context.SaveChanges();
-                            Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                                ShopTraining newShopTraining = new ShopTraining()
+                                {
+                                    EmployeeNumber = Session["EmpNo"].ToString(),
+                                    TrainingCode = code,
+                                    IsComfirmedByAdmin = false,
+                                    IsConfirmedByManger = false,
+                                    IsSubmitted = true,
+                                    SectionId = selectId.SectionId
+                                };
+                                context.ShopTrainings.Add(newShopTraining);
+                                context.SaveChanges();
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "Training under this section is successfull Added." + "');", true);
+                            }
                         }
+                        #endregion
                     }
                     else { Response.Redirect("~/Admin Page/AdminReport.aspx"); }
                 }
@@ -407,6 +416,7 @@ public partial class Home_InHouse : System.Web.UI.Page
                                     IsComfirmedByAdmin = false,
                                     IsConfirmedByManger = false,
                                     IsSubmitted = false,
+                                    SectionId = Variables.secNo
                                 };
                                 context.ShopTrainings.Add(newShopTraining);
                                 context.SaveChanges();
@@ -422,6 +432,7 @@ public partial class Home_InHouse : System.Web.UI.Page
                                 IsComfirmedByAdmin = false,
                                 IsConfirmedByManger = false,
                                 IsSubmitted = false,
+                                SectionId = Variables.secNo
                             };
                             context.ShopTrainings.Add(newShopTraining);
                             context.SaveChanges();
@@ -438,54 +449,41 @@ public partial class Home_InHouse : System.Web.UI.Page
 
                         int dept = Variables.deptNo;
                         var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
-                        var shopList = context.ShopTrainings.ToList();
-                        List<ShopTraining> newShopList = new List<ShopTraining>();
-                        newShopList.Clear();
-                        foreach (var item in shopList)
-                        {
-                            var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                            if (check != null)
-                            {
-                                newShopList.Add(item);
-                            }
-                            else
-                            {
-                                var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                                if (checkUser != null)
-                                {
-                                    newShopList.Add(item);
-                                }
-                            }
-                        }
+                        var selectId = context.Sections.FirstOrDefault(c => c.SectionName == cmbSections.Text);
+                        var checkDuplicate = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber.ToLower() == empNo && c.TrainingCode == code && c.SectionId == selectId.SectionId);
 
-                        var checkDuplicate = newShopList.FirstOrDefault(c => c.TrainingCode == code);
-                        if (checkDuplicate != null)
-                        {
-                            Variables.checkOutCode = clickedButton.CommandName;
-
-                            if (checkDuplicate.IsSubmitted == true && checkDuplicate.IsConfirmedByManger == true)
-                            {
-                                Response.Redirect("~/Home/Manager/ManagerStatus.aspx");
-                            }
-                            else
-                            {
-                                Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
-                            }
-                        }
+                        if (selectId == null)
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertInfo('" + "Please select a section first." + "');", true);
                         else
                         {
-                            ShopTraining newShopTraining = new ShopTraining()
+                            if (checkDuplicate != null)
                             {
-                                EmployeeNumber = Session["EmpNo"].ToString(),
-                                TrainingCode = code,
-                                IsComfirmedByAdmin = false,
-                                IsConfirmedByManger = false,
-                                IsSubmitted = true,
-                            };
-                            context.ShopTrainings.Add(newShopTraining);
-                            context.SaveChanges();
-                            Variables.checkOutCode = clickedButton.CommandName;
-                            Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                                Variables.checkOutCode = clickedButton.CommandName;
+                                Variables.selectedSecId = selectId.SectionId;
+
+                                if (checkDuplicate.IsSubmitted == true && checkDuplicate.IsConfirmedByManger == true)
+                                    Response.Redirect("~/Home/Manager/ManagerStatus.aspx");
+                                else
+                                    Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                            }
+                            else
+                            {
+                                ShopTraining newShopTraining = new ShopTraining()
+                                {
+                                    EmployeeNumber = Session["EmpNo"].ToString(),
+                                    TrainingCode = code,
+                                    IsComfirmedByAdmin = false,
+                                    IsConfirmedByManger = false,
+                                    IsSubmitted = true,
+                                    SectionId = selectId.SectionId
+                                };
+                                context.ShopTrainings.Add(newShopTraining);
+                                context.SaveChanges();
+                                Variables.checkOutCode = clickedButton.CommandName;
+                                Variables.selectedSecId = selectId.SectionId;
+                                Response.Redirect("~/Home/Manager/ManagerNominate.aspx");
+                            }
+
                         }
                         #endregion
                     }

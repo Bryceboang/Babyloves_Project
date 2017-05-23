@@ -76,9 +76,9 @@
                     <asp:Label runat="server" Text="Facilitator: " Font-Names="Corbel"></asp:Label>
                     <asp:Label ID="lblFacilitator" runat="server" Text="Mr. Texas Joe (We Do Limited Corp.)" Font-Names="Corbel"></asp:Label>
                     <br />
-                    <asp:LinkButton ID="lnkAboutTrainier" runat="server" Font-Names="Corbel">About Trainer</asp:LinkButton>|
-              <asp:LinkButton ID="lnkCourseOutline" runat="server" Font-Names="Corbel">Course Outline</asp:LinkButton>|
-              <asp:LinkButton ID="lnkBackground" runat="server" Font-Names="Corbel">Background</asp:LinkButton>
+                    <asp:LinkButton ID="lnkAboutTrainier" runat="server" Font-Names="Corbel" OnClick="lnkAboutTrainer_Click">About Trainer</asp:LinkButton>|
+              <asp:LinkButton ID="lnkCourseOutline" runat="server" Font-Names="Corbel" OnClick="lnkCourseOutline_Click">Course Outline</asp:LinkButton>|
+              <asp:LinkButton ID="lnkBackground" runat="server" Font-Names="Corbel" OnClick="lnkBackground_Click">Background</asp:LinkButton>
                     <br />
                     <asp:Label ID="Label1" runat="server" Text="Target Participants: " Font-Names="Corbel"></asp:Label>
                     <asp:Label ID="lblTarget" runat="server" Text="Production A- Process Engineers" Font-Names="Corbel"></asp:Label>

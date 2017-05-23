@@ -4,8 +4,8 @@
     <link href="Manager.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <script src="../SweetAlert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../SweetAlert/dist/sweetalert.css">
+    <script src="../sweetalert-master/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../sweetalert-master/dist/sweetalert.css">
     <script>
         function sweetAlertMessage(myTitle, myText) {
             swal(

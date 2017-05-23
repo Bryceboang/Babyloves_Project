@@ -47,30 +47,56 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
             {
                 string empNo = string.Empty;
                 empNo = Session["EmpNo"].ToString().ToLower();
+                int count = 0;
                 int dept = Variables.deptNo;
-                var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
-                var shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == false).ToList();
-                List<ShopTraining> newShopList = new List<ShopTraining>();
-                newShopList.Clear();
-                foreach (var item in shopList)
+                Section selectSect = new Section();
+                List<ShopTraining> shopList = new List<ShopTraining>();
+                shopList.Clear();
+
+
+                if (!Page.IsPostBack)
                 {
-                    var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                    if (check != null)
+                    cmbSections.Items.Clear();
+                    var list = context.Sections.Where(c => c.DepartmentId == Variables.deptNo).ToList();
+                    foreach (var item in list) { cmbSections.Items.Add(item.SectionName); }
+                    if (list.Count() > 0)
                     {
-                        newShopList.Add(item);
+                        cmbSections.SelectedIndex = 0;
+                    }
+
+                    if (Session["FullName"] != null)
+                    {
+                        btnLogout.Visible = true;
+                        lblHello.Visible = true;
+                        lblName.Visible = true;
+                        lblName.Text = Session["FullName"].ToString();
+                        gridDiv.Visible = false;
+                        gridWhole.Visible = false;
+
                     }
                     else
                     {
-                        var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                        if (checkUser != null)
-                        {
-                            newShopList.Add(item);
-                        }
+                        btnLogout.Visible = false;
+                        lblHello.Visible = false;
+                        lblName.Visible = false;
                     }
                 }
 
-                int count = 0;
-                foreach (var item in newShopList)
+
+                if (string.IsNullOrWhiteSpace(Variables.currentcmbSec) != true)
+                {
+                    selectSect = context.Sections.FirstOrDefault(c => c.SectionName == Variables.currentcmbSec);
+                    shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() != empNo && c.SectionId == selectSect.SectionId).ToList();
+                }
+                else
+                {
+                    cmbSections.SelectedIndex = 0;
+                    var selectId = context.Sections.FirstOrDefault(c => c.SectionName == cmbSections.Text);
+                    shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() != empNo && c.SectionId == selectId.SectionId).ToList();
+                }
+
+                menuPanel.Controls.Clear();
+                foreach (var item in shopList)
                 {
                     count++;
                     string top = string.Empty;
@@ -97,30 +123,72 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
                 }
             }
 
-            if (!Page.IsPostBack)
-            {
+            //if (!Page.IsPostBack)
+            //{
 
-                if (Session["FullName"] != null)
-                {
-                    btnLogout.Visible = true;
-                    lblHello.Visible = true;
-                    lblName.Visible = true;
-                    lblName.Text = Session["FullName"].ToString();
-                    gridDiv.Visible = false;
-                    gridWhole.Visible = false;
-                }
-                else
-                {
-                    btnLogout.Visible = false;
-                    lblHello.Visible = false;
-                    lblName.Visible = false;
-                }
-            }
+            //    if (Session["FullName"] != null)
+            //    {
+            //        btnLogout.Visible = true;
+            //        lblHello.Visible = true;
+            //        lblName.Visible = true;
+            //        lblName.Text = Session["FullName"].ToString();
+            //        gridDiv.Visible = false;
+            //        gridWhole.Visible = false;
+            //    }
+            //    else
+            //    {
+            //        btnLogout.Visible = false;
+            //        lblHello.Visible = false;
+            //        lblName.Visible = false;
+            //    }
+            //}
         }
         catch (Exception ex)
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
+    }
+
+    void ReloadTraining(string filter)
+    {
+        using (var context = new DatabaseContext())
+        {
+            string empNo = string.Empty;
+            empNo = Session["EmpNo"].ToString().ToLower();
+            int count = 0;
+            int dept = Variables.deptNo;
+            var selectSect = context.Sections.FirstOrDefault(c => c.SectionName == filter);
+            List<ShopTraining> shopList = new List<ShopTraining>();
+            shopList.Clear();
+            shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() != empNo && c.SectionId == selectSect.SectionId).ToList();
+            menuPanel.Controls.Clear();
+            foreach (var item in shopList)
+            {
+                count++;
+                string top = string.Empty;
+                if (count == 1) { top = "15px"; }
+                else { top = "30px"; }
+                HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
+                mainDiv.Attributes.Add("style", "commentBody");
+                mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
+                mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
+
+                LinkButton lnkCode = new LinkButton();
+                lnkCode.Text = item.TrainingCode;
+                lnkCode.CommandName = item.ShopTrainingId.ToString();
+                lnkCode.ForeColor = Color.Red;
+                lnkCode.Font.Size = FontUnit.Larger;
+                lnkCode.Font.Bold = true;
+                lnkCode.Font.Underline = false;
+                lnkCode.Font.Name = "Goudy Old Style";
+                lnkCode.Click += new System.EventHandler(lnkCode_Click);
+                mainDiv.Controls.Add(lnkCode);
+
+                // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
+                menuPanel.Controls.Add(mainDiv);
+            }
+        }
+
     }
 
     void ReloadCode(object sender, string Code)
@@ -452,5 +520,15 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
+    }
+
+    protected void cmbSections_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Variables.checkOutCode = string.Empty;
+        Variables.selectedSecId = 0;
+        gridDiv.Visible = false;
+        gridWhole.Visible = false;
+        Variables.currentcmbSec = cmbSections.Text;
+        ReloadTraining(cmbSections.Text);
     }
 }
