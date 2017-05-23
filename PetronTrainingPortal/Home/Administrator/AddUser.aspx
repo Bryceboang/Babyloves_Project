@@ -16,7 +16,6 @@
                     <br />
                     <br />
                     <asp:TextBox ID="txtBoxEmployeeNumberSearch" runat="server" ValidationGroup="user" Width="150px"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="txtBoxEmployeeNumberSearch" ForeColor="Red" ValidationGroup="user"></asp:RequiredFieldValidator>
                     <br />
                     <asp:Label ID="lblEmpNoMsg" runat="server" ForeColor="Red" Text=""></asp:Label>
                     <br />
@@ -27,7 +26,7 @@
                 </div>
                 <div class="right1_content_user_home ">
                     <center>
-                    <asp:GridView ID="gridEmployee"  runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
+                    <asp:GridView ID="gridEmployee" runat="server" AutoGenerateColumns="false" CssClass="mydatagrid" EmptyDataText="No data uploaded" Font-Size="8pt" HeaderStyle-CssClass="header" PagerStyle-CssClass="pager" RowStyle-CssClass="rows">
                         <Columns>
                              <asp:BoundField DataField="EmployeeNumber" HeaderText="Employee Number" />
                             <asp:BoundField DataField="FullName" HeaderText="Full Name" />
@@ -77,7 +76,7 @@
                     <br />
                     <br />
                     <asp:Label ID="Label5" runat="server" Text="Access Type:" ForeColor="White" Font-Bold="True" Width="150px"></asp:Label>
-                    <asp:DropDownList ID="cmbAccessType" CssClass="custom-dropdown"  AutoPostBack="true" runat="server">
+                    <asp:DropDownList ID="cmbAccessType" CssClass="custom-dropdown" AutoPostBack="true" runat="server">
                     <asp:ListItem>Supervisor</asp:ListItem>
                     <asp:ListItem>Manager</asp:ListItem>
                     <asp:ListItem>Admin</asp:ListItem>
@@ -85,7 +84,7 @@
                     <br />
                     <br />
                     <asp:Label ID="labelDept" runat="server" Text="Department:" ForeColor="White" Font-Bold="True" Width="120"></asp:Label>
-                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true"  runat="server"></asp:DropDownList>
+                    <asp:DropDownList ID="cmbDepartment" CssClass="custom-dropdown" AutoPostBack="true" runat="server"></asp:DropDownList>
                     <br />
                     <asp:Label ID="lblDepartmentMsg" runat="server" ForeColor="Red" ></asp:Label>
                     <br />
