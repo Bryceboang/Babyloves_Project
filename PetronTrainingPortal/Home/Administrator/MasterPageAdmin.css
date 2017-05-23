@@ -1,0 +1,34 @@
+﻿.loginDisplay
+{
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    padding: 20px;
+    color: Black;
+}
+
+.loginDisplay a:link
+{
+    color: Black;
+}
+
+.loginDisplay a:visited
+{
+    color: Blue;
+}
+
+.loginDisplay a:hover
+{
+    color: Blue;
+}
+
+.button {
+    border-style: none;
+    border-color: inherit;
+    border-width: medium;
+    background-color: #0054a6;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    }

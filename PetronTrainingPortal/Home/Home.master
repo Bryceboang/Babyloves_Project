@@ -70,8 +70,13 @@
             display: block;
         }
 
-        body {
+        /*body {
             background-image: url(../Image/PicturePlant2.jpg);
+            background-repeat: no-repeat;
+        }*/
+
+        body {
+            background-image: url(../Image/Masterbackground.jpg);
             background-repeat: no-repeat;
         }
     </style>

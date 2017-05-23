@@ -79,11 +79,11 @@
         }
 
 
-        $('.confirmation').click(function (e) {
-            e.preventDefault(); // Prevent the href from redirecting directly
-            var linkURL = $(this).attr("href");
-            warnBeforeRedirect(linkURL);
-        });
+        //$('.confirmation').click(function (e) {
+        //    e.preventDefault(); // Prevent the href from redirecting directly
+        //    var linkURL = $(this).attr("href");
+        //    warnBeforeRedirect(linkURL);
+        //});
 
         function warnBeforeRedirect(linkURL) {
             swal({

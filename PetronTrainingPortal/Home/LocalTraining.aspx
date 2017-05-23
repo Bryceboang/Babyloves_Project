@@ -16,16 +16,15 @@
         }
         .right {
             float: left;
-            width: 55%;
+            width: 72%;
             background-color: white;
             height: 100%;
         }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <script src="SweetAlert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="SweetAlert/dist/sweetalert.css">
-
+    <script src="sweetalert-master/dist/sweetalert.min.js"></script>
+    <link href="sweetalert-master/dist/sweetalert.css" rel="stylesheet" />
     <script>
         function sweetAlertMessage(myTitle, myText) {
             swal(
@@ -48,7 +47,7 @@
         </div>
         
         <div class="right">
-            <asp:Panel ID="menuPanel" runat="server" Height="500px" ScrollBars="Auto" >
+            <asp:Panel ID="menuPanel" runat="server" Height="513px" ScrollBars="Auto" >
             </asp:Panel>
         </div>
     </div>

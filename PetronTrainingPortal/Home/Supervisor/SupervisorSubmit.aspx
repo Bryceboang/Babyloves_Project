@@ -4,8 +4,8 @@
     <link href="Supervisor.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <script src="../SweetAlert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../SweetAlert/dist/sweetalert.css">
+    <script src="../sweetalert-master/dist/sweetalert.min.js"></script>
+    <link href="../sweetalert-master/dist/sweetalert.css" rel="stylesheet" />
     <script>
         function sweetAlertMessage(myTitle, myText) {
             swal(
@@ -51,9 +51,12 @@
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="lblHello" runat="server" Text="Hello!" ForeColor="Black" Font-Bold="True"></asp:Label>
-        &nbsp;<asp:Label ID="lblName" runat="server" Text="" ForeColor="Black" Font-Bold="True"></asp:Label> <br /> <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label3" runat="server" Text="Review" ForeColor="Black" Font-Bold="True" Font-Size="15"></asp:Label><br />
-           <asp:Panel ID="menuPanel" runat="server" ScrollBars="Vertical">
+            &nbsp;<asp:Label ID="lblName" runat="server" Text="" ForeColor="Black" Font-Bold="True"></asp:Label>
+            <br />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="Label3" runat="server" Text="Review" ForeColor="Black" Font-Bold="True" Font-Size="15"></asp:Label><br />
+            <asp:Panel ID="menuPanel" runat="server" ScrollBars="Vertical">
             </asp:Panel>
             <div class="logoutdiv">
                 <asp:Button ID="btnLogout" CssClass="logout" runat="server" Text="Logout" Font-Bold="True" Width="100px" OnClick="btnLogout_Click" />

@@ -4,9 +4,8 @@
     <link href="Supervisor.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <script src="../SweetAlert/dist/sweetalert.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="../Sweetalert/dist/sweetalert.css">
+    <script src="../sweetalert-master/dist/sweetalert.min.js"></script>
+    <link href="../sweetalert-master/dist/sweetalert.css" rel="stylesheet" />
     <script>
         function sweetAlertMessage(myTitle, myText) {
             swal(
@@ -79,11 +78,11 @@
         }
 
 
-        $('.confirmation').click(function (e) {
-            e.preventDefault(); // Prevent the href from redirecting directly
-            var linkURL = $(this).attr("href");
-            warnBeforeRedirect(linkURL);
-        });
+        //////$('.confirmation').click(function (e) {
+        //////    e.preventDefault(); // Prevent the href from redirecting directly
+        //////    var linkURL = $(this).attr("href");
+        //////    warnBeforeRedirect(linkURL);
+        //////});
 
         function warnBeforeRedirect(linkURL) {
             swal({
