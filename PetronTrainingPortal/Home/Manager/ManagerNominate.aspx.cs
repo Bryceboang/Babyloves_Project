@@ -13,219 +13,171 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        using (var context = new DatabaseContext())
+        try
         {
-            string empNo = string.Empty;
-            empNo = Session["EmpNo"].ToString().ToLower();
-            int count = 0;
-            int dept = Variables.deptNo;
-            Section selectSect = new Section();
-            List<ShopTraining> shopList = new List<ShopTraining>();
-            shopList.Clear();
-
-
-            if (!Page.IsPostBack)
+            using (var context = new DatabaseContext())
             {
-                Variables.currentcmbSec = string.Empty;
-                cmbSections.Items.Clear();
-                var list = context.Sections.Where(c => c.DepartmentId == Variables.deptNo).ToList();
-                foreach (var item in list) { cmbSections.Items.Add(item.SectionName); }
-                if (list.Count() > 0)
-                {
-                    cmbSections.SelectedIndex = 0;
-                }
+                string empNo = string.Empty;
+                empNo = Session["EmpNo"].ToString().ToLower();
+                int count = 0;
+                int dept = Variables.deptNo;
+                Section selectSect = new Section();
+                List<ShopTraining> shopList = new List<ShopTraining>();
+                shopList.Clear();
 
-                if (Session["FullName"] != null)
-                {
-                    btnLogout.Visible = true;
-                    lblHello.Visible = true;
-                    lblName.Visible = true;
-                    lblName.Text = Session["FullName"].ToString();
-                    gridDiv.Visible = false;
-                    gridWhole.Visible = false;
+                menuPanel.Controls.Clear();
+                List<Section> sectionList = new List<Section>();
+                sectionList.Clear();
+                sectionList = context.Sections.Where(c => c.DepartmentId == dept).ToList();
 
-                    if (Variables.checkOutCode != string.Empty)
+                foreach (var sec in sectionList)
+                {
+                    shopList = context.ShopTrainings.Where(c => c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() == empNo && c.SectionId == sec.SectionId).ToList();
+
+                    if (shopList.Count() > 0)
                     {
-                        ReloadCode(null, Variables.checkOutCode);
-                        var select = context.Sections.FirstOrDefault(c => c.SectionId == Variables.selectedSecId);
-                        cmbSections.Text = select.SectionName;
+                        HtmlGenericControl Div = new HtmlGenericControl("DIV");
+                        Div.Attributes.Add("style", "commentBody");
+                        Div.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
+                        Div.Style.Add(HtmlTextWriterStyle.MarginTop, "20px");
+
+                        HtmlGenericControl lblHeader = new HtmlGenericControl("Label");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.Color, "Blue");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.Height, "100px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.MarginLeft, "15px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.MarginTop, "15px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.FontSize, "20px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.FontFamily, "Corbel");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.FontWeight, "Bold");
+                        lblHeader.InnerHtml = sec.SectionName;
+                        Div.Controls.Add(lblHeader);
+                        Div.Controls.Add(new LiteralControl("<br />"));
+
+                        foreach (var item in shopList)
+                        {
+                            count++;
+                            string top = string.Empty;
+                            if (count == 1) { top = "17px"; }
+                            else { top = "17px"; }
+                            HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
+                            mainDiv.Attributes.Add("style", "commentBody");
+                            mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "30px");
+                            mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
+
+                            LinkButton lnkCode = new LinkButton();
+                            lnkCode.Text = item.TrainingCode;
+                            lnkCode.CommandName = item.ShopTrainingId.ToString();
+                            lnkCode.ID = sec.SectionId.ToString() + "-" + count;
+                            lnkCode.ForeColor = Color.Red;
+                            lnkCode.Font.Size = FontUnit.Larger;
+                            lnkCode.Font.Bold = true;
+                            lnkCode.Font.Underline = false;
+                            lnkCode.Font.Name = "Goudy Old Style";
+                            lnkCode.Click += new System.EventHandler(lnkCode_Click);
+                            mainDiv.Controls.Add(lnkCode);
+                            Div.Controls.Add(mainDiv);
+
+                            // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
+                            menuPanel.Controls.Add(Div);
+                        }
                     }
                 }
-                else
+
+                if (!Page.IsPostBack)
                 {
-                    btnLogout.Visible = false;
-                    lblHello.Visible = false;
-                    lblName.Visible = false;
+
+                    if (Session["FullName"] != null)
+                    {
+                        btnLogout.Visible = true;
+                        lblHello.Visible = true;
+                        lblName.Visible = true;
+                        lblName.Text = Session["FullName"].ToString();
+                        gridDiv.Visible = false;
+                        gridWhole.Visible = false;
+
+                        if (Variables.checkOutCode != string.Empty)
+                        {
+                            ReloadCode(null, Variables.checkOutCode);
+                        }
+                    }
+                    else
+                    {
+                        btnLogout.Visible = false;
+                        lblHello.Visible = false;
+                        lblName.Visible = false;
+                    }
                 }
             }
-
-
-            if (string.IsNullOrWhiteSpace(Variables.currentcmbSec) != true)
-            {
-                selectSect = context.Sections.FirstOrDefault(c => c.SectionName == Variables.currentcmbSec);
-                shopList = context.ShopTrainings.Where(c => c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() == empNo && c.SectionId == selectSect.SectionId).ToList();
-            }
-            else
-            {
-                var selectId = context.Sections.FirstOrDefault(c => c.SectionName == cmbSections.Text);
-                shopList = context.ShopTrainings.Where(c => c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() == empNo && c.SectionId == selectId.SectionId).ToList();
-            }
-
-            menuPanel.Controls.Clear();
-            foreach (var item in shopList)
-            {
-                count++;
-                string top = string.Empty;
-                if (count == 1) { top = "15px"; }
-                else { top = "30px"; }
-                HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
-                mainDiv.Attributes.Add("style", "commentBody");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
-
-                LinkButton lnkCode = new LinkButton();
-                lnkCode.Text = item.TrainingCode;
-                lnkCode.CommandName = item.ShopTrainingId.ToString();
-                lnkCode.ForeColor = Color.Red;
-                lnkCode.Font.Size = FontUnit.Larger;
-                lnkCode.Font.Bold = true;
-                lnkCode.Font.Underline = false;
-                lnkCode.Font.Name = "Goudy Old Style";
-                lnkCode.Click += new System.EventHandler(lnkCode_Click);
-                mainDiv.Controls.Add(lnkCode);
-
-                // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
-                menuPanel.Controls.Add(mainDiv);
-            }
         }
-
-        //if (!Page.IsPostBack)
-        //{
-
-        //    if (Session["FullName"] != null)
-        //    {
-        //        btnLogout.Visible = true;
-        //        lblHello.Visible = true;
-        //        lblName.Visible = true;
-        //        lblName.Text = Session["FullName"].ToString();
-        //        gridDiv.Visible = false;
-        //        gridWhole.Visible = false;
-
-        //        if (Variables.checkOutCode != string.Empty)
-        //        {
-        //            ReloadCode(null, Variables.checkOutCode);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        btnLogout.Visible = false;
-        //        lblHello.Visible = false;
-        //        lblName.Visible = false;
-        //    }
-        //}
+        catch (Exception ex)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
+        }
     }
 
     void ReloadTraining()
     {
-
-        using (var context = new DatabaseContext())
+        try
         {
-            string empNo = string.Empty;
-            empNo = Session["EmpNo"].ToString().ToLower();
-            int count = 0;
-            int dept = Variables.deptNo;
-            var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
-            var shopList = context.ShopTrainings.Where(c => c.IsConfirmedByManger == false).ToList();
-            List<ShopTraining> newShopList = new List<ShopTraining>();
-            newShopList.Clear();
-            foreach (var item in shopList)
+            using (var context = new DatabaseContext())
             {
-                var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                if (check != null)
+                string empNo = string.Empty;
+                empNo = Session["EmpNo"].ToString().ToLower();
+                int count = 0;
+                int dept = Variables.deptNo;
+                var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
+                var shopList = context.ShopTrainings.Where(c => c.IsConfirmedByManger == false).ToList();
+                List<ShopTraining> newShopList = new List<ShopTraining>();
+                newShopList.Clear();
+                foreach (var item in shopList)
                 {
-                    newShopList.Add(item);
-                }
-                else
-                {
-                    var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                    if (checkUser != null)
+                    var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                    if (check != null)
                     {
                         newShopList.Add(item);
                     }
+                    else
+                    {
+                        var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                        if (checkUser != null)
+                        {
+                            newShopList.Add(item);
+                        }
+                    }
+                }
+
+                menuPanel.Controls.Clear();
+                foreach (var item in newShopList)
+                {
+                    count++;
+                    string top = string.Empty;
+                    if (count == 1) { top = "15px"; }
+                    else { top = "30px"; }
+                    HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
+                    mainDiv.Attributes.Add("style", "commentBody");
+                    mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
+                    mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
+
+                    LinkButton lnkCode = new LinkButton();
+                    lnkCode.Text = item.TrainingCode;
+                    lnkCode.CommandName = item.ShopTrainingId.ToString();
+                    lnkCode.ForeColor = Color.Red;
+                    lnkCode.Font.Size = FontUnit.Larger;
+                    lnkCode.Font.Bold = true;
+                    lnkCode.Font.Underline = false;
+                    lnkCode.Font.Name = "Goudy Old Style";
+                    lnkCode.Click += new System.EventHandler(lnkCode_Click);
+                    mainDiv.Controls.Add(lnkCode);
+
+                    // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
+                    menuPanel.Controls.Add(mainDiv);
                 }
             }
-
-
-            foreach (var item in newShopList)
-            {
-                count++;
-                string top = string.Empty;
-                if (count == 1) { top = "15px"; }
-                else { top = "30px"; }
-                HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
-                mainDiv.Attributes.Add("style", "commentBody");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
-
-                LinkButton lnkCode = new LinkButton();
-                lnkCode.Text = item.TrainingCode;
-                lnkCode.CommandName = item.ShopTrainingId.ToString();
-                lnkCode.ForeColor = Color.Red;
-                lnkCode.Font.Size = FontUnit.Larger;
-                lnkCode.Font.Bold = true;
-                lnkCode.Font.Underline = false;
-                lnkCode.Font.Name = "Goudy Old Style";
-                lnkCode.Click += new System.EventHandler(lnkCode_Click);
-                mainDiv.Controls.Add(lnkCode);
-
-                // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
-                menuPanel.Controls.Add(mainDiv);
-            }
         }
-
-    }
-
-    void ReloadTraining(string filter)
-    {
-
-        using (var context = new DatabaseContext())
+        catch (Exception ex)
         {
-            string empNo = string.Empty;
-            empNo = Session["EmpNo"].ToString().ToLower();
-            int count = 0;
-            int dept = Variables.deptNo;
-            var selectSect = context.Sections.FirstOrDefault(c => c.SectionName == filter);
-            List<ShopTraining> shopList = new List<ShopTraining>();
-            shopList.Clear();
-            shopList = context.ShopTrainings.Where(c => c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() == empNo && c.SectionId == selectSect.SectionId).ToList();
-            menuPanel.Controls.Clear();
-            foreach (var item in shopList)
-            {
-                count++;
-                string top = string.Empty;
-                if (count == 1) { top = "15px"; }
-                else { top = "30px"; }
-                HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
-                mainDiv.Attributes.Add("style", "commentBody");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
-
-                LinkButton lnkCode = new LinkButton();
-                lnkCode.Text = item.TrainingCode;
-                lnkCode.CommandName = item.ShopTrainingId.ToString();
-                lnkCode.ForeColor = Color.Red;
-                lnkCode.Font.Size = FontUnit.Larger;
-                lnkCode.Font.Bold = true;
-                lnkCode.Font.Underline = false;
-                lnkCode.Font.Name = "Goudy Old Style";
-                lnkCode.Click += new System.EventHandler(lnkCode_Click);
-                mainDiv.Controls.Add(lnkCode);
-
-                // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
-                menuPanel.Controls.Add(mainDiv);
-            }
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
-
     }
 
     void ReloadCode(object sender, string Code)
@@ -248,17 +200,23 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
 
                     Variables.shopTrainingId = selectId.ShopTrainingId;
                     Variables.code = code;
+
+
                     string header = string.Empty;
                     string startMonth = string.Empty;
                     string extension = string.Empty;
                     int startDay = 0;
                     string dateEnd = string.Empty;
+                    int secId = 0;
+                    secId = Variables.selectedSecId;
+
+                    var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == secId);
 
                     var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
                     startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
                     startDay = train.DateStart.Date.Day;
                     dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
-                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
+                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ") - " + selectSec.SectionName;
                     lblHeader.Text = header;
                     lblTrainingVenue.Text = train.Venue;
                     lblFacilitator.Text = train.TrainingProvider;
@@ -266,11 +224,9 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
                     ReloadGrid();
                     gridDiv.Visible = false;
                     gridWhole.Visible = true;
-
                 }
                 else
                 {
-
                     string code = string.Empty;
                     LinkButton clickedButton = (LinkButton)sender;
                     code = clickedButton.Text;
@@ -281,12 +237,18 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
                     string extension = string.Empty;
                     int startDay = 0;
                     string dateEnd = string.Empty;
+                    int secId = 0;
+
+                    var secName = clickedButton.ID.Split('-');
+                    secId = int.Parse(secName[0]);
+                    Variables.selectedSecId = secId;
+                    var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == secId);
 
                     var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
                     startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
                     startDay = train.DateStart.Date.Day;
                     dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
-                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
+                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ") - " + selectSec.SectionName;
                     lblHeader.Text = header;
                     lblTrainingVenue.Text = train.Venue;
                     lblFacilitator.Text = train.TrainingProvider;
@@ -311,6 +273,7 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
             {
                 int id = Variables.shopTrainingId;
                 int deptId = Variables.deptNo;
+                int sectId = Variables.selectedSecId;
                 var nomineeList = context.Nominees.Where(c => c.ShopTrainingId == id).ToList();
 
                 var empList = context.Employees.Where(c => c.DepartmentId == deptId).ToList();
@@ -326,20 +289,39 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
                     }
                 }
 
+                // added May 24, 2017 for duplicate emp
+                List<Nominee> managerEmpList = new List<Nominee>();
+                managerEmpList.Clear();
+
+                var shopTrain = context.ShopTrainings.FirstOrDefault(c => c.TrainingCode == Variables.code && c.SectionId == sectId);
+
+                if (shopTrain != null)
+                {
+                    var nomnomList = context.Nominees.Where(c => c.ShopTrainingId == shopTrain.ShopTrainingId).ToList();
+                    foreach (var item in nomnomList)
+                    {
+                        managerEmpList.Add(item);
+                    }
+                }
+
                 List<EmployeeNomineeViews> empNomViewList = new List<EmployeeNomineeViews>();
                 empNomViewList.Clear();
 
                 foreach (var item in newEmpList)
                 {
-                    DateTime now = DateTime.Now;
-                    Age age = new Age(item.DateHired, now);
-                    string service = (age.Years + "." + age.Months).ToString();
-                    empNomViewList.Add(new EmployeeNomineeViews()
-                    {
-                        EmployeeNumber = item.EmployeeNumber,
-                        FullName = item.FullName,
-                        ServiceYears = service
-                    });
+                    var check = managerEmpList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                    if (check == null)
+                    { ///
+                        DateTime now = DateTime.Now;
+                        Age age = new Age(item.DateHired, now);
+                        string service = (age.Years + "." + age.Months).ToString();
+                        empNomViewList.Add(new EmployeeNomineeViews()
+                        {
+                            EmployeeNumber = item.EmployeeNumber,
+                            FullName = item.FullName,
+                            ServiceYears = service
+                        });
+                    }///
                 }
 
                 gridNominee.DataSource = null;
@@ -434,7 +416,8 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
                     gridDiv.Visible = false;
                     gridWhole.Visible = false;
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertSuccess('" + "Shopped Training deleted." + "');", true);
-                    ReloadTraining(cmbSections.Text);
+                    //ReloadTraining();
+                    Page_Load(sender, e);
                 }
             }
         }
@@ -560,32 +543,5 @@ public partial class Home_Manager_ManagerNominate : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
-    }
-
-    protected void cmbSections_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        //for (int i = 0; i < 2; i++)
-        //{
-        //    if (i == 0)
-        //    {
-        Variables.checkOutCode = string.Empty;
-        Variables.selectedSecId = 0;
-        gridDiv.Visible = false;
-        gridWhole.Visible = false;
-        Variables.currentcmbSec = cmbSections.Text;
-        Page_Load(sender, e);
-        //ReloadTraining(cmbSections.Text);
-        //Response.Redirect(Request.Url.AbsoluteUri);
-        //    }
-        //    else
-        //    {
-        //        Variables.checkOutCode = string.Empty;
-        //        Variables.selectedSecId = 0;
-        //        gridDiv.Visible = false;
-        //        gridWhole.Visible = false;
-        //        Variables.currentcmbSec = cmbSections.Text;
-        //        Response.Redirect(Request.RawUrl);
-        //    }
-        //}
     }
 }

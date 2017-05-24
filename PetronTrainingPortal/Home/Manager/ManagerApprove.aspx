@@ -105,11 +105,6 @@
         <asp:Label ID="lblHello" runat="server" Text="Hello!" ForeColor="Black" Font-Bold="True"></asp:Label>
             &nbsp;<asp:Label ID="lblName" runat="server" Text="" ForeColor="Black" Font-Bold="True"></asp:Label>
             <br />
-            <div id="sectionDiv" runat="server">
-                &nbsp;&nbsp;   &nbsp;&nbsp; 
-                <asp:Label ID="Label4" runat="server" Text="Section: " ForeColor="Black" Font-Names="Goudy Old Style" Font-Size="18pt" Font-Bold="True" />
-                <asp:DropDownList ID="cmbSections" OnSelectedIndexChanged="cmbSections_SelectedIndexChanged" runat="server" AutoPostBack="True"></asp:DropDownList>
-            </div>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:Label ID="Label3" runat="server" Text="Items for Confirmation" ForeColor="Black" Font-Bold="True" Font-Size="15"></asp:Label><br />
             <asp:Panel ID="menuPanel" runat="server" ScrollBars="Vertical">

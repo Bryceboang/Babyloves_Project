@@ -264,6 +264,12 @@ public partial class Home_Login : System.Web.UI.Page
                                 Session["EmpNo"] = selecteduser.EmployeeNumber;
                                 Session["FullName"] = selecteduser.FullName;
                                 Session["AccountType"] = "Manager";
+                                Variables.checkOutCode = string.Empty;
+                                Variables.code = string.Empty;
+                                Variables.currentcmbSec = string.Empty;
+                                Variables.selectedSecId = 0;
+                                Variables.submitCode = string.Empty;
+                                Variables.submitShopTrainingId = 0;
                                 Response.Redirect("~/Home/Manager/ManagerList.aspx");
                             }
                             else if (selecteduser.AccessType == "Admin")

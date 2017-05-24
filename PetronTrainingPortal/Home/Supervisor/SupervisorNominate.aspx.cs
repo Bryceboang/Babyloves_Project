@@ -235,21 +235,42 @@ public partial class Home_Supervisor_SupervisorNominate : System.Web.UI.Page
                         newEmpList.Add(item);
                     }
                 }
+                
+                // added May 24, 2017 for duplicate emp
+                List<Nominee> managerEmpList = new List<Nominee>();
+                managerEmpList.Clear();
+
+                var selectManager = context.Users.FirstOrDefault(c => c.DepartmentId == deptId);
+                var shopTrain = context.ShopTrainings.FirstOrDefault(c => c.EmployeeNumber == selectManager.EmployeeNumber && c.TrainingCode == Variables.code && c.SectionId == sectId);
+
+                if (shopTrain != null)
+                {
+                    var nomnomList = context.Nominees.Where(c => c.ShopTrainingId == shopTrain.ShopTrainingId).ToList();
+                    foreach (var item in nomnomList)
+                    {
+                        managerEmpList.Add(item);
+                    }
+                }
+                ///
 
                 List<EmployeeNomineeViews> empNomViewList = new List<EmployeeNomineeViews>();
                 empNomViewList.Clear();
 
                 foreach (var item in newEmpList)
                 {
-                    DateTime now = DateTime.Now;
-                    Age age = new Age(item.DateHired, now);
-                    string service = (age.Years + "." + age.Months).ToString();
-                    empNomViewList.Add(new EmployeeNomineeViews()
-                    {
-                        EmployeeNumber = item.EmployeeNumber,
-                        FullName = item.FullName,
-                        ServiceYears = service
-                    });
+                    var check = managerEmpList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
+                    if (check == null)
+                    { ///
+                        DateTime now = DateTime.Now;
+                        Age age = new Age(item.DateHired, now);
+                        string service = (age.Years + "." + age.Months).ToString();
+                        empNomViewList.Add(new EmployeeNomineeViews()
+                        {
+                            EmployeeNumber = item.EmployeeNumber,
+                            FullName = item.FullName,
+                            ServiceYears = service
+                        });
+                    }///
                 }
 
                 gridNominee.DataSource = null;

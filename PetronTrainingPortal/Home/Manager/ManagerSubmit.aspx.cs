@@ -255,7 +255,7 @@ public partial class Home_Manager_ManagerSubmit : System.Web.UI.Page
                         var listnom = context.Nominees.Where(c => c.ShopTrainingId == Variables.shopTrainingId).ToList();
                         if (listnom.Count() > 0)
                         {
-                            if (selectShopTraining.IsSubmitted == true)
+                            if (selectShopTraining.EmployeeNumber != empNo)
                             {
                                 selectShopTraining.IsConfirmedByManger = true;
                             }

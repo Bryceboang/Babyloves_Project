@@ -53,16 +53,66 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
                 List<ShopTraining> shopList = new List<ShopTraining>();
                 shopList.Clear();
 
+                menuPanel.Controls.Clear();
+                List<Section> sectionList = new List<Section>();
+                sectionList.Clear();
+                sectionList = context.Sections.Where(c => c.DepartmentId == dept).ToList();
+
+                foreach (var sec in sectionList)
+                {
+                    shopList = context.ShopTrainings.Where(c => c.IsConfirmedByManger == false && c.IsSubmitted == true && c.EmployeeNumber.ToLower() != empNo && c.SectionId == sec.SectionId).ToList();
+
+                    if (shopList.Count() > 0)
+                    {
+                        HtmlGenericControl Div = new HtmlGenericControl("DIV");
+                        Div.Attributes.Add("style", "commentBody");
+                        Div.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
+                        Div.Style.Add(HtmlTextWriterStyle.MarginTop, "20px");
+
+                        HtmlGenericControl lblHeader = new HtmlGenericControl("Label");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.Color, "Blue");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.Height, "100px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.MarginLeft, "15px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.MarginTop, "15px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.FontSize, "20px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.FontFamily, "Corbel");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.FontWeight, "Bold");
+                        lblHeader.InnerHtml = sec.SectionName;
+                        Div.Controls.Add(lblHeader);
+                        Div.Controls.Add(new LiteralControl("<br />"));
+
+                        foreach (var item in shopList)
+                        {
+                            count++;
+                            string top = string.Empty;
+                            if (count == 1) { top = "17px"; }
+                            else { top = "17px"; }
+                            HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
+                            mainDiv.Attributes.Add("style", "commentBody");
+                            mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "30px");
+                            mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
+
+                            LinkButton lnkCode = new LinkButton();
+                            lnkCode.Text = item.TrainingCode;
+                            lnkCode.CommandName = item.ShopTrainingId.ToString();
+                            lnkCode.ID = sec.SectionId.ToString() + "-" + count;
+                            lnkCode.ForeColor = Color.Red;
+                            lnkCode.Font.Size = FontUnit.Larger;
+                            lnkCode.Font.Bold = true;
+                            lnkCode.Font.Underline = false;
+                            lnkCode.Font.Name = "Goudy Old Style";
+                            lnkCode.Click += new System.EventHandler(lnkCode_Click);
+                            mainDiv.Controls.Add(lnkCode);
+                            Div.Controls.Add(mainDiv);
+
+                            // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
+                            menuPanel.Controls.Add(Div);
+                        }
+                    }
+                }
 
                 if (!Page.IsPostBack)
                 {
-                    cmbSections.Items.Clear();
-                    var list = context.Sections.Where(c => c.DepartmentId == Variables.deptNo).ToList();
-                    foreach (var item in list) { cmbSections.Items.Add(item.SectionName); }
-                    if (list.Count() > 0)
-                    {
-                        cmbSections.SelectedIndex = 0;
-                    }
 
                     if (Session["FullName"] != null)
                     {
@@ -72,7 +122,6 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
                         lblName.Text = Session["FullName"].ToString();
                         gridDiv.Visible = false;
                         gridWhole.Visible = false;
-
                     }
                     else
                     {
@@ -81,114 +130,12 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
                         lblName.Visible = false;
                     }
                 }
-
-
-                if (string.IsNullOrWhiteSpace(Variables.currentcmbSec) != true)
-                {
-                    selectSect = context.Sections.FirstOrDefault(c => c.SectionName == Variables.currentcmbSec);
-                    shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() != empNo && c.SectionId == selectSect.SectionId).ToList();
-                }
-                else
-                {
-                    cmbSections.SelectedIndex = 0;
-                    var selectId = context.Sections.FirstOrDefault(c => c.SectionName == cmbSections.Text);
-                    shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() != empNo && c.SectionId == selectId.SectionId).ToList();
-                }
-
-                menuPanel.Controls.Clear();
-                foreach (var item in shopList)
-                {
-                    count++;
-                    string top = string.Empty;
-                    if (count == 1) { top = "15px"; }
-                    else { top = "30px"; }
-                    HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
-                    mainDiv.Attributes.Add("style", "commentBody");
-                    mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
-                    mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
-
-                    LinkButton lnkCode = new LinkButton();
-                    lnkCode.Text = item.TrainingCode;
-                    lnkCode.CommandName = item.ShopTrainingId.ToString();
-                    lnkCode.ForeColor = Color.Red;
-                    lnkCode.Font.Size = FontUnit.Larger;
-                    lnkCode.Font.Bold = true;
-                    lnkCode.Font.Underline = false;
-                    lnkCode.Font.Name = "Goudy Old Style";
-                    lnkCode.Click += new System.EventHandler(lnkCode_Click);
-                    mainDiv.Controls.Add(lnkCode);
-
-                    // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
-                    menuPanel.Controls.Add(mainDiv);
-                }
             }
-
-            //if (!Page.IsPostBack)
-            //{
-
-            //    if (Session["FullName"] != null)
-            //    {
-            //        btnLogout.Visible = true;
-            //        lblHello.Visible = true;
-            //        lblName.Visible = true;
-            //        lblName.Text = Session["FullName"].ToString();
-            //        gridDiv.Visible = false;
-            //        gridWhole.Visible = false;
-            //    }
-            //    else
-            //    {
-            //        btnLogout.Visible = false;
-            //        lblHello.Visible = false;
-            //        lblName.Visible = false;
-            //    }
-            //}
         }
         catch (Exception ex)
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
-    }
-
-    void ReloadTraining(string filter)
-    {
-        using (var context = new DatabaseContext())
-        {
-            string empNo = string.Empty;
-            empNo = Session["EmpNo"].ToString().ToLower();
-            int count = 0;
-            int dept = Variables.deptNo;
-            var selectSect = context.Sections.FirstOrDefault(c => c.SectionName == filter);
-            List<ShopTraining> shopList = new List<ShopTraining>();
-            shopList.Clear();
-            shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == false && c.EmployeeNumber.ToLower() != empNo && c.SectionId == selectSect.SectionId).ToList();
-            menuPanel.Controls.Clear();
-            foreach (var item in shopList)
-            {
-                count++;
-                string top = string.Empty;
-                if (count == 1) { top = "15px"; }
-                else { top = "30px"; }
-                HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
-                mainDiv.Attributes.Add("style", "commentBody");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
-                mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
-
-                LinkButton lnkCode = new LinkButton();
-                lnkCode.Text = item.TrainingCode;
-                lnkCode.CommandName = item.ShopTrainingId.ToString();
-                lnkCode.ForeColor = Color.Red;
-                lnkCode.Font.Size = FontUnit.Larger;
-                lnkCode.Font.Bold = true;
-                lnkCode.Font.Underline = false;
-                lnkCode.Font.Name = "Goudy Old Style";
-                lnkCode.Click += new System.EventHandler(lnkCode_Click);
-                mainDiv.Controls.Add(lnkCode);
-
-                // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
-                menuPanel.Controls.Add(mainDiv);
-            }
-        }
-
     }
 
     void ReloadCode(object sender, string Code)
@@ -238,12 +185,18 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
                     string extension = string.Empty;
                     int startDay = 0;
                     string dateEnd = string.Empty;
+                    int secId = 0;
+
+                    var secName = clickedButton.ID.Split('-');
+                    secId = int.Parse(secName[0]);
+
+                    var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == secId);
 
                     var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
                     startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
                     startDay = train.DateStart.Date.Day;
                     dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
-                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
+                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ") - " + selectSec.SectionName;
                     lblHeader.Text = header;
                     lblTrainingVenue.Text = train.Venue;
                     lblFacilitator.Text = train.TrainingProvider;
@@ -522,13 +475,4 @@ public partial class Home_Manager_ManagerApprove : System.Web.UI.Page
         }
     }
 
-    protected void cmbSections_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        Variables.checkOutCode = string.Empty;
-        Variables.selectedSecId = 0;
-        gridDiv.Visible = false;
-        gridWhole.Visible = false;
-        Variables.currentcmbSec = cmbSections.Text;
-        ReloadTraining(cmbSections.Text);
-    }
 }

@@ -49,77 +49,91 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
                 empNo = Session["EmpNo"].ToString().ToLower();
                 int count = 0;
                 int dept = Variables.deptNo;
-                var empList = context.Employees.Where(c => c.DepartmentId == dept).ToList();
+                Section selectSect = new Section();
+                List<ShopTraining> shopList = new List<ShopTraining>();
+                shopList.Clear();
 
-                var shopList = context.ShopTrainings.Where(c => c.IsSubmitted == true && c.IsConfirmedByManger == true).ToList();
-                List<ShopTraining> newShopList = new List<ShopTraining>();
-                newShopList.Clear();
-                foreach (var item in shopList)
+                menuPanel.Controls.Clear();
+                List<Section> sectionList = new List<Section>();
+                sectionList.Clear();
+                sectionList = context.Sections.Where(c => c.DepartmentId == dept).ToList();
+
+                foreach (var sec in sectionList)
                 {
-                    var check = empList.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                    if (check != null)
+                    shopList = context.ShopTrainings.Where(c => c.IsConfirmedByManger == true && c.SectionId == sec.SectionId).ToList();
+
+                    if (shopList.Count() > 0)
                     {
-                        newShopList.Add(item);
-                    }
-                    else
-                    {
-                        var checkUser = context.Users.FirstOrDefault(c => c.EmployeeNumber == item.EmployeeNumber);
-                        if (checkUser != null)
+                        HtmlGenericControl Div = new HtmlGenericControl("DIV");
+                        Div.Attributes.Add("style", "commentBody");
+                        Div.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
+                        Div.Style.Add(HtmlTextWriterStyle.MarginTop, "20px");
+
+                        HtmlGenericControl lblHeader = new HtmlGenericControl("Label");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.Color, "Blue");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.Height, "100px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.MarginLeft, "15px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.MarginTop, "15px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.FontSize, "20px");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.FontFamily, "Corbel");
+                        lblHeader.Style.Add(HtmlTextWriterStyle.FontWeight, "Bold");
+                        lblHeader.InnerHtml = sec.SectionName;
+                        Div.Controls.Add(lblHeader);
+                        Div.Controls.Add(new LiteralControl("<br />"));
+
+                        foreach (var item in shopList)
                         {
-                            newShopList.Add(item);
+                            count++;
+                            string top = string.Empty;
+                            if (count == 1) { top = "17px"; }
+                            else { top = "17px"; }
+                            HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
+                            mainDiv.Attributes.Add("style", "commentBody");
+                            mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "30px");
+                            mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
+
+                            LinkButton lnkCode = new LinkButton();
+                            lnkCode.Text = item.TrainingCode;
+                            lnkCode.CommandName = item.ShopTrainingId.ToString();
+                            lnkCode.ID = sec.SectionId.ToString() + "-" + count;
+                            lnkCode.ForeColor = Color.Red;
+                            lnkCode.Font.Size = FontUnit.Larger;
+                            lnkCode.Font.Bold = true;
+                            lnkCode.Font.Underline = false;
+                            lnkCode.Font.Name = "Goudy Old Style";
+                            lnkCode.Click += new System.EventHandler(lnkCode_Click);
+                            mainDiv.Controls.Add(lnkCode);
+                            Div.Controls.Add(mainDiv);
+
+                            // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
+                            menuPanel.Controls.Add(Div);
                         }
                     }
                 }
 
-                foreach (var item in newShopList)
+                if (!Page.IsPostBack)
                 {
-                    count++;
-                    string top = string.Empty;
-                    if (count == 1) { top = "15px"; }
-                    else { top = "30px"; }
-                    HtmlGenericControl mainDiv = new HtmlGenericControl("DIV");
-                    mainDiv.Attributes.Add("style", "commentBody");
-                    mainDiv.Style.Add(HtmlTextWriterStyle.MarginLeft, "25px");
-                    mainDiv.Style.Add(HtmlTextWriterStyle.MarginTop, top);
 
-                    LinkButton lnkCode = new LinkButton();
-                    lnkCode.Text = item.TrainingCode;
-                    lnkCode.CommandName = item.ShopTrainingId.ToString();
-                    lnkCode.ForeColor = Color.Red;
-                    lnkCode.Font.Size = FontUnit.Larger;
-                    lnkCode.Font.Bold = true;
-                    lnkCode.Font.Underline = false;
-                    lnkCode.Font.Name = "Goudy Old Style";
-                    lnkCode.Click += new System.EventHandler(lnkCode_Click);
-                    mainDiv.Controls.Add(lnkCode);
-
-                    // add the mainDiv to the page somehow, these can be added to any HTML control that can act as a container. I would suggest a plain old mainDiv.
-                    menuPanel.Controls.Add(mainDiv);
-                }
-            }
-
-            if (!Page.IsPostBack)
-            {
-
-                if (Session["FullName"] != null)
-                {
-                    btnLogout.Visible = true;
-                    lblHello.Visible = true;
-                    lblName.Visible = true;
-                    lblName.Text = Session["FullName"].ToString();
-                    gridDiv.Visible = false;
-                    gridWhole.Visible = false;
-
-                    if (Variables.checkOutCode != string.Empty)
+                    if (Session["FullName"] != null)
                     {
-                        ReloadCode(null, Variables.checkOutCode);
+                        btnLogout.Visible = true;
+                        lblHello.Visible = true;
+                        lblName.Visible = true;
+                        lblName.Text = Session["FullName"].ToString();
+                        gridDiv.Visible = false;
+                        gridWhole.Visible = false;
+
+                        if (Variables.checkOutCode != string.Empty)
+                        {
+                            ReloadCode(null, Variables.checkOutCode);
+                        }
                     }
-                }
-                else
-                {
-                    btnLogout.Visible = false;
-                    lblHello.Visible = false;
-                    lblName.Visible = false;
+                    else
+                    {
+                        btnLogout.Visible = false;
+                        lblHello.Visible = false;
+                        lblName.Visible = false;
+                    }
                 }
             }
         }
@@ -127,7 +141,6 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "text", "sweetAlertWarning('" + ex.Message + "');", true);
         }
-
     }
 
     void ReloadGrid()
@@ -194,11 +207,16 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
                         int startDay = 0;
                         string dateEnd = string.Empty;
 
+                        int secId = 0;
+                        secId = Variables.selectedSecId;
+
+                        var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == secId);
+
                         var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
                         startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
                         startDay = train.DateStart.Date.Day;
                         dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
-                        header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
+                        header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ") - " + selectSec.SectionName + " (Manager)";
                         lblHeader.Text = header;
                         lblTrainingVenue.Text = train.Venue;
                         lblFacilitator.Text = train.TrainingProvider;
@@ -215,7 +233,7 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
                 }
                 else
                 {
-
+                    string empNo = Session["EmpNo"].ToString().ToLower();
                     string code = string.Empty;
                     LinkButton clickedButton = (LinkButton)sender;
                     code = clickedButton.Text;
@@ -226,12 +244,33 @@ public partial class Home_Manager_ManagerStatus : System.Web.UI.Page
                     string extension = string.Empty;
                     int startDay = 0;
                     string dateEnd = string.Empty;
+                    int secId = 0;
+
+                    var secName = clickedButton.ID.Split('-');
+                    secId = int.Parse(secName[0]);
+
+                    var selectSec = context.Sections.FirstOrDefault(c => c.SectionId == secId);
+
+                    var selectShop = context.ShopTrainings.FirstOrDefault(c => c.ShopTrainingId == Variables.shopTrainingId);
+                    string isManager = string.Empty;
+
+                    if (selectShop != null)
+                    {
+                        if (selectShop.EmployeeNumber.ToLower() == empNo)
+                        {
+                            isManager = "(Manager)";
+                        }
+                        else
+                        {
+                            isManager = string.Empty;
+                        }
+                    }
 
                     var train = context.Trainings.FirstOrDefault(c => c.TrainingCode == code);
                     startMonth = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(train.DateStart.Date.Month);
                     startDay = train.DateStart.Date.Day;
                     dateEnd = train.DateEnd.Date.ToString("MMMM dd, yyyy");
-                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ")";
+                    header = train.TrainingCode + ":" + train.TrainingTitle + "(" + startMonth + " " + startDay + "-" + dateEnd + ") - " + selectSec.SectionName + " " + isManager;
                     lblHeader.Text = header;
                     lblTrainingVenue.Text = train.Venue;
                     lblFacilitator.Text = train.TrainingProvider;
