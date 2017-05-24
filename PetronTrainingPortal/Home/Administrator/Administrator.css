@@ -45,7 +45,9 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    height: 180px;
+    height: 170px;
+    background-color: #85bfff;
+    padding: 5px;
 }
 
 .center_content_train_admin {
@@ -189,14 +191,16 @@
 }
 
 .right1_content_train_home {
-    width: 670px;
+    width: 650px;
     float: left;
     margin-left: 2px auto;
     border: 2px solid white;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    height: 180px;
+    height: 170px;
+    background-color: #85bfff;
+    padding: 5px;
 }
 
 .left2_content_train_home {

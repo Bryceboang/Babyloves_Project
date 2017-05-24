@@ -71,30 +71,30 @@
 </head>
 <body>
     <ul>
-        <li><a href="AdminReport.aspx">Registration</a></li>
+        <li><a href="AdminConfirmation.aspx">AdminConfirmation</a></li>
         <%--<li class="dropdown"><a href="#" class="dropbtn">Status</a>
             <div class="dropdown-content">
                 <a href="StatusOnGoingTraining.aspx">On Going Training</a>
                 <a href="StatusCompletedTraining.aspx">Completed Trainings</a>
             </div>
             </li>--%>
-        <li><a href="TrainingSchedule.aspx">Schedule</a></li>
-        <li><a href="StatusOnGoingTraining.aspx">On Going</a></li>
-        <li><a href="StatusCompletedTraining.aspx">Accomplished</a></li>
-        <li><a href="TrainingCompleted.aspx">Complete</a></li>
-        <li><a href="TrainingHome.aspx">Trainings</a></li>
-        <li><a href="DepartmentHome.aspx">Departments</a></li>
-        <li><a href="SectionHome.aspx">Sections</a></li>
-        <li><a href="UserHome.aspx">Users</a></li>
-        <li><a href="EmployeeHome.aspx">Employees</a></li>
+        <%--<li><a href="TrainingSchedule.aspx">Schedule</a></li>--%>
+        <li><a href="OnGoingTraining.aspx">OnGoing</a></li>
+        <li><a href="CompletedTraining.aspx">Accomplished</a></li>
+        <li><a href="AdminComplete.aspx">Complete</a></li>
+        <li><a href="AddTraining.aspx">Trainings</a></li>
+        <li><a href="AddDepartment.aspx">Departments</a></li>
+        <li><a href="AddSection.aspx">Sections</a></li>
+        <li><a href="AddUser.aspx">Users</a></li>
+        <li><a href="AddEmployee.aspx">Employees</a></li>
 
-        <li class="navright"><a href="ChangePassword.aspx">Change Password</a></li>
+        <li class="navright"><a href="ChangePassword.aspx">ChanChange Password</a></li>
     </ul>
     <form id="form1" runat="server">
         <div class="loginDisplay">
             <asp:Label ID="lblWelcome" runat="server" Text="Welcome, " Font-Size="16px" Visible="False" ForeColor="White"></asp:Label>
             <asp:Label ID="lblFirstname" runat="server" Font-Italic="True" Font-Size="16px" Visible="False" ForeColor="White"></asp:Label>
-            <asp:LinkButton ID="linkbTnlogout" runat="server" Font-Bold="True" Visible="False" ForeColor="White">[Logout]</asp:LinkButton>
+            <asp:LinkButton ID="linkbTnlogout" runat="server" Font-Bold="True" Visible="False" ForeColor="White" OnClick="linkbTnlogout_Click">[Logout]</asp:LinkButton>
         </div>
     <div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
